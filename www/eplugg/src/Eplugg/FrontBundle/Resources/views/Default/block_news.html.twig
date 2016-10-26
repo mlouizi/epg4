@@ -1,0 +1,70 @@
+{% if logs is empty  %}
+    {{ 'Information privée'|trans }}
+{% else %}
+    {% for log in logs %}
+        <div class="item_infinity">
+            <div class="filter_date">
+                {% if log.created|date("m/d/Y") == "now"|date("m/d/Y")  %}
+                    {{ 'Aujourd’hui'|trans }}
+                {% else %}
+                    {{ log.created|date("m-d-Y") }}
+                {% endif %}
+            </div>
+            <div style="width:85%" class="content_date_bloc">
+                <div class="bloc_date_">
+                    <div class="branche"><span>{{ log.created|date("H:i") }}</span></div>
+                    <div class="personne_prince">
+                        <a href="{{ path('eplugg_profile_page', {'uid': log.user.id }) }}" data-tooltip="#html-content{{ log.user.id }}" class="infobull_div tooltip" style="cursor: pointer;"></a>
+                        <div class="img_prince">
+                            <a href="{{ path('eplugg_profile_page', {'uid': log.user.id }) }}">
+                                <img width="60" height="60" alt="" src="{% if log.user.avatar is not empty %} {{ asset(log.user.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}">
+                            </a>
+                        </div>
+                        <div class="descp_prince">
+                            <strong><a data-tooltip="#html-content{{ log.user.id }}" href="{{ path('eplugg_profile_page', {'uid': log.user.id }) }}"> {{ log.user.firstName }} {{ log.user.lastName }} </a></strong>
+                            {{ log.user.job }}
+                        </div>
+                    </div>
+                    <div class="clear10"></div>
+                    <div class="infos_modif">
+                        {% if log.logType == "update_personal_informations" %}
+                            {{ 'Changed his Personal Informations'|trans }}
+                        {% elseif log.logType == "update_company_informations" %}
+                            {{ 'Changed his Professional Informations'|trans }}
+                        {% elseif log.logType == "update_profile_avatar" %}
+                             {{ 'Changed his Avatar'|trans }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="clear10"></div>
+            </div>
+            <div id="html-content{{ log.user.id }}" style="display:none;">
+                <div onclick="window.location.href='{{ path('eplugg_profile_page', {'uid': log.user.id }) }}'" id="card_eplugg">
+                    <div class="yellow"><img src="{{ asset('images/arrow-yelow.png') }}"></div>
+                    <div id="card_user">
+                        <div class="img_profil"> <a href="{{ path('eplugg_profile_page', {'uid': log.user.id }) }}"> <img width="48" height="48" alt="" src="{% if log.user.avatar is not empty %} {{ asset(log.user.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}"> </a> </div>
+                        <div class="descp_card">
+                            <div class="name_user"><a href="{{ path('eplugg_profile_page', {'uid': log.user.id }) }}"> {{ log.user.firstName }} {{ log.user.lastName }} </a></div>
+                            <div class="job_user">{{ log.user.job }}</div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div id="card_company">
+                        <div class="img_profil">
+                            <a href="{{ path('eplugg_profile_page', {'uid': log.user.id }) }}"><img width="51" height="51" src="{% if log.user.CompanyAvatar is not empty %} {{ asset(log.user.CompanyAvatar.croppedWebPath) }} {% else %}{{ asset('images/avatar-company.png') }} {% endif %}"></a>
+                        </div>
+                        <div class="descp_card">
+                            <div class="company_user"><a href="{{ path('eplugg_profile_page', {'uid': log.user.id }) }}">{{ log.user.companyName }}</a></div>
+                            <div class="tag_company">
+                                {{ log.user.getActivitiesFormatted }}
+                            </div>
+                            <div class="lieu_company">{{ log.user.companyAddress }}</div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endif %}

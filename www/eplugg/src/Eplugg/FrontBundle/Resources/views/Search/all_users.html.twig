@@ -1,0 +1,122 @@
+{% extends 'EpluggFrontBundle::base.html.twig' %}
+{% block title %}{{ 'Eplugg'|trans }} - {{ 'Utilisateurs'|trans }}{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/cupertino/jquery-ui-1.10.4.custom.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('css/prettyPhoto.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
+
+
+{% endblock %}
+{% block login %}
+    <div class="login">
+        <form action="{{ path("fos_user_security_check") }}" id="signinform" method="post">
+            <input type="text" class="" name="_username" required="required"  placeholder="{{ 'Email address'|trans }}"   />
+            <input type="password" class="" name="_password" required="required" autocomplete="off"  placeholder="{{ 'Mot de passe'|trans }}" />
+            <input id="userLang" type="hidden" value="{{ app.request.locale }}" name="lang">
+            <button class="submit_header" type="submit" ></button>
+            <div class="cat_search">
+                <a data-url='' id="lang_link"><span id="cat_label">en </span></a>
+                <a id="btn_cat"><img src="{{ asset('images/arrow.png') }}" alt="" /></a>
+                <div class="souscat">
+                    <ul>
+                        <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}" data-lang='en'>en</a></li>
+                        <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}" data-lang='fr'>fr</a></li>
+                    </ul>
+                </div>
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+            <a id="connex" href="{{ path('fos_user_resetting_request') }}">{{ 'Mot de passe oublié'|trans }}?</a>
+        </form>
+
+    </div>
+    <div class="clear10"></div>
+{% endblock %}
+{% block body %}
+<div id="content" style="min-height: 923px;">
+    <div class="center_content_inner" style="min-height: 918px;">
+        <div class="plugg_link" align="right">
+            <a style="width:195px; margin:0" href="{{ path('eplugg_front_homepage') }}">{{ 'Retour à la page d’accueil'|trans }}</a>
+        </div>
+        <div class="clear"></div>
+        <div class="titre_plugg search">{{ 'Résultats de la recherche'|trans }} </div>
+        <div class="result_search"> {{ total }} {{ 'Résultats'|trans }} </div>
+        <div id="content_infinity" class="inf_search">
+            {% for user in users %}
+                <div class="item_infinity item_infinity_serach__">
+                    <div onclick="$('#loginname').html(' {{ user.firstName }} {{ user.lastName }}') ; $('#loginMessage').click()" class="card_bloc" id="card_eplugg">
+                        <div class="yellow"><img src="{{ asset('images/arrow-yelow.png') }}"></div>
+                        <div id="card_user">
+                            <div class="img_profil"><a><img width="48" height="48" alt="" src="{% if user.avatar is not empty %} {{ asset(user.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}"></a></div>
+                            <div class="descp_card">
+                                <div class="name_user"><a> {{ user.firstName }} {{ user.lastName }}</a> </div>
+                                <div class="job_user">{{ user.job }}</div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div id="card_company">
+                            <div class="img_profil"> <a><img width="51" height="51" src="{% if user.CompanyAvatar is not empty %} {{ asset(user.CompanyAvatar.croppedWebPath) }} {% else %}{{ asset('images/avatar-company.png') }} {% endif %}"></a></div>
+                            <div class="descp_card">
+                                <div class="company_user"><a>{{ user.companyName }}</a></div>
+                                <div class="tag_company">
+                                    {% if user.getActivitiesFormatted is not empty %}{{ user.getActivitiesFormatted }}{% endif %}
+                                </div>
+                                <div class="lieu_company">{{ user.companyAddress }}</div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+             {% endfor %}
+            <a id="next" href="?page=0"></a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear25"></div>
+</div>
+<a id="loginMessage" href="#loginContent" rel="message"></a>
+<div id="loginContent" style="display: none">
+    <div class="titre_plugg">Notification</div>
+    <div align="center" class="top_form"><strong>{{ 'Pour communiquer avec'|trans }}<span id="loginname">madison MILLARD</span>, {{ 'Inscrire sur Eplugg maintenant'|trans }}.</strong>
+        <br><br>
+
+        <div align="center" class="plugg_link info_card"><a href="{{ path('eplugg_front_homepage') }}">Sign Up</a> &nbsp;&nbsp;<a href="{{ path('fos_user_security_login') }}">{{ 'S’identifier'|trans }}</a></div></div>
+</div>
+
+{% endblock %}
+{% block after_footer %}
+
+{% endblock %}
+{% block javascripts %}
+
+    <script language="javascript" type="text/javascript" src="{{ asset('js/jquery-1.11.0.min.js') }}"></script>
+    <script language="javascript" type="text/javascript" src="{{ asset('js/jquery.easing.min.js') }}"></script>
+    <script language="javascript" type="text/javascript" src="{{ asset('js/jquery.prettyPhoto.js') }}"></script>
+    <script language="javascript" type="text/javascript" src="{{ asset('js/profile.js') }}"></script>
+
+    <script language="javascript" type="text/javascript" src="{{ asset('js/jquery.placeholder.js') }}"></script>
+    <script>
+        $(function() { $('input, textarea').placeholder(); });
+    </script>
+    <script language="javascript" type="text/javascript" src="{{ asset('js/script.js') }}"></script>
+    <script language="javascript" type="text/javascript" src="{{ asset('js/jquery.infinitescroll.js') }}"></script>
+
+    <script type="text/javascript" language="javascript">
+        $('#content_infinity').infinitescroll(
+                {
+                    navSelector:"#next:last",
+                    nextSelector:"a#next:last",
+                    itemSelector:"#content_infinity div.item_infinity",
+                    dataType:'html',
+                    maxPage:157,
+                    path:function(index) {
+
+                        return "?page=" + index ;
+                    }
+                },
+                function(newElements, data, url){ }
+        );
+    </script>
+{% endblock %}

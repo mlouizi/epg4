@@ -1,0 +1,56 @@
+<div class="search_" id="adv_search_conf">
+    <div class="inner_search"><div id="specsearch"><a id="adv_search" class="link_ad">{{ 'Recherche Avancée'|trans }}</a></div>
+        <div class="form_search">
+            {{ form_start(form, {'method': 'get', 'files': true, 'action': path('search_users_page'),'attr': {'id': 'advancedSearchForm'} }) }}
+                <div class="search_inner">
+                    <div class="card_user-search">
+                        <div class="select_div">
+                            <label class="custom_gendre">
+                                {{ form_widget(form.gendre, { 'attr': { 'class': 'type1'} } ) }}
+
+                            </label>
+                        </div>
+                        <div class="half_div">
+                            {{ form_widget(form.first_name, { 'attr': {'placeholder': 'Prénom'|trans} }) }}
+
+                        </div>
+                        <div class="half_div">
+                            {{ form_widget(form.last_name, { 'attr': {'placeholder': 'Nom'|trans} }) }}
+                        </div>
+                        {{ form_widget(form.job, { 'attr': {'placeholder': 'Métier'|trans} }) }}
+
+                    </div>
+                    <div class="card_company-search">
+                        <div>
+                            {{ form_widget(form.company_name, { 'attr': {'placeholder': 'Établissement'|trans} }) }}
+                        </div>
+                        <div>
+                            {# todo activity #}
+                            {{ form_widget(form.activity, { 'attr': {'placeholder': 'Activités'|trans} }) }}
+                        </div>
+                        <div class="half_div">
+                            {{ form_widget(form.company_city, { 'attr': {'placeholder': 'Ville'|trans} }) }}
+
+                        </div>
+                        <div class="half_div">
+                            <label class="custom_country">
+                               {{ form_widget(form.country  ) }}
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="clear15"></div>
+                <div align="center">
+
+                    <input type="hidden" id="status_adv_search" value="0">
+                    {{ form_widget(form.advancedSearch  ) }}
+
+                    <button type="reset">{{ 'Réinitialiser'|trans }}</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit">{{ 'Rechercher'|trans }}</button>
+                </div>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+</div>

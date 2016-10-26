@@ -1,0 +1,117 @@
+{% extends 'EpluggBackBundle::base.html.twig' %}
+
+{% block content %}
+    <section class="content-header">
+        <h1>Users</h1>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div id="users" class="dataTables_wrapper form-inline dt-bootstrap">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a class="btn btn-success" href="{{ path('eplugg_add_page') }}">Add new page</a>
+
+                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid"
+                                           aria-describedby="example2_info">
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="" aria-sort="ascending">Title
+                                            </th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="" aria-sort="ascending">Status
+                                            </th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="" aria-sort="ascending">Created
+                                            </th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="" aria-sort="ascending">Updated
+                                            </th>
+
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for page in pages %}
+
+                                            <tr class="{{ cycle(['odd', 'even'], loop.index) }}" role="row">
+                                                <td>
+                                                    {% if page.title is not empty %}
+                                                        {{ page.title }}
+                                                    {% else %}
+                                                        -
+                                                    {% endif %}
+                                                </td>
+
+                                                <td>
+                                                    {% if page.status == true %}
+                                                        Published
+                                                    {% else %}
+                                                        Unpublished
+                                                    {% endif %}
+                                                </td>
+
+                                                <td>
+                                                    {{ page.created.date }}
+
+                                                </td>
+                                                <td>
+                                                    {{ page.updated.date }}
+
+                                                </td>
+
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-success" type="button">Action</button>
+                                                        <button data-toggle="dropdown"
+                                                                class="btn btn-success dropdown-toggle" type="button">
+                                                            <span class="caret"></span>
+                                                            <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                        <ul role="menu" class="dropdown-menu">
+                                                            <li><a href="{{ path('eplugg_edit_page', {'pid': page.id }) }}">Edit Page</a></li>
+                                                            <li>{% if page.status == true %}<a href="{{ path('eplugg_unpublish_page', {'pid': page.id }) }}">Unpublish Page</a>{% else %}<a href="{{ path('eplugg_publish_page', {'pid': page.id }) }}">publish Page</a>{% endif %}</li>
+                                                            <li><a href="{{ path('eplugg_add_page') }}?trPage={{ page.id }}">Traduire</a></li>
+															<li><a href="{{ path('eplugg_delete_page', {'pid': page.id }) }}">Delete Page</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block pages_javascripts %}
+<script src="{{asset('bo/plugins/gritter/js/jquery.gritter.js') }}"></script>
+
+<script>
+    $(document).ready(function () {
+		{% for flashMessage in app.session.flashbag.get('error') %}
+			{% if  flashMessage == "pageTraduite" %}
+					$.gritter.add({title: "ERREUR !", text: "La page existe dans toutes les langues ! ", sticky: false, time: ""});
+			{% endif %}
+			{% if  flashMessage == "pageReliee" %}
+					$.gritter.add({title: "ERREUR !", text: "La page est reliée !", sticky: false, time: ""});
+			{% endif %}
+		{% endfor %}
+    });
+</script>
+
+{% endblock %}

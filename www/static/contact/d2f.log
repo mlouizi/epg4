@@ -1,0 +1,486 @@
+8
+8
+8
+8
+8a:1:{i:0;s:1:"a";}
+8a:1:{i:0;s:1:"a";}
+8a:1:{i:0;s:1:"a";}
+8a:2:{s:7:"session";s:26:"93gulk4j18i23av4o2ai1g3qv4";s:3:"sex";s:1:"1";}
+21a:1:{s:2:"id";s:26:"93gulk4j18i23av4o2ai1g3qv4";}
+21a:1:{s:2:"id";s:26:"93gulk4j18i23av4o2ai1g3qv4";}
+87a:7:{i:0;a:7:{s:2:"id";i:16220;s:3:"sex";i:1;s:9:"firstname";s:4:"Zied";s:8:"lastname";s:5:"Guiga";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:3:"Pdg";s:14:"common_friends";s:1:"0";}i:1;a:7:{s:2:"id";i:2;s:3:"sex";i:1;s:9:"firstname";s:6:"Sfgsfd";s:8:"lastname";s:6:"Gsdfgs";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:9:"Dfgsdfgsd";s:14:"common_friends";s:1:"0";}i:2;a:7:{s:2:"id";i:16224;s:3:"sex";i:1;s:9:"firstname";s:9:"Alaeddine";s:8:"lastname";s:8:"Ouertani";s:7:"picture";s:62:"http://192.168.1.5:8888/static/user_up/20140910144628__moi.jpg";s:3:"job";s:37:"Ingénieur développeur android & ios";s:14:"common_friends";s:1:"0";}i:3;a:7:{s:2:"id";i:16222;s:3:"sex";i:1;s:9:"firstname";s:7:"Prenom2";s:8:"lastname";s:4:"Nom2";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:9:"ftfvttvft";s:14:"common_friends";s:1:"0";}i:4;a:7:{s:2:"id";i:3;s:3:"sex";i:1;s:9:"firstname";s:7:"Mohamed";s:8:"lastname";s:4:"Arbi";s:7:"picture";s:73:"http://192.168.1.5:8888/static/user_up/20140827115418__water-park-001.JPG";s:3:"job";s:3:"Oui";s:14:"common_friends";s:1:"0";}i:5;a:7:{s:2:"id";i:1;s:3:"sex";i:1;s:9:"firstname";s:2:"Hr";s:8:"lastname";s:4:"Anis";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:15:"Project manager";s:14:"common_friends";s:1:"0";}i:6;a:7:{s:2:"id";i:16223;s:3:"sex";i:1;s:9:"firstname";s:9:"Firstname";s:8:"lastname";s:8:"Lastname";s:7:"picture";s:72:"http://192.168.1.5:8888/static/user_up/20140910111218__fond-d-ecran2.jpg";s:3:"job";s:3:"Job";s:14:"common_friends";s:1:"0";}}
+21a:1:{s:2:"id";s:26:"93gulk4j18i23av4o2ai1g3qv4";}
+63[]
+63a:0:{} a:1:{s:2:"id";s:26:"93gulk4j18i23av4o2ai1g3qv4";}
+63a:0:{} a:2:{s:7:"session";s:26:"93gulk4j18i23av4o2ai1g3qv4";s:3:"sex";s:1:"1";}
+63a:0:{} a:2:{s:7:"session";s:26:"93gulk4j18i23av4o2ai1g3qv4";s:3:"sex";s:1:"1";}
+63a:0:{} a:2:{s:7:"session";s:26:"93gulk4j18i23av4o2ai1g3qv4";s:3:"sex";s:1:"2";}
+63a:0:{} a:2:{s:7:"session";s:26:"93gulk4j18i23av4o2ai1g3qv4";s:3:"sex";s:1:"3";}
+63a:0:{} a:2:{s:10:"first_name";s:7:"mohamed";s:7:"session";s:26:"93gulk4j18i23av4o2ai1g3qv4";}
+88SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='93gulk4j18i23av4o2ai1g3qv4'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='93gulk4j18i23av4o2ai1g3qv4'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='93gulk4j18i23av4o2ai1g3qv4')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='93gulk4j18i23av4o2ai1g3qv4')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%1%'
+                        AND A.id_user=U.id_user AND U.id_user !='93gulk4j18i23av4o2ai1g3qv4' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20 a:0:{}
+65a:0:{}
+65a:0:{}
+590
+68a:0:{}
+591
+68a:0:{}
+481
+51aaaaaa
+51aaaaaa
+51aaaaaa
+51aaaaaa
+51aaaaaa
+51aaaaaa
+51aaaaaa
+57a:7:{i:0;a:7:{s:2:"id";i:16220;s:3:"sex";i:1;s:9:"firstname";s:4:"Zied";s:8:"lastname";s:5:"Guiga";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:3:"Pdg";s:14:"common_friends";s:1:"0";}i:1;a:7:{s:2:"id";i:2;s:3:"sex";i:1;s:9:"firstname";s:6:"Sfgsfd";s:8:"lastname";s:6:"Gsdfgs";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:9:"Dfgsdfgsd";s:14:"common_friends";s:1:"0";}i:2;a:7:{s:2:"id";i:16224;s:3:"sex";i:1;s:9:"firstname";s:9:"Alaeddine";s:8:"lastname";s:8:"Ouertani";s:7:"picture";s:62:"http://192.168.1.5:8888/static/user_up/20140910144628__moi.jpg";s:3:"job";s:37:"Ingénieur développeur android & ios";s:14:"common_friends";s:1:"0";}i:3;a:7:{s:2:"id";i:16222;s:3:"sex";i:1;s:9:"firstname";s:7:"Prenom2";s:8:"lastname";s:4:"Nom2";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:9:"ftfvttvft";s:14:"common_friends";s:1:"0";}i:4;a:7:{s:2:"id";i:3;s:3:"sex";i:1;s:9:"firstname";s:7:"Mohamed";s:8:"lastname";s:4:"Arbi";s:7:"picture";s:73:"http://192.168.1.5:8888/static/user_up/20140827115418__water-park-001.JPG";s:3:"job";s:3:"Oui";s:14:"common_friends";s:1:"0";}i:5;a:7:{s:2:"id";i:1;s:3:"sex";i:1;s:9:"firstname";s:2:"Hr";s:8:"lastname";s:4:"Anis";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:15:"Project manager";s:14:"common_friends";s:1:"0";}i:6;a:7:{s:2:"id";i:16223;s:3:"sex";i:1;s:9:"firstname";s:9:"Firstname";s:8:"lastname";s:8:"Lastname";s:7:"picture";s:72:"http://192.168.1.5:8888/static/user_up/20140910111218__fond-d-ecran2.jpg";s:3:"job";s:3:"Job";s:14:"common_friends";s:1:"0";}}
+481
+51aaaaaa
+51aaaaaa
+51aaaaaa
+51aaaaaa
+51aaaaaa
+51aaaaaa
+51aaaaaa
+57a:7:{i:0;a:7:{s:2:"id";i:16220;s:3:"sex";i:1;s:9:"firstname";s:4:"Zied";s:8:"lastname";s:5:"Guiga";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:3:"Pdg";s:14:"common_friends";s:1:"0";}i:1;a:7:{s:2:"id";i:2;s:3:"sex";i:1;s:9:"firstname";s:6:"Sfgsfd";s:8:"lastname";s:6:"Gsdfgs";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:9:"Dfgsdfgsd";s:14:"common_friends";s:1:"0";}i:2;a:7:{s:2:"id";i:16224;s:3:"sex";i:1;s:9:"firstname";s:9:"Alaeddine";s:8:"lastname";s:8:"Ouertani";s:7:"picture";s:62:"http://192.168.1.5:8888/static/user_up/20140910144628__moi.jpg";s:3:"job";s:37:"Ingénieur développeur android & ios";s:14:"common_friends";s:1:"0";}i:3;a:7:{s:2:"id";i:16222;s:3:"sex";i:1;s:9:"firstname";s:7:"Prenom2";s:8:"lastname";s:4:"Nom2";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:9:"ftfvttvft";s:14:"common_friends";s:1:"0";}i:4;a:7:{s:2:"id";i:3;s:3:"sex";i:1;s:9:"firstname";s:7:"Mohamed";s:8:"lastname";s:4:"Arbi";s:7:"picture";s:73:"http://192.168.1.5:8888/static/user_up/20140827115418__water-park-001.JPG";s:3:"job";s:3:"Oui";s:14:"common_friends";s:1:"0";}i:5;a:7:{s:2:"id";i:1;s:3:"sex";i:1;s:9:"firstname";s:2:"Hr";s:8:"lastname";s:4:"Anis";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:15:"Project manager";s:14:"common_friends";s:1:"0";}i:6;a:7:{s:2:"id";i:16223;s:3:"sex";i:1;s:9:"firstname";s:9:"Firstname";s:8:"lastname";s:8:"Lastname";s:7:"picture";s:72:"http://192.168.1.5:8888/static/user_up/20140910111218__fond-d-ecran2.jpg";s:3:"job";s:3:"Job";s:14:"common_friends";s:1:"0";}}
+56a:6:{i:0;a:7:{s:2:"id";i:16222;s:3:"sex";i:1;s:9:"firstname";s:7:"Prenom2";s:8:"lastname";s:4:"Nom2";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:9:"ftfvttvft";s:14:"common_friends";s:1:"0";}i:1;a:7:{s:2:"id";i:2;s:3:"sex";i:1;s:9:"firstname";s:6:"Sfgsfd";s:8:"lastname";s:6:"Gsdfgs";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:9:"Dfgsdfgsd";s:14:"common_friends";s:1:"0";}i:2;a:7:{s:2:"id";i:16223;s:3:"sex";i:1;s:9:"firstname";s:9:"Firstname";s:8:"lastname";s:8:"Lastname";s:7:"picture";s:72:"http://192.168.1.5:8888/static/user_up/20140910111218__fond-d-ecran2.jpg";s:3:"job";s:3:"Job";s:14:"common_friends";s:1:"0";}i:3;a:7:{s:2:"id";i:16220;s:3:"sex";i:1;s:9:"firstname";s:4:"Zied";s:8:"lastname";s:5:"Guiga";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:3:"Pdg";s:14:"common_friends";s:1:"0";}i:4;a:7:{s:2:"id";i:1;s:3:"sex";i:1;s:9:"firstname";s:2:"Hr";s:8:"lastname";s:4:"Anis";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:15:"Project manager";s:14:"common_friends";s:1:"0";}i:5;a:7:{s:2:"id";i:16224;s:3:"sex";i:1;s:9:"firstname";s:9:"Alaeddine";s:8:"lastname";s:8:"Ouertani";s:7:"picture";s:62:"http://192.168.1.5:8888/static/user_up/20140910144628__moi.jpg";s:3:"job";s:37:"Ingénieur développeur android & ios";s:14:"common_friends";s:1:"0";}}
+56a:6:{i:0;a:7:{s:2:"id";i:16222;s:3:"sex";i:1;s:9:"firstname";s:7:"Prenom2";s:8:"lastname";s:4:"Nom2";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:9:"ftfvttvft";s:14:"common_friends";s:1:"0";}i:1;a:7:{s:2:"id";i:2;s:3:"sex";i:1;s:9:"firstname";s:6:"Sfgsfd";s:8:"lastname";s:6:"Gsdfgs";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:9:"Dfgsdfgsd";s:14:"common_friends";s:1:"0";}i:2;a:7:{s:2:"id";i:16223;s:3:"sex";i:1;s:9:"firstname";s:9:"Firstname";s:8:"lastname";s:8:"Lastname";s:7:"picture";s:72:"http://192.168.1.5:8888/static/user_up/20140910111218__fond-d-ecran2.jpg";s:3:"job";s:3:"Job";s:14:"common_friends";s:1:"0";}i:3;a:7:{s:2:"id";i:16220;s:3:"sex";i:1;s:9:"firstname";s:4:"Zied";s:8:"lastname";s:5:"Guiga";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:3:"Pdg";s:14:"common_friends";s:1:"0";}i:4;a:7:{s:2:"id";i:1;s:3:"sex";i:1;s:9:"firstname";s:2:"Hr";s:8:"lastname";s:4:"Anis";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:15:"Project manager";s:14:"common_friends";s:1:"0";}i:5;a:7:{s:2:"id";i:16224;s:3:"sex";i:1;s:9:"firstname";s:9:"Alaeddine";s:8:"lastname";s:8:"Ouertani";s:7:"picture";s:62:"http://192.168.1.5:8888/static/user_up/20140910144628__moi.jpg";s:3:"job";s:37:"Ingénieur développeur android & ios";s:14:"common_friends";s:1:"0";}}
+56a:0:{}
+56a:6:{i:0;a:7:{s:2:"id";i:16222;s:3:"sex";i:1;s:9:"firstname";s:7:"Prenom2";s:8:"lastname";s:4:"Nom2";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:9:"ftfvttvft";s:14:"common_friends";s:1:"0";}i:1;a:7:{s:2:"id";i:2;s:3:"sex";i:1;s:9:"firstname";s:6:"Sfgsfd";s:8:"lastname";s:6:"Gsdfgs";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:9:"Dfgsdfgsd";s:14:"common_friends";s:1:"0";}i:2;a:7:{s:2:"id";i:16223;s:3:"sex";i:1;s:9:"firstname";s:9:"Firstname";s:8:"lastname";s:8:"Lastname";s:7:"picture";s:72:"http://192.168.1.5:8888/static/user_up/20140910111218__fond-d-ecran2.jpg";s:3:"job";s:3:"Job";s:14:"common_friends";s:1:"0";}i:3;a:7:{s:2:"id";i:16220;s:3:"sex";i:1;s:9:"firstname";s:4:"Zied";s:8:"lastname";s:5:"Guiga";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:3:"Pdg";s:14:"common_friends";s:1:"0";}i:4;a:7:{s:2:"id";i:1;s:3:"sex";i:1;s:9:"firstname";s:2:"Hr";s:8:"lastname";s:4:"Anis";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:15:"Project manager";s:14:"common_friends";s:1:"0";}i:5;a:7:{s:2:"id";i:16224;s:3:"sex";i:1;s:9:"firstname";s:9:"Alaeddine";s:8:"lastname";s:8:"Ouertani";s:7:"picture";s:62:"http://192.168.1.5:8888/static/user_up/20140910144628__moi.jpg";s:3:"job";s:37:"Ingénieur développeur android & ios";s:14:"common_friends";s:1:"0";}}
+56a:0:{}
+56a:6:{i:0;a:7:{s:2:"id";i:16222;s:3:"sex";i:1;s:9:"firstname";s:7:"Prenom2";s:8:"lastname";s:4:"Nom2";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:9:"ftfvttvft";s:14:"common_friends";s:1:"0";}i:1;a:7:{s:2:"id";i:2;s:3:"sex";i:1;s:9:"firstname";s:6:"Sfgsfd";s:8:"lastname";s:6:"Gsdfgs";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:9:"Dfgsdfgsd";s:14:"common_friends";s:1:"0";}i:2;a:7:{s:2:"id";i:16223;s:3:"sex";i:1;s:9:"firstname";s:9:"Firstname";s:8:"lastname";s:8:"Lastname";s:7:"picture";s:72:"http://192.168.1.5:8888/static/user_up/20140910111218__fond-d-ecran2.jpg";s:3:"job";s:3:"Job";s:14:"common_friends";s:1:"0";}i:3;a:7:{s:2:"id";i:16220;s:3:"sex";i:1;s:9:"firstname";s:4:"Zied";s:8:"lastname";s:5:"Guiga";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:3:"Pdg";s:14:"common_friends";s:1:"0";}i:4;a:7:{s:2:"id";i:1;s:3:"sex";i:1;s:9:"firstname";s:2:"Hr";s:8:"lastname";s:4:"Anis";s:7:"picture";s:49:"http://192.168.1.5:8888/static/user_up/avatar.png";s:3:"job";s:15:"Project manager";s:14:"common_friends";s:1:"0";}i:5;a:7:{s:2:"id";i:16224;s:3:"sex";i:1;s:9:"firstname";s:9:"Alaeddine";s:8:"lastname";s:8:"Ouertani";s:7:"picture";s:62:"http://192.168.1.5:8888/static/user_up/20140910144628__moi.jpg";s:3:"job";s:37:"Ingénieur développeur android & ios";s:14:"common_friends";s:1:"0";}}
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%markus%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%1%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%markus%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%1%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%markus%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%markus%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%1%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%3%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%2%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%markus%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%1%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%1%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%1%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%1%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%markus%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%1%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%markus%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%1%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%markus%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%1%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%markus%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%1%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%markus%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%1%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20
+79SELECT 
+                                (SELECT count(*) 
+                                        FROM relations R
+                                        WHERE 
+                                                (R.id_user1=U.id_user AND R.id_user2 IN (SELECT R2.id_user2 FROM relations R2 WHERE R2.id_user1='3'))
+                                                OR
+                                                (R.id_user2=U.id_user AND R.id_user1 IN (SELECT R2.id_user1 FROM relations R2 WHERE R2.id_user2='3'))
+                                ) 
+                        AS common_friends, U.job,U.firstname,U.lastname, U.user_picture,U.id_user,U.gendre
+                        FROM users U,user_activity A 
+                        WHERE 
+                                U.id_user NOT IN (SELECT id_user2 FROM relations WHERE id_user1='3')
+                        AND
+                                U.id_user NOT IN (SELECT id_user1 FROM relations WHERE id_user2='3')
+                        AND A.activity LIKE '%%'
+                        AND U.firstname LIKE '%%'
+                        AND U.lastname LIKE '%%'
+                        AND U.job LIKE '%%'
+                        AND U.company_name LIKE '%%'
+                        AND U.company_country LIKE '%%'
+                        AND U.company_city LIKE '%%'
+                        AND U.gendre LIKE '%1%'
+                        AND A.id_user=U.id_user AND U.id_user !='3' GROUP BY U.id_user ORDER BY common_friends DESC LIMIT 0,20

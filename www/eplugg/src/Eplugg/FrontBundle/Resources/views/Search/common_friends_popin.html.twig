@@ -1,0 +1,32 @@
+{% block styles %}
+{% endblock %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>{{ 'ePlugg'|trans }}</title>
+    <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('js/jquery-1.10.2.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.prettyPhoto.js') }}"></script>
+</head>
+    <body>
+    {% block body %}
+        <div class="titre_plugg">{{ 'Contacts en commun'|trans }}</div>
+        {% if users is not empty %}
+            {% for user in users %}
+                <div class="bloc_connais">
+                    <div class="im_connais"><a href="{{ path('eplugg_profile_page', {'uid': user.id }) }}"><img width="37" height="37" alt="" src="{% if user.avatar is not empty %} {{ asset(user.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}"><span></span></a></div>
+                    <div class="des_connais">
+                        <strong><a data-tooltip="#html-content{{ user.id }}" href="{{ path('eplugg_profile_page', {'uid': user.id }) }}">{{ user.firstName }} {{ user.lastName }}</a></strong>
+                        {{ user.job }}
+                    </div>
+                    <div class="clear5"></div>
+                </div>
+            {% endfor %}
+        {% else %}
+        <div class="message">{{ 'Aucun contact trouvé'|trans }}.</div>
+        {% endif %}
+        <div class="clear20"></div>
+    {% endblock %}
+    </body>
+</html>

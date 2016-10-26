@@ -1,0 +1,115 @@
+{% extends 'EpluggFrontBundle::base_logged_in.html.twig' %}
+{% block title %}{{ 'Eplugg'|trans }} - {{ 'Répertoire'|trans }}{% endblock %}
+
+{% block body %}
+    <div id="content" style="min-height: 834px;">
+        <div class="center_content_inner" style="min-height: 829px;">
+            <div id="left_content">
+                {{ render(controller('EpluggFrontBundle:Default:leftSidebarConnected')) }}
+            </div>
+            <div id="body_content">
+                <div class="titre_plugg search">{{ 'Répertoire'|trans }}</div>
+                <div class="result_search" id="directory_serach">
+                    <div class="input_search"><input id="dir_ct_serach" data-url="{{ path('directory') }}" name="keys" placeholder="{{ 'Rechercher'|trans }}..." type="text">
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="filtre_alphabet sc_menu" style="overflow: hidden;">
+                    <ul class="sc_menu">
+                        <li><a class="select" href="{{ path('directory') }}">{{ 'Tous'|trans }}</a></li>
+                        {% for letter in 'a'..'z' %}
+
+                            <li><a class="setLetter "
+                                   href="{{ path('directory', {'letter':letter}) }}">{{ letter|upper }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <div id="dir_ct_list">
+                    {% include "EpluggFrontBundle:Repertoire:Repertoire_bloc_friends.html.twig" with {"annuaire": annuaire} only %}
+
+
+                </div>
+            </div>
+            {% include "EpluggFrontBundle:logged_in:right_sidebar.html.twig" %}
+            <div class="clear"></div>
+        </div>
+        <div class="clear25"></div>
+    </div>
+    {% block more_javascripts %}
+        <script src="{{ asset('js/menuphone/vendor/modernizr.custom.71422.js') }}" language="javascript" type="text/javascript"></script>
+        <script>
+            $(function(){
+                var div = $('div.sc_menu'), ul = $('ul.sc_menu'), ulPadding = 15;
+                var divWidth = div.width();
+                div.css({overflow: 'hidden'});
+                var lastLi = ul.find('li:last-child');
+                div.mousemove(function(e){
+                    var ulWidth = lastLi[0].offsetLeft + lastLi.outerWidth() + ulPadding;
+                    var left = (e.pageX - div.offset().left) * (ulWidth-divWidth) / divWidth;
+                    div.scrollLeft(left);
+                });
+            });
+        </script>
+    {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

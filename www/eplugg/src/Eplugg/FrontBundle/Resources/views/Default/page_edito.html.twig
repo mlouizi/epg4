@@ -1,0 +1,33 @@
+{% extends 'EpluggFrontBundle::base.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block stylesheets %}
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
+{% endblock %}
+{% block title %}{{ 'Eplugg'|trans }} - {{ page.title }}{% endblock %}
+
+{% block body %}
+    <div id="content">
+        <div class="center_content_inner mentionlegal">
+            <div class="titre_plugg search">{{ page.title }}</div>
+            {{ page.body | raw }}
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endblock body %}
+{% block javascripts %}
+    <script language="javascript" type="text/javascript" src="{{ asset('js/jquery-1.11.0.min.js') }}"></script>
+    <script language="javascript" type="text/javascript" src="{{ asset('js/jquery.easing.min.js') }}"></script>
+    <script language="javascript" type="text/javascript" src="{{ asset('js/jquery.mousewheel.min.js') }}"></script>
+    <script language="javascript" type="text/javascript" src="{{ asset('js/jquery.prettyPhoto.js') }}"></script>
+    <script language="javascript" type="text/javascript" src="{{ asset('js/jquery.placeholder.js') }}"></script>
+    <script language="javascript" type="text/javascript" src="{{ asset('js/jquery.caret.js') }}"></script>
+    <script language="javascript" type="text/javascript" src="{{ asset('js/script.js') }}"></script>
+    <script language="javascript" type="text/javascript" >
+        var invalide_email_error = "Invalid email address." ;
+        var password_error = "Password must be a minimum of 6 characters string." ;
+        var confirm_password_error = "The two passwords must be identical." ;
+    </script>
+    <script language="javascript" type="text/javascript" src="{{ asset('js/steps.js') }}"></script>
+{% endblock %}
+

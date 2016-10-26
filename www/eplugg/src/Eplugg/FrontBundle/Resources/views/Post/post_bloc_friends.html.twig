@@ -1,0 +1,57 @@
+{% if posts is empty %}
+    <div class="message">{{ 'Aucun article trouvé'|trans }}.</div>
+{% else %}
+    {% for post in posts %}
+
+        <div class="bloc_post item_infinity">
+            {% if post.user.id ==  app.user.id %}
+                <a class="deletepost" href="{{ path('post_delete',{'id':post.id}) }}"  onclick="return confirm('Are you sure?')" >Delete</a>
+            {% endif %}
+            <div class="post_avatar_user">
+                <a href="{{ path('eplugg_profile_page', {'uid': post.user.id }) }}">
+                    <img width="50" height="50"
+                         src="{% if post.user.avatar is not empty %} {{ asset(post.user.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}">
+                </a>
+            </div>
+
+            <div class="post_name_user">
+                <a href="{{ path('eplugg_profile_page', {'uid': post.user.id }) }}">{{ post.user.firstName }} {{ post.user.lastName }}</a>
+            </div>
+            <div>
+
+                {%  set source_post = getsourcepost(post.id) %}
+                {% if source_post is not null %}
+                    {{ 'a partagé'|trans }}
+                    <a href="{{ path('post_show',{'idpost':source_post.id}) }}">{{ 'le post'|trans }}  </a> de {{ source_post.user.firstName }} {{ source_post.user.lastName  }}
+                {% endif %}
+
+            </div>
+
+            <br>
+            <div class="post_name_time">
+                {{ post.dateAjout|date('d-m-y h:i:s') }}
+            </div>
+            <br>
+            <div class="contenu_post">
+                {{ post.contenu }}
+            </div>
+            {% if post.getWebPath() is not  empty %}
+                <img class="img_post" width="100%" height="315px" src="{{ asset(post.getWebPath()) }}">
+            {% endif %}
+            <div class="like_post_" id="like_post_{{ post.id }}">
+            {% include "EpluggFrontBundle:Post:like_post_block.html.twig" with {"postlike": getlikedpost(post.id),"post":post,"likedpostsameuser":likedPostOrNot(post.id,app.user.id)}  %}
+            </div>
+            <a class="share-btt" href="{{ path('post_share',{'idpost':post.id}) }}"><span>Partager</span></a>
+            
+
+            <div class="commentire_post" id="commentire_post_{{ post.id }}">
+                {#   {{ render(controller('EpluggFrontBundle:Post:addListComment',{ 'id_post': post.id })) }} #}
+                {% include "EpluggFrontBundle:Post:commentaires.html.twig" with {"comments": getcomments(post.id),"post":post}  %}
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+{% endif %}

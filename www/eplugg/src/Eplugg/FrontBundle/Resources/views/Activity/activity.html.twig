@@ -1,0 +1,56 @@
+{% extends 'EpluggFrontBundle::base_logged_in.html.twig' %}
+{% block title %}{{ 'Eplugg'|trans }} - {{ 'Activité'|trans }} {{ name_activity }}{% endblock %}
+
+{% block body %}
+    <div id="content" style="min-height: 834px;">
+        <div class="center_content_inner" style="min-height: 829px;">
+            <div id="left_content">
+                {{ render(controller('EpluggFrontBundle:Default:leftSidebarConnected')) }}
+            </div>
+            <div id="body_content">
+                <div class="titre_plugg">{{ name_activity }}</div>
+                <div id="content_infinity">
+
+                    <div class="item_infinity">
+
+                        {% include "@EpluggFront/Activity/bloc_friends_activity.html.twig" with {"annuaire": annuaire, 'name_activity': name_activity} only %}
+                        <a id="next" href="?page=0"></a>
+
+                    </div>
+
+                </div>
+
+            </div>
+            {% include "EpluggFrontBundle:logged_in:right_sidebar.html.twig" %}
+            <div class="clear"></div>
+        </div>
+        <div class="clear25"></div>
+    </div>
+
+
+
+
+{% endblock %}
+{% block more_javascripts %}
+    <script src="{{ asset('js/jquery.infinitescroll.js') }}"></script>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function() {
+            $('#content_infinity').infinitescroll(
+                    {
+                        navSelector: "#next:last",
+                        nextSelector: "a#next:last",
+                        itemSelector: "#content_infinity div.item_infinity",
+                        dataType: 'html',
+                        maxPage: 3,
+                        path: function (index) {
+                            return "?page=" + index;
+                        }
+                    },
+                    function (newElements, data, url) {
+                        $('.tooltip').darkTooltip({animation: 'flipIn', gravity: 'east', theme: 'light'});
+                        intPretty();
+                    }
+            );
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% if annuaire is empty %}
+    <div class="message">{{ 'Aucun contact trouvé'|trans }}.</div>
+{% else %}
+    {% for friend in annuaire %}
+        <div class="bloc_user">
+            <a class="infobull_div tooltip" data-tooltip="#html-content{{ friend.id }}" href="{{ friend.profile_url }}"
+               style="cursor: pointer;"></a>
+            <div class="im_connais"><a href="{{ friend.profile_url }}">
+                    <img src="{{ friend.user_picture }}"
+                         width="37" height="37"
+                         alt=""><span></span></a></div>
+            <div class="des_connais">
+                <strong><a href="{{ friend.profile_url }}" class="tooltip" data-tooltip="#html-content{{ friend.id }}"
+                           style="cursor: pointer;">{{ friend.firstname }} {{ friend.lastname|upper }}</a></strong>
+                {{ friend.job }}
+            </div>
+            <div class="clear5"></div>
+            <div style="display:none;" id="html-content{{ friend.id }}">
+                <div id="card_eplugg" onclick="window.location.href='{{ friend.profile_url }}'">
+                    <div class="yellow"><img src="{{ asset('images/arrow-yelow.png') }}"></div>
+                    <div id="card_user">
+                        <div class="img_profil"><a href="{{ friend.profile_url }}"><img
+                                        src="{{ friend.user_picture }}" alt="" width="48" height="48"></a>
+                        </div>
+                        <div class="descp_card">
+                            <div class="name_user"><a href="{{ friend.profile_url }}"> {{ friend.firstname }} {{ friend.lastname|upper }}</a></div>
+                            <div class="job_user">{{ friend.job }}</div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div id="card_company">
+                        <div class="img_profil">
+                            <a href="{{ friend.profile_url }}"><img
+                                        src="{{ asset(friend.company_logo) }}"
+                                        width="51" height="51"></a>
+                        </div>
+                        <div class="descp_card">
+                            <div class="company_user"><a href="{{ friend.profile_url }}">{{ friend.company_name }}</a></div>
+                            <div class="tag_company">
+                            {{ friend.company_activity }}
+                            </div>
+                            <div class="lieu_company">{{ friend.company_city }} {{friend.company_country  }}</div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="plugg_link info_card">
+                    <a href="{{ path('eplugg_suggest_user', {'uid': friend.id }) }}&amp;iframe=true&amp;width=400" rel="suggerer">{{ 'Suggérer'|trans }}</a>
+                    <a href="{{ path('eplugg_messages_user', {'uid': friend.id }) }}">{{ 'Message'|trans }}</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endif %}

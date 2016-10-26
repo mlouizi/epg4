@@ -1,0 +1,60 @@
+{% extends 'EpluggFrontBundle::base_logged_in.html.twig' %}
+{% block body %}
+
+    <div id="content" style="min-height: 834px;">
+        <div class="center_content_inner" style="min-height: 829px;">
+            <div id="calendar-wrap">
+            <header>
+                <a class="prev ajax-calendar" href="{{ path("eplugg_calendar", {'month': prevDate|date("m"), 'year': prevDate|date("Y") }) }}">prev</a>
+                <h1 class="calendar-date">{{ date|date("F Y") }}</h1>
+                <a class="next ajax-calendar" href="{{ path("eplugg_calendar", {'month': nextDate|date("m"), 'year': nextDate|date("Y") }) }}">next</a>
+                <span class="add-event"><a class="add_event" rel="add_event"  href="{{ path('eplugg_add_event', {'iframe': 'true', 'width': '500', 'height': '350' }) }}">{{ 'Ajouter un évènement'|trans }}</a></span>
+            </header>
+            <div class="clear"></div>
+            <div id="calendar">
+            <ul class="weekdays">
+                <li>{{ 'Lundi'|trans }}</li>
+                <li>{{ 'Mardi'|trans }}</li>
+                <li>{{ 'Mercredi'|trans }}</li>
+                <li>{{ 'Jeudi'|trans }}</li>
+                <li>{{ 'Vendredi'|trans }}</li>
+                <li>{{ 'Samedi'|trans }}</li>
+                <li>{{ 'Dimanche'|trans }}</li>
+            </ul>
+
+            <!-- Days from previous month -->
+            {% for week in events %}
+                <ul class="days">
+                    {% for day in week %}
+                        {% if day["day"] is not empty %}
+                            <li class="day other-month">
+                                <div class="date">{{ day["day"] }}</div>
+                                {% if day["events"] is  defined %}
+                                    {% for event in day["events"] %}
+                                        <div class="event">
+                                            <div class="event-desc">
+                                                {{ event.title }}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </li>
+
+                        {% else %}
+                            <li class="day other-month"></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+
+            </div><!-- /. calendar -->
+            </div><!-- /. wrap -->
+
+
+            <div class="clear"></div>
+        </div>
+        <div class="clear25"></div>
+    </div>
+
+{% endblock %}
+

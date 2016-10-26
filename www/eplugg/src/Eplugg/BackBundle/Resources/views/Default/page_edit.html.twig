@@ -1,0 +1,113 @@
+{% extends 'EpluggBackBundle::base.html.twig' %}
+{% block content %}
+    <section class="content-header">
+        <h1>User Add</h1>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-sm-12">
+                        {{ form_start(form, {'method': 'post',  'action':  path('eplugg_edit_page', {'pid': pid})  }) }}
+                        <div class="margin row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    {{ form_label(form.title) }}
+                                    {{ form_errors(form.title) }}
+                                    {{ form_widget(form.title, { 'attr': {'class': 'form-control', 'placeholder': 'title' } }) }}
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="margin row">
+                            <div class="col-md-12">
+                                <div class="box box-info">
+                                    <div class="box-body pad">
+                                        {{ form_label(form.body) }}
+                                        {{ form_errors(form.body) }}
+                                        {{ form_widget(form.body, {'id': 'editor1', 'attr': {'class': 'form-control', 'placeholder': 'title','cols': '80', 'rows': '10' } }) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="margin row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    {{ form_label(form.slug) }}
+                                    {{ form_errors(form.slug) }}
+                                    {{ form_widget(form.slug, { 'attr': {'class': 'form-control', 'placeholder': 'path' } }) }}
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="margin row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    {{ form_label(form.weight) }}
+                                    {{ form_errors(form.weight) }}
+                                    {{ form_widget(form.weight, { 'attr': {'class': 'form-control' } }) }}
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="margin row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    {{ form_label(form.promoteFooterMenu) }}
+                                    {{ form_errors(form.promoteFooterMenu) }}
+                                    {{ form_widget(form.promoteFooterMenu, { 'attr': {} }) }}
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="margin row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    {{ form_label(form.menuTitle) }}
+                                    {{ form_errors(form.menuTitle) }}
+                                    {{ form_widget(form.menuTitle, { 'attr': {} }) }}
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="margin row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    {{ form_label(form.status) }}
+                                    {{ form_errors(form.status) }}
+                                    {{ form_widget(form.status, { 'attr': {} }) }}
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="margin row">
+                            <div class="form-group">
+                                {{ form_widget(form.submit, { 'id': "delete", 'attr': {'class': 'btn btn-primary', 'type': 'submit'}, 'label': 'Submit' } ) }}
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+{% block pages_javascripts %}
+    <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
+    <script>
+        jQuery(function () {
+            // Replace the <textarea id="editor1"> with a CKEditor
+            // instance, using default configuration.
+            CKEDITOR.replace('editor1');
+        });
+    </script>
+{% endblock %}

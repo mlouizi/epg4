@@ -1,0 +1,13 @@
+{% extends 'EpluggFrontBundle::base.html.twig' %}
+{% block title %}{{ 'Eplugg'|trans }} - {{ 'Mot de passe oublié'|trans }}{% endblock %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+{% block stylesheets %}
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    {% block fos_user_content %}
+        {% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+    {% endblock fos_user_content %}
+{% endblock %}

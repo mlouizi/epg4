@@ -1,0 +1,23 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="login-sys">
+    <div class="titre_plugg">{{ 'Mot de passe oublié'|trans }}?</div>
+    <div class="login_inner">
+        <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+            {% if invalid_username is defined %}
+                <div class="message error">
+                    <strong>{{ 'L’adresse e-mail que vous avez entré n’est pas associée à un compte'|trans }}.</strong>
+                </div>
+            {% endif %}
+            <input placeholder="{{ 'Adresse e-mail'|trans }}" type="text" id="username" name="username" required="required" />
+            <div>
+                <span class="login_span">
+                    <a href="{{ path('fos_user_security_login') }}" class="connex">{{ 'S’identifier'|trans }}</a><br>
+                </span>
+                <span class="button_span">
+                    <button class="submit" type="submit">{{ 'S’identifier'|trans }}</button>
+                </span>
+                <div class="clear"></div>
+            </div>
+        </form>
+    </div>
+</div>

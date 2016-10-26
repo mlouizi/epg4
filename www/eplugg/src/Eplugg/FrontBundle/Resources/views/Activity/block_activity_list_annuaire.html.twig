@@ -1,0 +1,12 @@
+{% if activities is empty %}
+<div class="message">{{ 'Aucune activité trouvée'|trans }}.</div>
+{% else %}
+
+{% for activity in activities %}
+    <div class="bloc_user">
+    <div class="des_connais"><strong><a href="{{ path('search_users_by_activity',{'id': activity.activity_id}) }}">{{ activity.name }}</a></strong></div>
+    <div class="ferme_connais"><a href="{{ path('search_users_by_activity',{'id': activity.activity_id}) }}" title="1 Contact" class="nb_vue_"><span>{{ activity.nbr_repeat_activity }}</span></a></div>
+    <div class="clear5"></div>
+</div>
+{% endfor %}
+{% endif %}

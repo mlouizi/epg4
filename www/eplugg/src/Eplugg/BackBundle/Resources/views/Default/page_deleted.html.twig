@@ -1,0 +1,25 @@
+{% extends 'EpluggBackBundle::base.html.twig' %}
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div id="users" class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="callout callout-info">
+                                        <p>The page has been successfully deleted!</p>
+                                    </div>
+                                    <a class="btn" href="{{ path('eplugg_back_pages') }}">Back</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

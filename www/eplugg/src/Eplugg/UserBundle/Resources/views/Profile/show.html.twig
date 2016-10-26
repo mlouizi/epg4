@@ -1,0 +1,10 @@
+{% extends 'EpluggFrontBundle::base_logged_in.html.twig' %}
+{% block title %}{{ 'Eplugg'|trans }} - {{ 'Profile'|trans }}  {{ user.firstName }} {{ user.lastName }}{% endblock %}
+{% block og %}
+    <meta property="og:title" content="Profile {{ user.firstName }} {{ user.lastName }}"/>
+    <meta property="og:image" content="{% if user.avatar is not empty %} {{ asset(user.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}"/>
+    <meta property="og:description" content="{% if user.directPhone is not empty %}{{ 'Direct Phone'|trans }}: {{ user.directPhone }}  {% endif %}{% if user.mobile is not empty %}{{ 'Mobile Phone'|trans }}: {{ user.mobile }}  {% endif %}{% if user.moreEmails is not empty %}{{ 'Emails'|trans }}: {{ user.moreEmails }}  {% endif %}"/>
+{% endblock %}
+{% block body %}
+    {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+{% endblock %}

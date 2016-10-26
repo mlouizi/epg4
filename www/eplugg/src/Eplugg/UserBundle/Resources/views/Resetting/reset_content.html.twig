@@ -1,0 +1,16 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="login-sys">
+    {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+        {{ form_widget(form) }}
+        <div>
+            <span class="login_span">
+                <a href="{{ path('fos_user_security_login') }}" class="connex">{{ 'S’identifier'|trans }}</a><br>
+            </span>
+            <span class="button_span">
+                <button class="submit" type="submit">{{ 'S’identifier'|trans }}</button>
+            </span>
+            <div class="clear"></div>
+        </div>
+
+    {{ form_end(form) }}
+</div>

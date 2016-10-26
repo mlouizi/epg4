@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}{{ 'Eplugg'|trans }}{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <meta name="viewport" content="width=100%, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+
+</head>
+<body>
+<div id="eplugg">
+{% block header %}
+    <div style="overflow:auto" id="header">
+        <div class="center_content">
+            <div id="logo">
+                <a href="{{ path('eplugg_front_homepage') }}">
+                    <img alt="logo" src="{{ asset('images/logo.png') }}">
+                </a>
+            </div>
+            {% block login %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
+{% block body %}{% endblock %}
+
+{% block footer %}
+    {% include "EpluggFrontBundle:Default:footer.html.twig" %}
+
+{% endblock %}
+{% block after_footer %}
+{% endblock %}
+</div>
+{% block javascripts %}{% endblock %}
+</body>
+</html>

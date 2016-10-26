@@ -1,0 +1,33 @@
+{% extends 'EpluggBackBundle::base.html.twig' %}
+
+{% block content %}
+    <section class="content-header">
+        <h1>Users</h1>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div id="users" class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    {{ form_start(form, {'method': 'post',  'action':  path('eplugg_block_user', {'uid': uid}) , 'attr': {'class': 'box-title'} }) }}
+                                    <h3>Are you sure you want to block this user?</h3>
+                                    <div>
+                                        {{ form_widget(form.block, { 'id': "delete", 'attr': {'class': 'btn btn-primary', 'type': 'submit'}, 'label': 'Block' } ) }}
+                                        <a class="btn" href="{{ path('eplugg_back_users') }}">Cancel</a>
+                                    </div>
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

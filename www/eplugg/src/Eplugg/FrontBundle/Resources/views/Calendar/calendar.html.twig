@@ -1,0 +1,28 @@
+{% extends 'EpluggFrontBundle::base_logged_in.html.twig' %}
+{% block title %}{{ 'Eplugg'|trans }} - {{ 'Calendrier'|trans }}{% endblock %}
+{% block body %}
+    <div class="page-calendar">
+        <div class="add-event">
+            <a class="add_event" rel="add_event"  href="{{ path('eplugg_add_event', {'iframe': 'true', 'width': '500', 'height': '350' }) }}">{{ 'Ajouter un évènement'|trans }}</a>
+        </div>
+        <div style="width:100%; max-width:600px; display:inline-block;">
+            <div class="monthly" id="mycalendar"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block more_javascripts %}
+
+    <script src="{{ asset('js/monthly.js') }}" language="javascript" type="text/javascript"></script>
+
+    <script>
+        $('#mycalendar').monthly({
+            mode: 'event',
+            xmlUrl: '{{ path('eplugg_xml_events') }}'
+        });
+    </script>
+{% endblock %}
+ {% block more_stylesheets %}
+     <link href="{{ asset('css/monthly.css') }}" type="text/css" rel="stylesheet">
+
+ {% endblock %}

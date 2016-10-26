@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}{{ 'Eplugg'|trans }}{% endblock %}</title>
+    {% block og %}{% endblock %}
+    {% block stylesheets %}
+        <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('css/sizzle.css') }}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('css/cupertino/jquery-ui-1.10.4.custom.css') }}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('css/prettyPhoto.css') }}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('css/darktooltip.css') }}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('css/jautocomplete.css') }}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('css/popModal.css') }}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('css/responsive.css') }}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('css/steps.css') }}" type="text/css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('chat/css/style.css') }}" type="text/css" />
+    {% endblock %}
+    {% block more_stylesheets %}
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <meta name="viewport" content="width=100%, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
+</head>
+<body>
+{% block nav %}
+
+    <nav class="pushy pushy-left">
+
+        <div class="profil_bloc">
+            <div class="img_prince"><a href="/user?id="><img width="35" height="33" alt="" src="{{ asset('images/avatar.png') }}"></a></div>
+            <div class="descp_prince">
+                <strong><a href="/user?id="> </a></strong>
+            </div>
+        </div>
+        <ul>
+            <li><a href="/"><img src="{{ asset('images/news.png') }}"> {{'Actualité'|trans }}</a></li>
+            <li><a href="/directory"><img src="{{ asset('images/directory.png') }}"> {{'Répertoire'|trans }}</a></li>
+            <li><a href="{{ path('eplugg_messages') }}"><img src="{{ asset('images/msg_menu.png') }}"> {{'Message'|trans }}</a></li>
+            <li><a href="/invitations"><img src="{{ asset('images/invitation2.png') }}"> {{'Invitation'|trans }}</a></li>
+            <!-- <li><a href="#"><img src="/images/search_menu.png" /> {{'Recherche'|trans }}</a></li>-->
+            <li><a href="/logout"><img src="{{ asset('images/logout2.png') }}"> {{'Déconnexion'|trans }}</a></li>
+        </ul>
+    </nav>
+    <div class="site-overlay"></div>
+{% endblock nav %}
+{% block chat %}
+    <div id="list_friends" style="z-index: 15;"> <!-- LIST CONTACT -->
+        <div id="infomrations_account_status">
+            <div id="infos_account" class="label friend-num-connected {% if app.user.status == 1 %}label-online{% else %}label-offline{% endif %}">{{'Bienvenue'|trans}}, {{ app.user.username }}</div>
+        </div><br/><br/><br/><hr/><br/>
+
+        <div id="status-search">
+            <div id="change-status"><!-- change in status bar -->
+                <a class="href_dyn" data-status="label-online" href=""><div id="online-status" data-status="Online" class="case-status  first-case-status"><div class="icon_status"></div></div></a>
+                <a class="href_dyn" data-status="label-offline" href=""><div id="offline-status" data-status="Offline" class="case-status last-case-status"><div class="icon_status"></div></div></a>
+            </div>
+        </div>
+        <br/><br/>
+        <div>
+            <input type="text" name="search" id="search" />
+        </div>
+        <br/><br/>
+
+        <audio id="bip-sound" style="display:none;" controls preload="auto"> <!-- Sound reception of a message  -->
+            <source src="{{ asset('chat/sound/bip.mp3') }}" controls></source>
+            <source src="{{ asset('chat/sound/bip.ogg') }}" controls></source>
+        </audio><hr/><br/>
+
+        <div id="list_friends_into">
+        </div>
+    </div>
+
+    <div id="content_msg_box">  <!-- List of contact -->
+    </div>
+{% endblock %}
+<div id="eplugg">
+    {% block alertMessage %}
+        <div class="menu-btn"></div>
+        <div id="get_message" style="display:none">
+            <div class="titre_plugg">{{ 'Notification'|trans }}</div>
+            <div class="msg_glob">
+                <div id="alertmsg" class="alertmsg"></div>
+            </div>
+        </div>
+    {% endblock alertMessage %}
+    {% block advancedSearch %}
+        {{ render(controller('EpluggFrontBundle:Search:advancedSearchBlock')) }}
+    {% endblock advancedSearch  %}
+
+    {% block header %}
+        {{ render(controller('EpluggFrontBundle:Default:headerConnected', {'originalRequest': app.request })) }}
+    {% endblock %}
+    {% block body %}{% endblock %}
+    {% block footer %}
+
+        <div id="footer">
+            <div class="center_content">
+                <div id="menu_footer">
+                    <ul>
+                        {% for link in MenuFooter %}
+                            <li><a href="{{ path('eplugg_front_page', {'slug': link.slug }) }}">{% if link.menuTitle is not empty %} {{ link.menuTitle }} {% else %} {{ link.title }} {% endif %}</a></li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+                <div id="copyright"><img alt="Corporation" src="{{ asset('images/logo_footer.png') }}"> {{ 'Corporation'|trans }} &copy; 2016</div>
+            </div>
+        </div>
+    {% endblock %}
+    {% block after_footer %}
+    {% endblock %}
+</div>
+{% block javascripts %}
+    <script src="{{ asset('/js/jquery-1.10.2.js') }}" type="text/javascript" language="javascript"></script>
+    <script src="{{ asset('/js/jquery-ui-1.10.4.custom.js') }}" type="text/javascript" language="javascript"></script>
+    <script src="{{ asset('/js/jquery.easing.min.js') }}" type="text/javascript" language="javascript"></script>
+    <script src="{{ asset('/js/jquery.prettyPhoto.js') }}" type="text/javascript" language="javascript"></script>
+    <script src="{{ asset('/js/jquery.cookie.js') }}" type="text/javascript" language="javascript"></script>
+    <script src="{{ asset('/js/jquery.darktooltip.js') }}" type="text/javascript" language="javascript"></script>
+    <script src="{{ asset('/js/jsrender.min.js') }}" type="text/javascript" language="javascript"></script>
+    <script src="{{ asset('/js/jautocomplete.min.js') }}" type="text/javascript" language="javascript"></script>
+    <script src="{{ asset('/js/jquery.caret.js') }}" type="text/javascript" language="javascript"></script>
+    <script src="{{ asset('/js/popModal.js') }}" type="text/javascript" language="javascript"></script>
+    <script src="{{ asset('/js/scripts.js') }}" type="text/javascript" language="javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    <script src="{{ asset('/js/menuphone/vendor/modernizr.custom.71422.js') }}"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDz_cFGBeygOAl5p8xKn-njVduhYuXOiFw"></script>
+
+    <script src="{{ asset('/js/menuphone/pushy.min.js') }}">
+
+        /*! Pushy - v0.9.1 - 2013-9-16
+         * Pushy is a responsive off-canvas navigation menu using CSS transforms & transitions.
+         * https://github.com/christophery/pushy/
+         * by Christopher Yee */
+    $ (function(){function h(){t.toggleClass(o);e.toggleClass(s);n.toggleClass(u);r.toggleClass(a)}function p(){t.addClass(o);e.animate({left:"0px"},l);n.animate({left:c},l);r.animate({left:c},l)}function d(){t.removeClass(o);e.animate({left:"-"+c},l);n.animate({left:"0px"},l);r.animate({left:"0px"},l)}var e=$(".pushy"),t=$("body"),n=$("#eplugg"),r=$(".push"),i=$(".site-overlay"),s="pushy-left pushy-open",o="pushy-active",u="container-push",a="push-push",f=$(".menu-btn, .pushy a"),l=200,c=e.width()+"px";if(Modernizr.csstransforms3d){f.click(function(){h()});i.click(function(){h()})}else{e.css({left:"-"+c});n.css({"overflow-x":"hidden"});var v=!0;f.click(function(){if(v){p();v=!1}else{d();v=!0}});i.click(function(){if(v){p();v=!1}else{d();v=!0}})}});
+    </script>
+    <script type="text/javascript">
+/*
+    By Osvaldas Valutis, www.osvaldas.info
+    Available for use under the MIT License
+*/
+
+'use strict';
+
+( function ( document, window, index )
+{
+    var inputs = document.querySelectorAll( '.inputfile' );
+    Array.prototype.forEach.call( inputs, function( input )
+    {
+        var label    = input.nextElementSibling,
+            labelVal = label.innerHTML;
+
+        input.addEventListener( 'change', function( e )
+        {
+            var fileName = '';
+            if( this.files && this.files.length > 1 )
+                fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+            else
+                fileName = e.target.value.split( '\\' ).pop();
+
+            if( fileName )
+                label.querySelector( 'span' ).innerHTML = fileName;
+            else
+                label.innerHTML = labelVal;
+        });
+
+        // Firefox bug fix
+        input.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
+        input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
+    });
+}( document, window, 0 ));
+    </script>
+    <script type="text/javascript" src="{{ asset('/js/step.js') }}"></script>
+    <script src="{{ asset('js/jquery.placeholder.js') }}"></script>
+    <script>
+        $(function() { $('input, textarea').placeholder(); });
+    </script>
+    <script src="{{ asset('js/script.js') }}" language="javascript" type="text/javascript"></script>
+
+{% endblock %}
+{% block js_chat %}
+    <script type="text/javascript">
+
+        function msg_read(sender){ // Read message is ok
+            $('#' + sender + ' .top_message_box').css('background', '#fff');
+            $.get("{{ path('eplugg_chat_read_approved') }}", {usertwo: sender}, function(data) {});
+        }
+
+        function addMsgBox(id){ // New box chat
+            var html_ex = $('#content_msg_box').html();
+
+            msg_read(id);
+
+            $.post("{{ path('eplugg_chat_get_msg_box') }}",{usertwo: id}, function(data) { // Script make box caht
+                $('#content_msg_box').html(html_ex + data);
+            });
+
+        }
+
+        function refreshTimer(){
+            $.post("{{ path('eplugg_chat_refresh_timer_status') }}",
+                    function(data) {
+                        $('#infos_account').removeClass('label-online');
+                        $('#infos_account').removeClass('label-offline');
+                        if(data == 1){
+                            $('#infos_account').addClass('label-online');
+                        }
+                        else if(data==0){
+                            $('#infos_account').addClass('label-offline');
+                        }
+                    }
+            );
+            setTimeout('refreshTimer()',2500);
+        }
+
+        function addBoxAuto(id_box){
+
+            if($('#' + id_box).height() == 23){ // If box is already create and if the box is lowered
+                $('#' + id_box).css('height', '374px').css('margin-top', '0px');
+
+                // Show elements
+                $('#box_msg_' + id_box).show();
+                $('#write_msg_' + id_box).show();
+                $('#box_msg_' + id_box).show();
+            }
+
+            if($('#' + id_box).length <= 0){ // If the box not exist
+
+                var large_dispo = $("html").width() - $('#list_friends').width();
+                var nb_max_box = large_dispo / 350;
+                nb_max_box = Math.round(nb_max_box-1);
+
+                if($('.message_box').size() < nb_max_box){ // Test if the box chat number is maximum
+                    addMsgBox(id_box);
+                }
+            }
+
+        }
+
+
+        function reloadMembers(){ // View contact
+            if($("#search").val()==""){
+                $.post("{{ path('eplugg_chat_get_users') }}",
+                        function(data, status) {
+                            users = '';
+                            for(i=0;i<data.length;i++){
+                                img = "{{ asset('uploads/pictures/') }}"+data[i].image;
+                                users =' <div class="line_friend" data-box="'+data[i].id+'">'+
+                                '<div class="img_friend">'+
+                                '<img width="36" height="34" src="'+img+'">'+
+                                '</div>'+
+                                '<span>'+data[i].username+'</span> '+data[i].statusMsg+
+                                '<a class="tooltip tooltip-left-message left-icon-tooltip" data-tooltip="">'+
+                                '<div class="icon_status_friend status-friend '+data[i].status+'"></div>'+
+                                '</a>'+
+                                '</div>' + users;
+                                if(data[i].statusMsg != ''){
+                                    addBoxAuto(data[i].id);
+                                }
+                            }
+                            $('#list_friends_into').html(users);
+                        });
+                setTimeout('reloadMembers()',5000);
+            }
+        }
+
+        $(document).ready(function(){
+            $('.souscat a').click(function(){
+                _this = $(this) ;
+                $('#userLang').val(_this.data('lang')) ;
+                $('#lang_link').html(_this.html()) ;
+                $('.souscat').animate({height: ['hide', 'swing'],opacity: 'hide'}, 500, 'linear');
+            });
+            $('#btn_cat, #lang_link').click(function(){
+                $(".souscat").animate({
+                    height: ["toggle", "swing"],
+                    opacity: "toggle"
+                }, 500, "linear")
+            });
+
+            $('body').on( "click",".line_friend", function(){ // Line contact for create box chat
+                var id_box = $(this).attr('data-box');
+
+                if($('#' + id_box).height() == 23){ // If box is already create and if the box is lowered
+                    $('#' + id_box).css('height', '374px').css('margin-top', '0px');
+
+                    // Show elements
+                    $('#box_msg_' + id_box).show();
+                    $('#write_msg_' + id_box).show();
+                    $('#box_msg_' + id_box).show();
+                }
+
+                if($('#' + id_box).length <= 0){ // If the box not exist
+
+                    var large_dispo = $("html").width() - $('#list_friends').width();
+                    var nb_max_box = large_dispo / 350;
+                    nb_max_box = Math.round(nb_max_box-1);
+
+                    if($('.message_box').size() < nb_max_box){ // Test if the box chat number is maximum
+                        addMsgBox(id_box);
+                    }
+                }
+            });
+
+            $('.href_dyn').on("click", function () { // Change statustop bar
+
+                $.get($(this).attr("href"));
+
+                // Remove class button
+                $('#infos_account').removeClass('label-online');
+                $('#infos_account').removeClass('label-offline');
+
+                // Set new status
+                var StatusNew = $(this).attr('data-status');
+
+
+                // Add class - is selected
+                $('#infos_account').addClass(StatusNew);
+
+                if(StatusNew == 'label-online'){ s = 1; } else{ s = 0; }
+
+                $.post("{{ path('eplugg_chat_update_my_status') }}", { status: s } );
+
+                // Reset timer for change status
+
+                return false;
+            });
+
+            $("#search").on("keyup",function() {
+                $.post("{{ path('eplugg_chat_search_friend') }}",
+                        {search: $(this).val()},
+                        function(data, status) {
+                            users = '';
+                            for(i=0;i<data.length;i++){
+                                img = "{{ asset('uploads/pictures/') }}"+data[i].image;
+                                users =' <div class="line_friend" data-box="'+data[i].id+'">'+
+                                '<div class="img_friend">'+
+                                '<img width="36" height="34" src="'+img+'">'+
+                                '</div>'+
+                                '<span>'+data[i].username+'</span> '+data[i].statusMsg+
+                                '<a class="tooltip tooltip-left-message left-icon-tooltip" data-tooltip="">'+
+                                '<div class="icon_status_friend status-friend '+data[i].status+'"></div>'+
+                                '</a>'+
+                                '</div>' + users;
+                                if(data[i].statusMsg != ''){
+                                    addBoxAuto(data[i].id);
+                                }
+                            }
+                            $('#list_friends_into').html(users);
+                        }
+                );
+            });
+
+
+
+            refreshTimer();
+            reloadMembers();
+
+        }) ;
+    </script>
+{% endblock %}
+{% block js_geolocalization %}
+<script type="text/javascript">
+    if (navigator.geolocation) {
+        var watchId = navigator.geolocation.watchPosition(successCallbackGeolocalization, null, {enableHighAccuracy:true});
+
+    }
+    else {
+           
+        $.ajax({
+           url: "{{ path('eplugg_update_coordinations') }}",
+           type: "GET", 
+           data: "geo=false",
+           success : function (result) {
+           }
+        });
+    }
+
+    function successCallbackGeolocalization(position){
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;    
+       $.ajax({
+           url : "{{ path('eplugg_update_coordinations') }}",
+           type : "GET",
+           data : "geo=true&lat=" + latitude + "&lon="+ longitude,
+           success : function (result) {
+           }
+        });
+    };
+</script>
+{% endblock %}
+{% block more_javascripts %}
+{% endblock %}
+</body>
+</html>

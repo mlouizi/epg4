@@ -1,0 +1,59 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div id="content">
+    <div class="center_content_inner">
+        <div id="body_content" class="profil">
+            <div id="card_eplugg">
+                <div class="yellow">
+                    <img src="{{ asset('images/arrow-yelow-big.png') }}">
+                </div>
+                <div id="card_user">
+                    <div class="img_profil">
+                        <a><img src="{{ asset('images/avatar-user.png') }}"></a>
+                    </div>
+                    <div class="descp_card">
+                        <strong><a>Julie THERY</a></strong>
+                        <em>{{ 'Designer industriel'|trans }}</em>
+                        <ul>
+                            <li class="tel1">{{ 'Information privée'|trans }} <img src="{{ asset('images/private.png') }}"></li>
+                            <li class="mobile">{{ 'Information privée'|trans }} <img src="{{ asset('images/private.png') }}"></li>
+                            <li class="mail1">
+                                {{ 'Information privée'|trans }} <img src="{{ asset('images/private.png') }}"></li>
+                            <li class="sociaux">
+                                {{ 'Information privée'|trans }} <img src="{{ asset('images/private.png') }}"></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div id="card_company">
+                    <div class="img_profil"><a><img src="{{ asset('images/entreprise.png') }}"></a></div>
+                    <div class="descp_card">
+                        <strong><a> {{ 'Masia vallformosa sl unipersonal'|trans }} </a></strong>
+                        <div class="tag">#culture #patrimoine </div>
+                        <ul>
+                            <li class="tel2"> {{ 'Information privée'|trans }} <img src="{{ asset('images/private.png') }}"> </li>
+                            <li class="fax"> {{ 'Information privée'|trans }} <img src="{{ asset('images/private.png') }}"> </li>
+                            <li class="site">
+                                {{ 'Information privée'|trans }} <img src="{{ asset('images/private.png') }}">                            </li>
+                            <li class="lieu">{{ 'Information privée'|trans }} <img src="{{ asset('images/private.png') }}"></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+            </div>
+            <div class="partage_profil"></div>
+            <div class="clear30"></div>
+            <div class="titre_plugg"> {{ 'Parcours'|trans }} </div>
+            <div class="cv_profil"> {{ 'Information privée'|trans }} </div>
+            <div class="clear20"></div>
+            <div class="titre_plugg">{{ 'Actualités'|trans }}</div>
+            <div id="content_infinity" class="content_center__"> {{ 'Information privée'|trans }} </div>
+            <div class="clear20"></div>
+        </div>
+    </div>
+    <div class="clear25"></div>
+</div>
+<div class="fos_user_user_show">
+    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
+    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+</div>

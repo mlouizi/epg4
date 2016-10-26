@@ -1,0 +1,78 @@
+{% extends 'EpluggFrontBundle::base_logged_in.html.twig' %}
+{% block title %}{{ 'Eplugg'|trans }} - {{ 'Publication'|trans }}{% endblock %}
+
+{% block body %}
+    <div id="content" style="min-height: 834px;">
+        <div class="center_content_inner" style="min-height: 829px;">
+            <div id="left_content">
+                {{ render(controller('EpluggFrontBundle:Default:leftSidebarConnected')) }}
+            </div>
+            <div id="body_content" style="background-color: #e9ebee!important;">
+
+                <div id="dir_ct_list">
+                    {% if post is empty %}
+                        <div class="message">{{ 'Aucun article trouvé'|trans }}.</div>
+                    {% else %}
+
+                            <div  class="bloc_post">
+                                {% if post.user.id ==  app.user.id %}
+                                    <a class="deletepost" href="{{ path('post_delete',{'id':post.id}) }}"  onclick="return confirm('Are you sure?')" >Delete</a>
+                                {% endif %}
+                                <div class="post_avatar_user">
+                                    <a href="{{ path('eplugg_profile_page', {'uid': post.user.id }) }}">
+                                        <img width="50" height="50"
+                                             src="{% if post.user.avatar is not empty %} {{ asset(post.user.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}">
+                                    </a>
+                                </div>
+
+                                <div class="post_name_user">
+                                    <a href="{{ path('eplugg_profile_page', {'uid': post.user.id }) }}">{{ post.user.firstName }} {{ post.user.lastName }}</a>
+                                </div>
+                                <br>
+                                <div class="post_name_time">
+                                    {{ post.dateAjout|date('d-m-y h:m:s') }}
+                                </div>
+                                <br>
+                                <div class="contenu_post">
+                                    {{ post.contenu }}
+                                </div>
+
+
+
+                                {% if post.getWebPath() is not  empty %}
+                                    <img class="img_post" width="100%" height="315px" src="{{ asset(post.getWebPath()) }}">
+                                {% endif %}
+
+
+
+
+                                <a href="{{ path('post_share',{'idpost':post.id}) }}">{{ 'Partager'|trans }}</a>
+                                {% include "EpluggFrontBundle:Post:like_post_block.html.twig" with {"postlike": getlikedpost(post.id),"post":post,"likedpostsameuser":likedPostOrNot(post.id,app.user.id)}  %}
+
+
+
+
+
+                                <div class="commentire_post" id="commentire_post_{{ post.id }}">
+                                    {#   {{ render(controller('EpluggFrontBundle:Post:addListComment',{ 'id_post': post.id })) }} #}
+                                    {% include "EpluggFrontBundle:Post:commentaires.html.twig" with {"comments": getcomments(post.id),"post":post}  %}
+
+
+                                </div>
+
+                            </div>
+
+
+
+                    {% endif %}
+
+
+                </div>
+            </div>
+            {% include "EpluggFrontBundle:logged_in:right_sidebar.html.twig" %}
+            <div class="clear"></div>
+        </div>
+        <div class="clear25"></div>
+    </div>
+
+{% endblock %}

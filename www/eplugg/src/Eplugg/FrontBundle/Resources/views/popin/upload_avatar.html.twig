@@ -1,0 +1,244 @@
+{% extends 'EpluggFrontBundle:popin:base_popin.html.twig' %}
+{% block scripts %}
+    <script type="text/javascript" src="{{ asset('js/jcrop/jquery.Jcrop.js') }}"></script>
+    <script>
+        // convert bytes into friendly format
+        function bytesToSize(bytes) {
+            var sizes = ['Bytes', 'KB', 'MB'];
+            if (bytes == 0) return 'n/a';
+            var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+            return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
+        }
+        ;
+
+        // check for selected crop region
+        function checkForm() {
+            if (parseInt($('#w').val())) return true;
+            $('.error').html('Please select a crop region and then press Upload').show();
+            return false;
+        }
+        ;
+
+        // update info by cropping (onChange and onSelect events handler)
+        function updateInfo(e) {
+            $('#x1').val(e.x);
+            $('#y1').val(e.y);
+            $('#x2').val(e.x2);
+            $('#y2').val(e.y2);
+            $('#w').val(e.w);
+            $('#h').val(e.h);
+            var rx = 200 / e.w;
+            var ry = 200 / e.h;
+            image_width = $("#preview").width();
+            image_height = $('#preview').height();
+            $('#demo').css({
+                width: Math.round(rx * image_width) + 'px',
+                height: Math.round(ry * image_height) + 'px',
+                marginLeft: '-' + Math.round(rx * e.x) + 'px',
+                marginTop: '-' + Math.round(ry * e.y) + 'px'
+            });
+            $('#divSubmit').show();
+        }
+        ;
+
+        // clear info by cropping (onRelease event handler)
+        function clearInfo() {
+            $('.info #w').val('');
+            $('.info #h').val('');
+        }
+        ;
+
+        // Create variables (in this scope) to hold the Jcrop API and image size
+        var jcrop_api, boundx, boundy;
+
+        function fileSelectHandler() {
+            // get selected file
+            var oFile = $('#image_file')[0].files[0];
+
+            // hide all errors
+            $('.error').hide();
+
+            // check for image type (jpg and png are allowed)
+            var rFilter = /^(image\/jpeg|image\/png)$/i;
+            if (!rFilter.test(oFile.type)) {
+                $('.error').html('Please select a valid image file (jpg and png are allowed)').show();
+                return;
+            }
+
+            // check for file size
+
+
+            // preview element
+            var oImage = document.getElementById('preview');
+            var oDemo = document.getElementById('demo');
+
+
+            // prepare HTML5 FileReader
+            var oReader = new FileReader();
+            oReader.onload = function (e) {
+
+                // e.target.result contains the DataURL which we can use as a source of the image
+                oImage.src = e.target.result;
+                oDemo.src = e.target.result;
+                oImage.onload = function () { // onload event handler
+
+                    // display step 2
+                    $('.step2').fadeIn(500);
+
+                    // display some basic image info
+                    var sResultFileSize = bytesToSize(oFile.size);
+                    $('#filesize').val(sResultFileSize);
+                    $('#filetype').val(oFile.type);
+                    $('#filedim').val(oImage.naturalWidth + ' x ' + oImage.naturalHeight);
+
+                    // destroy Jcrop if it is existed
+                    if (typeof jcrop_api != 'undefined') {
+                        jcrop_api.destroy();
+                        jcrop_api = null;
+                        $('#preview').width(oImage.naturalWidth);
+                        $('#preview').height(oImage.naturalHeight);
+                    }
+
+                        // initialize Jcrop
+                        $('#preview').Jcrop({
+                            minSize: [32, 32], // min crop size
+                            aspectRatio: 1, // keep aspect ratio 1:1
+                            bgFade: true, // use fade effect
+                            bgOpacity: .3, // fade opacity
+                            onChange: updateInfo,
+                            onSelect: updateInfo,
+                            onRelease: clearInfo,
+
+                            setSelect: [0, 160, 160, 0]
+                        }, function () {
+
+                            // use the Jcrop API to get the real image size
+                            var bounds = this.getBounds();
+                            boundx = bounds[0];
+                            boundy = bounds[1];
+
+                            // Store the Jcrop API in the jcrop_api variable
+                            jcrop_api = this;
+                        });
+
+
+                };
+            };
+
+            // read selected file as DataURL
+            oReader.readAsDataURL(oFile);
+        }
+
+    </script>
+    <script>
+        $(document).ready(function() {//start document ready
+            $('#avatar_form').on('submit', function(e) {
+                e.preventDefault();
+                var form = $(this);
+                var formdata = false;
+                if (window.FormData){
+                    formdata = new FormData(form[0]);
+                }
+                $.ajax({
+                    url: form.attr('action'), // Le nom du fichier indiqué dans le formulaire
+                    type: form.attr('method'), // La méthode indiquée dans le formulaire (get ou post)
+                    data: formdata ? formdata : form.serialize(),
+                    cache       : false,
+                    contentType : false,
+                    processData : false,
+                    success: function(data) { // Je récupère la réponse du fichier PHP
+                        if(data.valid) {
+                            $(".{{ avatarType }} .avatar_id"  , window.parent.document).val(data.imageId);
+                            $(".{{ avatarType }} .avatar_img", window.parent.document).attr("src", data.imageUrl);
+                             window.parent.$('#pp_close').trigger('click');
+
+                         }
+                    }
+                });
+            });
+        });//end document ready
+    </script>
+    {% if valid %}
+        <script>
+
+        </script>
+    {% endif %}
+{% endblock %}
+{% block styles %}
+    <link href="{{ asset('css/jcrop/jquery.Jcrop.css') }}" type="text/css" rel="stylesheet">
+
+    <style type="text/css">
+        img[src='Error.src']{
+            display: none;
+        }
+
+        #target { background-color: #ccc; width: 500px; height: 330px; font-size: 24px; display: block; }
+        div.upload {width: 64px;height: 28px;background: url({{ asset('images/upload.png') }});overflow: hidden;}
+        div.upload input {display: block !important;width: 64px !important;height: 28px !important;opacity: 0 !important;overflow: hidden !important;}
+
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="titre_plugg">{{ 'Modification image'|trans }}</div>
+    <div class="clear20"></div>
+    <div style="display: none;" id="dialog">
+        <div class="message error"></div>
+    </div>
+    <div style="padding:10px">
+        <!-- upload form -->
+        {{ form_start(form, { 'action': path('eplugg_upload_avatar', {'avatarType': avatarType } ), 'attr': {'id': 'avatar_form' } } ) }}
+
+            <table width="100%">
+                <tbody>
+                <tr>
+                    <td colspan="2">
+                        <div class="upload">
+                            {{ form_widget(form.file, {'id': 'image_file', 'attr': {'class': '', 'onchange': 'fileSelectHandler()' }}) }}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div style="float: left ;overflow: hidden; width: 200px; height: 200px "
+                                         id="div_preview">
+                                        <img  class="content_image" src="{{ asset('images/avatar.png') }}" id="demo">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div align="right" style="display:none" id="divSubmit">
+
+                                        <input type="submit" class="btn btn-large btn-inverse" id="save_image" value="{{ 'Enregistrer'|trans }}">
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>
+                        <div id="response">
+                            <img class="content_image" src="" id="preview" style="display: none">
+
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- hidden crop params -->
+            {{ form_widget(form.startWidth, {'id': 'x1'}) }}
+            {{ form_widget(form.startHeight, {'id': 'y1'}) }}
+            {{ form_widget(form.endWidth, {'id': 'x2'}) }}
+            {{ form_widget(form.endHeight, {'id': 'y2'}) }}
+
+        {{ form_end(form) }}
+
+    </div>
+
+
+
+{% endblock %}

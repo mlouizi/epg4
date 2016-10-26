@@ -1,0 +1,54 @@
+{% if suggestions is not empty %}
+    <div class="block-list-suggests">
+        <div class="suggests-title">{{ 'Connaissez-vous'|trans }}?</div>
+        {% for suggestion in suggestions %}
+
+            <div class="bloc_user">
+                <a href="{{ path('eplugg_profile_page', {'uid': suggestion.suggested.id }) }}" data-tooltip="#html-content{{ suggestion.suggested.id }}" class="infobull_div tooltip"></a>
+                <div class="im_connais"><a href="{{ path('eplugg_profile_page', {'uid': suggestion.suggested.id }) }}"><img width="37" height="37" alt="" src="{% if suggestion.suggested.avatar is not empty %} {{ asset(suggestion.suggested.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}"><span></span></a></div>
+                <div class="des_connais">
+                    <strong><a class="tooltip" data-tooltip="#html-content8" href="{{ path('eplugg_profile_page', {'uid': suggestion.suggested.id }) }}">{{ suggestion.suggested.firstName }} {{ suggestion.suggested.lastName }}</a></strong>
+                    {{ suggestion.suggested.job }}
+                </div>
+                <div class="ferme_connais">
+                    <a class="nb_vue_" title="0 {{ 'Contacts en commun'|trans }}"><span>0</span></a>
+                </div>
+                <div class="clear5"></div>
+            </div>
+            <div id="html-content{{ suggestion.suggested.id }}" style="display:none;">
+                <div onclick="window.location.href='{{ path('eplugg_profile_page', {'uid': suggestion.suggested.id }) }}'" id="card_eplugg">
+                    <div class="yellow"><img src="{{ asset('images/arrow-yelow.png') }}"></div>
+                    <div id="card_user">
+                        <div class="img_profil"><a href="{{ path('eplugg_profile_page', {'uid': suggestion.suggested.id }) }}"><img width="48" height="48" alt="" src="{% if suggestion.suggested.avatar is not empty %} {{ asset(suggestion.suggested.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}"></a></div>
+                        <div class="descp_card">
+                            <div class="name_user"><a href="{{ path('eplugg_profile_page', {'uid': suggestion.suggested.id }) }}">{{ suggestion.suggested.firstName }} {{ suggestion.suggested.lastName }}</a></div>
+                            <div class="job_user">{{ suggestion.suggested.job }}</div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div id="card_company">
+                        <div class="img_profil">
+                            <a href="{{ path('eplugg_profile_page', {'uid': suggestion.suggested.id }) }}">
+                                <img width="51" height="51" src="{% if suggestion.suggested.CompanyAvatar is not empty %} {{ asset(suggestion.suggested.CompanyAvatar.croppedWebPath) }} {% else %}{{ asset('images/avatar-company.png') }} {% endif %}">
+                            </a>
+                        </div>
+                        <div class="descp_card">
+                            <div class="company_user"><a href="{{ path('eplugg_profile_page', {'uid': suggestion.suggested.id }) }}">{{ suggestion.suggested.companyName }}</a> </div>
+                            <div class="tag_company">
+                                {{ suggestion.suggested.getActivitiesFormatted }}
+                            </div>
+                            <div class="lieu_company">{{ suggestion.suggested.companyAddress }}</div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="plugg_link info_card">
+                    <a href="{{ path('eplugg_invite_user', {'uid': suggestion.suggested.id, 'token': csrfToken }) }}" class="plugger plugger-link" title="{{ 'Plugger'|trans }}">{{ 'Plugger'|trans }}</a>
+
+
+                    <a href="{{ path('eplugg_messages_user', {'uid': suggestion.suggested.id } ) }}">{{ 'Message'|trans }}</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

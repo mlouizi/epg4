@@ -1,0 +1,126 @@
+{% extends 'EpluggFrontBundle::base_logged_in.html.twig' %}
+        {% block advancedSearch %}
+        {% endblock advancedSearch  %}
+{% block title %}{{ 'Eplugg'|trans }} - {{ 'Profile'|trans }} {{ user.firstName }} {{ user.lastName }}{% endblock %}
+{% block og %}
+    <meta property="og:title" content="{{ 'Carte visite eplugg'|trans }} {{ user.firstName }} {{ user.lastName }}"/>
+    <meta property="og:image" content="{% if user.avatar is not empty %} {{ asset(user.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}"/>
+    <meta property="og:description" content="{% if user.directPhone is not empty %}{{ 'Direct Phone'|trans }}: {{ user.directPhone }}  {% endif %}{% if user.mobile is not empty %}{{ 'Mobile Phone'|trans }}: {{ user.mobile }}  {% endif %}{% if user.moreEmails is not empty %}{{ 'Emails'|trans }}: {{ user.moreEmails }}  {% endif %}"/>
+{% endblock %}
+        {% block header %}
+            <div style="overflow:auto" id="header">
+                <div class="center_content">
+                    <div id="logo">
+                        <a href="{{ path('eplugg_front_homepage') }}">
+                           <img alt="logo" src="{{ asset('images/logo.png') }}">
+                        </a>
+                    </div>
+                    {% block login %}
+                        <div class="login">
+                            <form action="{{ path("fos_user_security_check") }}" id="signinform" method="post">
+                                <input type="text" class="" name="_username" required="required"  placeholder="{{ 'Email address'|trans }}"   />
+                                <input type="password" class="" name="_password" required="required" autocomplete="off"  placeholder="{{ 'Mot de passe'|trans }}" />
+                                <input id="userLang" type="hidden" value="{{ app.request.locale }}" name="lang">
+                                <button class="submit_header" type="submit" ></button>
+                                <div class="cat_search">
+                                    <a data-url='' id="lang_link"><span id="cat_label">en </span></a>
+                                    <a id="btn_cat"><img src="{{ asset('images/arrow.png') }}" alt="" /></a>
+                                    <div class="souscat">
+                                        <ul>
+                                            <li><a href="/lang?c=en" data-lang='en'>en</a></li>
+                                            <li><a href="/lang?c=fr" data-lang='fr'>fr</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="_csrf_token" value="{{ csrfToken }}"/>
+                                <a id="connex" href="{{ path('fos_user_resetting_request') }}">{{ 'Mot de passe oublié'|trans }}?</a>
+                            </form>
+
+                        </div>
+                        <div class="clear10"></div>
+                    {% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+{% block chat %}{% endblock %}
+{% block body %}
+
+    <div id="content">
+        <div class="center_content_inner">
+            <div id="body_content" class="profil">
+                <div id="card_eplugg">
+                    <div class="yellow">
+                        {{ render(controller('EpluggFrontBundle:Default:Vip', {'uid': user.Id})) }}
+
+                        <img src="{{ asset('images/arrow-yelow-big.png') }}">
+                    </div>
+                    <div id="card_user" itemscope itemtype="http://schema.org/QAPage">
+                        <div class="img_profil">
+                            <a><img itemprop="image" src="{% if user.avatar is not empty %} {{ asset(user.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}"></a>
+                        </div>
+                        <div class="descp_card">
+                            <strong><a href="#" itemprop="name">{{ user.firstName }} {{ user.lastName }}</a></strong>
+                            <em>search_users</em>
+                            <ul itemprop="description">
+                                {% if user.directPhone is not empty %}<li class="tel1">{{ user.directPhone }}</li>{% endif %}
+                                {% if user.mobile is not empty %}<li class="mobile">{{ user.mobile }}</li>{% endif %}
+                                {% if user.moreEmails is not empty %}<li class="mail1">{{ user.moreEmails }}</li>{% endif %}
+                                {% if user.sociaux is not empty %}<li class="sociaux">{{ user.sociaux }}</li>{% endif %}
+                            </ul>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div id="card_company">
+                        <div class="img_profil"><a><img src="{% if user.CompanyAvatar is not empty %} {{ asset(user.CompanyAvatar.croppedWebPath) }} {% else %}{{ asset('images/avatar-company.png') }} {% endif %}"></a></div>
+                        <div class="descp_card">
+                            <strong><a href="#">{{ user.companyName }}</a></strong>
+                            <div class="tag">{% if user.getActivitiesFormatted is not empty %}{{ user.getActivitiesFormatted }}{% endif %}</div>
+                            <ul>
+                                {% if user.companyTel is not empty %}<li class="tel2">{{ user.companyTel }}</li>{% endif %}
+                                {% if user.companyFax is not empty %}<li class="fax">{{ user.companyFax }}</li>{% endif %}
+                                {% if user.companyWebsite is not empty %}<li class="site">{{ user.companyWebsite }}</li>{% endif %}
+                                {% if user.companyAddress is not empty %}<li class="sociaux">{{ user.companyAddress }}</li>{% endif %}
+                            </ul>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+                <div class="social_bar">
+                    <a onclick="javascript:window.open(this.href, '', 'width=530,height=500,menubar=no,location=no,resizable=true,scrollbars=yes,status=yes');return false;" href="https://www.facebook.com/sharer/sharer.php?u={{ url('eplugg_profile_page', { 'uid': user.id}) }}" class="link_facebook hotspot" onmouseover="tooltip.show('share_on_facebook');" onmouseout="tooltip.hide();" title="facebook"></a>
+
+                    <a onclick="javascript:window.open(this.href, '', 'width=500,height=500,menubar=no,location=no,resizable=true,scrollbars=yes,status=yes');return false;" href="http://twitter.com/share?text=profile%20{{ user.firstName }}%20{{ user.lastName }}&url={{ url('eplugg_profile_page', { 'uid': user.id}) }}" class="link_twitter hotspot" onmouseover="tooltip.show('share_on_twitter');" onmouseout="tooltip.hide();"></a>
+
+                    <a onclick="javascript:window.open(this.href, '', 'width=500,height=500,menubar=no,location=no,resizable=true,scrollbars=yes,status=yes');return false;" href="https://plus.google.com/share?url={{ url('eplugg_profile_page', { 'uid': user.id}) }}" class="link_google hotspot" onmouseover="tooltip.show('share_on_google');" onmouseout="tooltip.hide();"></a>
+
+                    <a onclick="javascript:window.open(this.href, '', 'width=500,height=500,menubar=no,location=no,resizable=true,scrollbars=yes,status=yes');return false;" href="http://www.linkedin.com/shareArticle?mini=true&url={{ url('eplugg_profile_page', { 'uid': user.id}) }}" class="link_linkedin hotspot" onmouseover="tooltip.show('share_on_linkedin');" onmouseout="tooltip.hide();"></a>
+                </div>
+                <div class="partage_profil"></div>
+                <div class="clear30"></div>
+                <div class="titre_plugg"> {{ 'Parcours'|trans }} </div>
+                <div class="cv_profil">
+                    {% if isFriend %}
+                        {% if user.Cv is not empty and user.Cv.path is not empty  %}
+                            <div class="btn_download">
+                                <a href="{{ asset('uploads/' ~ user.Cv.path) }}" target="_blank">
+                                    <img src="{{ asset('images/pdf.png') }}" />
+                                </a>
+                            </div>
+                        {% endif %}
+                        {{ render(controller('EpluggFrontBundle:Default:getExperiences', {'ownProfile': false, 'uid': user.Id})) }}
+
+                    {% else %}
+                        {{ 'Information privée'|trans }}
+                    {% endif %}
+                </div>
+                <div class="clear20"></div>
+                <div class="titre_plugg">{{ 'Actualités'|trans }}</div>
+                <div id="content_infinity" class="content_center__">
+                    {{ 'Information privée'|trans }}
+                </div>
+                <div class="clear20"></div>
+            </div>
+        </div>
+        <div class="clear25"></div>
+    </div>
+{% endblock %}

@@ -1,0 +1,126 @@
+<div class="message_box" id="{{ destination.id }}" style="z-index: 20;">
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+			$('#{{ destination.id }}{{ currentUser.id }}').scrollTop($('#{{ destination.id }}{{ currentUser.id }}').height()); // Scrolltop Message box
+			reloadMembers{{ destination.id }}{{ currentUser.id }}(); 
+			//reloadStatusPl{{ destination.id }}{{ currentUser.id }}({{ destination.id }});
+		});
+		
+			function reloadmsg(key1, key2, box){ // Reload message for box contact
+				var ancien_script = $('#' + key2 + key1).html().length;
+
+				$.post("{{ path('eplugg_chat_reload_Messages') }}", {usertwo: key2}, function(data) { 
+					var nbCNewt = data.length;
+					//var nbCNew = data.length;
+					if((ancien_script - 10) < nbCNewt && nbCNewt > (ancien_script + 10)){
+						$('#' + key2 + key1).html(data); 
+						$('#' + key2 + key1).scrollTop($('#' + key2 + key1).height() + 5000000000000);
+					}
+				 });
+			}
+		
+		function reloadMembers{{ destination.id }}{{ currentUser.id }}(){ 
+
+			var id_box = {{ destination.id }};
+			if($('#' + id_box).height() != 23){ 
+				reloadmsg("{{ currentUser.id }}", '{{ destination.id }}', '{{ destination.id }}#{{ currentUser.id }}');
+			}
+			var name = {{ destination.id }}{{ currentUser.id }}; 
+			setTimeout('reloadMembers' + name + '()',2000); // Set every '2' secondes - Reload message
+
+		}
+		
+		/*
+		function reloadStatusPl{{ destination.id }}{{ currentUser.id }}(key){
+			$.get('scripts/load/StatusAccount.php?format=2&key=' + key, function(data) { 
+				$('#reloadReceiver_' + {{ destination.id }}).html(data); 
+
+			});
+			setTimeout('reloadStatusPl' + {{ destination.id }}{{ currentUser.id }} + '(' + key + ')', 2000); // Reload data every 2 sec
+		}
+		*/
+		
+		function msg_read(sender){ // Read message is ok
+			$('#' + sender + ' .top_message_box').css('background', '#fff');
+			$.get("{{ path('eplugg_chat_read_approved') }}", {usertwo: sender}, function(data) {});
+		}
+		
+		$('.message_box').on('click', function(){ // Click box, select text for write an message more easy
+			var id_box = $(this).attr('id'); 
+			$('#text_' + id_box).focus();
+
+			msg_read(id_box);
+
+		});
+		
+		$(".form_add_msg").on("submit", function () { // Action message for write an new message
+			var id_box = $(this).attr('data');
+			msg_read(id_box);
+			$.post($(this).attr("action"), $(this).serialize(), function (data) { 
+				$('#text_' + id_box).val(''); 
+			});
+
+			 // Resest function for change status abscent
+
+			return false;
+		});
+		
+		$('.icon_close').on("click", function(){ // Function for close box
+			var id_box = $(this).attr('data');
+			$('#' + id_box).remove(); 
+		});
+		
+		$('.resize_box').on("click", function(){ // Resize box for button
+
+			var id_box = $(this).attr('data');
+			var height_box = $('#' + id_box).height();
+
+			if(height_box == 23){ // Test if the box is already lowered
+				$('#' + id_box).css('height', '374px').css('margin-top', '0px');
+				$(this).removeClass('icon_fsize').addClass('icon_risize');
+
+				// Show elements
+				$('#box_msg_' + id_box).show();
+				$('#write_msg_' + id_box).show();
+				$('#box_msg_' + id_box).show();
+
+			}
+			else { // Else lowered the box
+				$('#' + id_box).css('height', '23px').css('margin-top', '351px');
+				$(this).removeClass('icon_risize').addClass('icon_fsize');
+
+				// Hide elements
+				$('#box_msg_' + id_box).hide();
+				$('#write_msg_' + id_box).hide();
+				$('#box_msg_' + id_box).hide();
+			}
+
+			friendResize();
+
+		});
+	
+	</script>
+	<div class="top_message_box" data-box="{{ destination.id }}"> <!-- Message box -->
+		<div class="reloadReceiverStatus" id="reloadReceiver_{{ destination.id }}">
+			<div class="status_message_box {% if destination.status == 1 and date().timestamp - destination.timer < 5 %}online-small-status{% else %}offline-status{% endif %}"></div> 
+			<a href="{{ path('eplugg_profile_page', { 'uid': destination.id }) }}">{{ destination.firstName }} {{ destination.lastName }}</a>
+		</div>
+		<div class="icon_message_box"> <!-- Icon box -->
+			<div data="{{ destination.id }}" class="icon_message_box_modal resize_box icon_risize"></div>
+			<div data="{{ destination.id }}" class="icon_message_box_modal icon_close"></div>
+		</div>
+	</div>
+	<div class="reload_box" id="box_msg_{{ destination.id }}"> 
+		<div class="msg_content_all" id="{{ destination.id }}{{ currentUser.id }}"> <!-- Reception messages here -->
+		
+		</div>
+		<div id="write_msg_{{ destination.id }}" class="write_msg"> <!-- Written box -->
+			<form class="form_add_msg" data="{{ destination.id }}" dataTo="{{ destination.id }}{{ currentUser.id }}" action="{{ path('eplugg_chat_send_message') }}" method="post">
+				<input type="hidden" style="display:none;" value="{{ destination.id }}" name="usertwo"/> 
+				<input id="text_{{ destination.id }}" name="message" placeholder="Your message ..." type="text" autocomplete="off" />
+				<input style="left:-999em; position:absolute; top:-999em;" type="submit"/>
+			</form>
+		</div>
+	</div>
+</div>

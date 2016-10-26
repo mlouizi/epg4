@@ -1,0 +1,59 @@
+html { height: 100%;  }
+
+#msform { position: relative; }
+#msform fieldset {  border: 0 none;
+    margin-left: 216px;
+    position: absolute;
+    width: 73%;}
+#msform fieldset:not(:first-of-type) { display: none; }
+
+#msform .action-button { width: 100px; background: #27AE60; font-weight: bold; color: white; border: 0 none; border-radius: 1px; cursor: pointer; padding: 10px 5px; margin: 10px 5px; }
+#msform .action-button:hover, #msform .action-button:focus { box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60; }
+#msform input.error{ background: #f8dbdb; border-color: #e77776; }
+
+#progressbar { counter-reset: step;
+    float: left;
+    left: -18px;
+    margin-top: 80px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    width: 231px;}
+#progressbar li {  color:#fff !important;   font-size: 20px;
+    font-weight: bold;
+    height: 83px;
+    list-style-type: none;
+    margin: 48px 0 49px;
+    padding-top: 28px; padding-left:12px;
+    position: relative;
+    text-transform: uppercase;
+    width: 177px; text-align:left}#progressbar li span{ font-size:14px; display:block; color:#F8CB48 !important; margin-top:5px; text-transform:none}
+#progressbar li:before {/* content: counter(step); counter-increment: step; width: 75px; line-height: 20px; height:75px; display: block; font-size: 10px; color: #333; background: white; border-radius: 3px; margin: 0 auto 5px auto;*/ visibility:hidden }
+#progressbar li:nth-child(1) { background:url("../images/step_shape.png") no-repeat top; margin-top:0 }
+#progressbar li:nth-child(2) { background:url("../images/step_shape.png") no-repeat top;margin-top:100px }
+#progressbar li:nth-child(3) { background:none; margin-bottom:0 }
+#progressbar li:after { content: ''; width: 100%; height: 2px;  position: absolute; left: -50%; top: 9px; z-index: -1;}
+#progressbar li:first-child:after { content: none; }
+#progressbar li.active:before,  #progressbar li.active:after, #progressbar li.active{ background-position:bottom; color:#f5ab1b }
+
+
+/*html { height: 100%;  }
+
+#msform { position: relative; }
+#msform fieldset { border: 0 none; width: 73%; position:absolute; margin-left:155px; }
+#msform fieldset:not(:first-of-type) { display: none; }
+
+#msform .action-button { width: 100px; background: #27AE60; font-weight: bold; color: white; border: 0 none; border-radius: 1px; cursor: pointer; padding: 10px 5px; margin: 10px 5px; }
+#msform .action-button:hover, #msform .action-button:focus { box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60; }
+#msform input.error{ background: #f8dbdb; border-color: #e77776; }
+
+#progressbar { margin-top: 80px; float:left; width:155px; overflow: hidden; counter-reset: step; text-align: center; background:url(../images/line.png) repeat-y center; width:155px;}
+#progressbar li { font-weight:bold; color:#8f8f8f; list-style-type: none;  text-transform: uppercase; font-size: 14px; font-weight:bold; width: 75px; height:47px; padding-top:28px; margin:68px 0 83px 41px; position: relative; }
+#progressbar li:before {*//* content: counter(step); counter-increment: step; width: 75px; line-height: 20px; height:75px; display: block; font-size: 10px; color: #333; background: white; border-radius: 3px; margin: 0 auto 5px auto;*/ /*visibility:hidden }
+#progressbar li:nth-child(1) { background:url(../images/icone_profil.png") no-repeat top; margin-top:0 }
+#progressbar li:nth-child(2) { background:url(../images/icone_poste.png") no-repeat top;margin-top:145px }
+#progressbar li:nth-child(3) { background:url(../images/icone_terminer.png") no-repeat top; margin-bottom:0 }
+#progressbar li:after { content: ''; width: 100%; height: 2px;  position: absolute; left: -50%; top: 9px; z-index: -1;}
+#progressbar li:first-child:after { content: none; }
+#progressbar li.active:before,  #progressbar li.active:after, #progressbar li.active{ background-position:bottom; color:#f5ab1b }
+*/

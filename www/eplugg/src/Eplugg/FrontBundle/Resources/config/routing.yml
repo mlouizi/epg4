@@ -1,0 +1,232 @@
+eplugg_front_homepage_no_local:
+    path:     /
+    defaults: { _controller: EpluggFrontBundle:Default:index, _locale:fr, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_front_homepage:
+    path:     /{_locale}
+    defaults: { _controller: EpluggFrontBundle:Default:index, trailingSlash : "/"  }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_front_checkmail:
+    path:     /{_locale}/checkmail
+    defaults: { _controller: EpluggFrontBundle:Default:checkMail, trailingSlash : "/" }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplug_signup_step2:
+    path:     /{_locale}/signup_step2
+    defaults: { _controller: EpluggFrontBundle:Default:signupStepTwo, trailingSlash : "/" }
+    requirements: { trailingSlash : "[/]{0,1}" }
+
+eplugg_front_page:
+    path:     /{_locale}/page/{slug}
+    defaults: { _controller: EpluggFrontBundle:Default:pageDisplay, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_edit_profile:
+    path:     /{_locale}/profile/edit
+    defaults: { _controller: EpluggFrontBundle:Default:editProfile, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_profile_page:
+    path:     /{_locale}/profile/{uid}
+    defaults: { _controller: EpluggFrontBundle:Default:profile, trailingSlash : "/"   }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        uid: \d+
+eplugg_invite_user:
+    path:     /{_locale}/profile/addfriend/{uid}
+    defaults: { _controller: EpluggFrontBundle:Default:addFriend, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_invitations:
+    path:     /{_locale}/invitations
+    defaults: { _controller: EpluggFrontBundle:Default:invitations, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_cancel_invitation:
+    path:     /{_locale}/profile/cancelfriend/{uid}
+    defaults: { _controller: EpluggFrontBundle:Default:cancelFriend, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_accpet_invitation:
+    path:     /{_locale}/profile/acceptfriend/{uid}
+    defaults: { _controller: EpluggFrontBundle:Default:acceptFriend, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_delete_friend:
+    path:     /{_locale}/profile/deletefriend/{uid}
+    defaults: { _controller: EpluggFrontBundle:Default:deleteFriend, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_upload_cv:
+    path:     /{_locale}/profile/upload_cv
+    defaults: { _controller: EpluggFrontBundle:Default:uploadCv, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_add_experience:
+    path:     /{_locale}/profile/add_experience
+    defaults: { _controller: EpluggFrontBundle:Default:addExperience, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_edit_experience:
+      path:     /{_locale}/profile/edit_experience/{eid}
+      defaults: { _controller: EpluggFrontBundle:Default:editExperience, trailingSlash : "/"   }
+      requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_delete_experience:
+      path:     /{_locale}/profile/delete_experience/{eid}
+      defaults: { _controller: EpluggFrontBundle:Default:deleteExperience, trailingSlash : "/"   }
+      requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_upload_avatar:
+      path:     /{_locale}/profile/upload_avatar/{avatarType}
+      defaults: { _controller: EpluggFrontBundle:Default:UploadAvatar, trailingSlash : "/"   }
+      requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_messages:
+    path:     /{_locale}/messages
+    defaults: { _controller: EpluggFrontBundle:Messages:Messages, trailingSlash : "/"   }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+eplugg_messages_user:
+    path:     /{_locale}/messages/{uid}
+    defaults: { _controller: EpluggFrontBundle:Messages:Messages, trailingSlash : "/"   }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        uid: \d+
+eplugg_messages_user_search:
+    path:     /{_locale}/messages/search
+    defaults: { _controller: EpluggFrontBundle:Messages:MessagesSearch, trailingSlash : "/"   }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+eplugg_suggest_user:
+    path:     /{_locale}/suggest/user/{uid}
+    defaults: { _controller: EpluggFrontBundle:Suggestion:SuggestUser, trailingSlash : "/"   }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+eplugg_suggest_users:
+    path:     /{_locale}/suggest/users/{uid}
+    defaults: { _controller: EpluggFrontBundle:Suggestion:SuggestGetUsers, trailingSlash : "/"   }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+eplugg_suggest_page_auto:
+    path:     /{_locale}/call-suggestions
+    defaults: { _controller: EpluggFrontBundle:Suggestion:SuggestedUsers, trailingSlash : "/"   }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+eplugg_ignore_user:
+    path:     /{_locale}/ignore/{uid}
+    defaults: { _controller: EpluggFrontBundle:Suggestion:IgnoreUser, trailingSlash : "/"   }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+eplugg_all_users:
+    path:     /{_locale}/eplugg
+    defaults: { _controller: EpluggFrontBundle:Search:AllUsers, trailingSlash : "/"   }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+search_users:
+    path:     /{_locale}/search_users
+    defaults: { _controller: EpluggFrontBundle:Search:SearchUsers, trailingSlash : "/"   }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+search_users_page:
+    path:     /{_locale}/search
+    defaults: { _controller: EpluggFrontBundle:Search:SearchUsersPage, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+directory:
+    path:     /{_locale}/directory
+    defaults: { _controller: EpluggFrontBundle:Directory:Directory, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+post_add:
+    path:     /{_locale}/post
+    defaults: { _controller: EpluggFrontBundle:Post:NewPost, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+post_show:
+    path:     /{_locale}/post/show/{idpost}
+    defaults: { _controller: EpluggFrontBundle:Post:showPost, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+post_delete:
+    path:     /{_locale}/post/delete/{id}
+    defaults: { _controller: EpluggFrontBundle:Post:deletePost, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+comment_delete:
+    path:     /{_locale}/comment/delete
+    defaults: { _controller: EpluggFrontBundle:Post:deleteCommentAjax, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+comment_add_ajax:
+    path:     /{_locale}/comment/add
+    defaults: { _controller: EpluggFrontBundle:Post:createCommentAjax, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_calendar:
+    path: /{_locale}/calendar
+    defaults: { _controller: EpluggFrontBundle:Calendar:Calendar, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_add_event:
+    path: /{_locale}/add_event
+    defaults: { _controller: EpluggFrontBundle:Calendar:AddEvent, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+post_share:
+    path:     /{_locale}/post/share/{idpost}
+    defaults: { _controller: EpluggFrontBundle:Post:sharePost, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+post_like:
+    path:     /{_locale}/post/like
+    defaults: { _controller: EpluggFrontBundle:Post:LikePostAjax, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+post_dislike:
+    path:     /{_locale}/post/dislike
+    defaults: { _controller: EpluggFrontBundle:Post:dislikePostAjax, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_common_firends:
+    path:     /{_locale}/common-friends/{uid}
+    defaults: { _controller: EpluggFrontBundle:Search:commomFriends, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_mapclic:
+    path:     /{_locale}/mapclic/members
+    defaults: { _controller: EpluggFrontBundle:Mapclic:mapclic, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_xml_events:
+    path:     /{_locale}/events/xml
+    defaults: { _controller: EpluggFrontBundle:Calendar:xmlEvents, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+search_users_by_activity:
+    path:     /{_locale}/activity/search/{id}
+    defaults: { _controller: EpluggFrontBundle:Activity:searchUserByActivity, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+
+search_all_users_activities:
+    path:     /{_locale}/activity/search
+    defaults: { _controller: EpluggFrontBundle:Activity:UsersActivities, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_chat_get_users:
+    path:     /{_locale}/chat/users
+    defaults: { _controller: EpluggFrontBundle:Messages:usersChat, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+
+eplugg_chat_update_my_status:
+    path:     /{_locale}/chat/updatemystatus
+    defaults: { _controller: EpluggFrontBundle:Messages:updateMyStatus, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+
+eplugg_chat_get_msg_box:
+    path:     /{_locale}/chat/getmsgbox
+    defaults: { _controller: EpluggFrontBundle:Messages:getMsgBox, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+
+eplugg_chat_refresh_timer_status:
+    path:     /{_locale}/chat/refreshtimerandstatus
+    defaults: { _controller: EpluggFrontBundle:Messages:refreshTimerAndStatus, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+
+eplugg_chat_reload_Messages:
+    path:     /{_locale}/chat/reloadmessages
+    defaults: { _controller: EpluggFrontBundle:Messages:reloadMessages, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+
+eplugg_chat_send_message:
+    path:     /{_locale}/chat/sendmessage
+    defaults: { _controller: EpluggFrontBundle:Messages:sendMessage, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+
+eplugg_chat_read_approved:
+    path:     /{_locale}/chat/readapproved
+    defaults: { _controller: EpluggFrontBundle:Messages:readApproved, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_chat_search_friend:
+    path:     /{_locale}/chat/searchfriend
+    defaults: { _controller: EpluggFrontBundle:Messages:searchFriend, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_localize:
+    path:     /{_locale}/localize
+    defaults: { _controller: EpluggFrontBundle:Localization:mapLocalization, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_update_coordinations:
+    path:     /{_locale}/update_coordinations
+    defaults: { _controller: EpluggFrontBundle:Localization:updateCoordinations, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }

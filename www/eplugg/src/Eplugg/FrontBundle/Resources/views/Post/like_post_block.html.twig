@@ -1,0 +1,10 @@
+
+
+{% if likedpostsameuser == false %}
+    <a class="like_post_boutton" href="javascript:void(0);" data-url="{{ path('post_like') }}" data-postid="{{ post.id }}">{{ 'J’aime'|trans }}</a>
+{% else %}
+    <a class="like_post_boutton" href="javascript:void(0);" data-url="{{ path('post_dislike') }}" data-postid="{{ post.id }}">{{ 'J’aime pas'|trans }}</a>
+{% endif %}
+
+{{ postlike|length }} {{ 'J’aime'|trans }}
+

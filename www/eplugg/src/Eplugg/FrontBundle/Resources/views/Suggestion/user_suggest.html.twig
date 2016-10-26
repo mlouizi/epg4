@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    {% if success %}
+        <script>
+            parent.document.location.reload();
+        </script>
+    {% endif %}
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>ePlugg</title>
+    <link type="text/css" href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ asset('js/tagsinput/dist/bootstrap-tagsinput.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput-typeahead.css">
+
+
+    <script src="{{ asset('js/jquery-1.10.2.js') }}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js" type="text/javascript"></script>
+    <script src="{{ asset('js/jquery.prettyPhoto.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/suggest.js') }}" type="text/javascript"></script>
+
+    <style>
+
+        .top_form .bootstrap-tagsinput .tag {
+            color: inherit;
+        }
+    </style>
+    <script type="text/javascript" language="javascript">
+      /*  $(document).ready(function(){
+            if($('#config_sugget').height()&lt;300){
+                _height = $('#config_sugget').height() + 50
+                parent.document.getElementById('iframe_eplugg').setAttribute('height', _height) ;
+                parent.document.getElementById('pp_content_eplugg').setAttribute('style', 'width:400px;height:' + _height +'px;') ;
+            }
+        }) ;*/
+    </script>
+</head>
+<body>
+    <div style="max-height: 300px;" id="config_sugget">
+
+        {% if error %}
+            {{ 'Vous n’êtes pas autorisé à effectuer cette action'|trans }}
+        {% else %}
+            <div class="titre_plugg">{{ 'Suggest'|trans }}</div>
+            <form method="post" action="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}" >
+                <div class="top_form">
+                    <input name="suggestion" type="text" id="suggestion" size="35" data-url="{{ path('eplugg_suggest_users', {'uid': uid, 'token' : csrfToken }) }}">
+                    <input name="token" value="{{ csrfToken }}" type="hidden">
+                </div>
+                <div class="clear20"></div>
+                <div align="right" class="div_btn"><button type="submit">{{ 'Suggérer'|trans }}</button></div>
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>

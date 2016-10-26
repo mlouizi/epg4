@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{{ 'Eplugg'|trans }} - {{ 'Localization'|trans }}{% endblock %}</title>
+
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet">
+
+    <style type="text/css">
+        html { height: 100% }
+        body { height: 100%; margin: 0px; padding: 0px }
+        #map_canvas { height: 100% ; width:100%;}
+    </style>
+        <script src="{{ asset('/js/jquery-1.10.2.js') }}" type="text/javascript" language="javascript"></script>
+
+    <script src="{{ asset('/js/gmap.js') }}" type="text/javascript" language="javascript"></script>
+    <script type="text/javascript">
+
+   
+        function initialize() {
+            centred = false;
+            map = new google.maps.Map(document.getElementById("map_canvas"), {
+                zoom: 19,
+                center: new google.maps.LatLng({{currentUser.latitude}}, {{currentUser.longitude}}),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+        }
+
+        if (navigator.geolocation) {
+            var watchId = navigator.geolocation.watchPosition(successCallback, null, {enableHighAccuracy:true});
+
+
+        }
+        else {
+             $.ajax({
+               url: "{{ path('eplugg_update_coordinations') }}",
+               type: "GET", 
+               data: "geo=false",
+               success : function (result) {
+               }
+            });
+            alert("Votre navigateur ne prend pas en compte la géolocalisation HTML5");
+            
+        }
+
+        function successCallback(position){
+            if(!centred) {
+                 map.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+
+            }
+               var latitude = position.coords.latitude;
+               var longitude = position.coords.longitude;  
+               $.ajax({
+                   url : "{{ path('eplugg_update_coordinations') }}",
+                   type : "GET",
+                   data : "geo=true&lat=" + latitude + "&lon="+ longitude,
+                   success : function (result) {
+                   }
+                });
+            var bounds = new google.maps.LatLngBounds();
+            var markers = [
+                ["{{ 'mon position'|trans }}", position.coords.latitude, position.coords.longitude, "{{ asset('/images/red-marker.ico') }}"],
+                {% if friendsOnline is not empty  %}
+                    {% for friend in friendsOnline %}
+                        [' {{ friend.firstname }} {{ friend.lastname|upper }}', {{ friend.latitude }}, {{ friend.longitude }}, "{{ asset('/images/blue-marker.ico') }}"],
+                    {% endfor %}
+                {% endif %}
+            ];
+                var infoWindowContent = [
+                ['<div class="info_content">' +
+                '<h3>London Eye</h3>' +
+                '<p>The London Eye is a giant Ferris wheel situated on the banks of the River Thames. The entire structure is 135 metres (443 ft) tall and the wheel has a diameter of 120 metres (394 ft).</p>' +        '</div>'],
+                {% if friendsOnline is not empty  %}
+                    {% for friend in friendsOnline %}
+                        [
+                        '<div id="card_eplugg" >'+ 
+                            '<div class="yellow"><img src="{{ asset('images/arrow-yelow.png') }}"></div>'+
+                            '<div id="card_user">'+
+                                '<div class="img_profil">'+
+                                    '<a href="{{ path('eplugg_profile_page', {'uid': friend.id }) }}"><img src="{% if friend.avatar is not empty %} {{ asset(friend.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}" alt="" width="48" height="48"></a>'+
+                                '</div>'+
+                                '<div class="descp_card">'+
+                                    '<div class="name_user"><a href="{{ path('eplugg_profile_page', {'uid': friend.id }) }}"> {{ friend.firstname }} {{ friend.lastname|upper }}</a></div>'+
+                                    '<div class="job_user">{{ friend.job }}</div>'+
+                                '</div>'+
+                                '<div class="clear"></div>'+
+                            '</div>'+
+                            '<div id="card_company">'+
+                                '<div class="img_profil">'+
+                                    '<a href="{{ path('eplugg_profile_page', {'uid': friend.id }) }}"><img src="{% if friend.CompanyAvatar is not empty %} {{ asset(friend.CompanyAvatar.croppedWebPath) }} {% else %}{{ asset('images/avatar-company.png') }} {% endif %}" width="51" height="51"></a>'+
+                                '</div>'+
+                                '<div class="descp_card">'+
+                                    '<div class="company_user"><a href="{{ path('eplugg_profile_page', {'uid': friend.id }) }}">{{ friend.companyName }}</a></div>'+
+                                    '<div class="tag_company">{{ friend.getActivitiesFormatted }}</div>'+
+                                '<div class="lieu_company">{{ friend.companyAddress }}</div>'+
+                            '</div>'+
+                            '<div class="clear"></div>'+
+                        '</div>'
+                        ],
+                    {% endfor %}
+                {% endif %}
+            ];
+            var infoWindow = new google.maps.InfoWindow(), marker, i;
+            
+                var Myposition = new google.maps.LatLng(markers[0][1], markers[0][2]);
+                bounds.extend(Myposition);
+            
+            // Loop through our array of markers & place each one on the map  
+            for( i = 0; i < markers.length; i++ ) {
+                var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+
+                marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: markers[i][0],
+                    icon: markers[i][3]
+                });
+                
+                // Allow each marker to have an info window    
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                        infoWindow.setContent(infoWindowContent[i][0]);
+                        infoWindow.open(map, marker);
+                    }
+                })(marker, i));
+
+                // Automatically center the map fitting all markers on the screen
+                if(!centred) {
+                    map.fitBounds(bounds);
+
+                }
+            }
+  
+            centred = true;
+
+        };
+
+
+    </script>
+</head>
+
+<body onload="initialize()">
+<div id="map_canvas"></div>
+</body>
+
+</html>

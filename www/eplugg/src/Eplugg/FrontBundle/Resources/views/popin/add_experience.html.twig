@@ -1,0 +1,48 @@
+{% extends 'EpluggFrontBundle:popin:base_popin.html.twig' %}
+{% block body %}
+    {% if valid %}
+        <script>
+            parent.document.location.reload();
+        </script>
+    {% endif %}
+    <div class="titre_plugg">{{ 'Ajouter une expérience professionnelle / école'|trans }}</div>
+    {{ form_start(form, { 'action': path('eplugg_add_experience'), 'attr': { 'class': 'fos_user_change_password' } }) }}
+
+    <div class="top_form">
+            <table width="100%" class="tab_cv">
+                <tbody>
+                <tr>
+                    <td>{{ 'Etablissement'|trans }} : <br>{{ form_widget(form.etablissement, {'id': 'company', 'attr': {}}) }}
+
+                </tr>
+                <tr>
+                    <td> {{ 'Poste / Diplôme'|trans }} : <br>{{ form_widget(form.title, {'id': 'work_status', 'attr': {}}) }}
+                </tr>
+                <tr>
+                    <td>Date<br>
+                        <table width="100%" class="date">
+                            <tbody><tr>
+                                <td>
+                                    {{ form_widget(form.startDate, {'id': 'from_date', 'attr': {'class': '', 'style': 'width:90%', 'placeholder': 'Début'|trans }}) }}
+                                </td>
+                                <td>
+                                    {{ form_widget(form.endDate, {'id': 'to_date', 'attr': {'class': '', 'style': 'width:90%', 'placeholder': 'Fin'|trans }}) }}
+
+                                </td>
+                            </tr>
+                            </tbody></table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Adresse : <br>{{ form_widget(form.address, {'id': 'place', 'attr': {}}) }}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="clear20"></div>
+        <div align="right" class="div_btn"><button class="btn btn-large btn-inverse submit" type="submit">{{ 'Enregistrer'|trans }}</button> </div>
+    {{ form_end(form) }}
+
+{% endblock  %}

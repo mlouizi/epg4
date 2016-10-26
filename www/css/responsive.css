@@ -1,0 +1,409 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+@media screen and (max-width:992px) {
+	.center_content, .center_content_inner{ width:90% !important;}
+	.pushy{ display:none}
+	#logo img{ padding-top:2px}
+	.profil .descp_card{
+	padding-left: 20px;
+    padding-right: 55px;
+    position: relative;
+    vertical-align: top;
+    width: 72%;}
+	#footer{ position:inherit !important}#right_content{ display:none}
+	#left_content{ width:28%}
+	#body_content{ width:66%; margin-bottom:20px}#search{ width:38%}
+	.profil{ width:100% !important}
+	.jautocomplete,.ja-actions{ width:100%}
+	#search form{ width:100%}
+	input.ja-tb{ width:82%}
+	#icone_header{ margin:0}
+	.content_date_bloc{ width:78%; padding-left:11.5%}
+	.branche {left: -27%; width: 27%;}
+	.pushy{ display:none}
+	/*.home_full{ left:50%; margin-left:-225px}
+	.slogan{ margin-right:-50%}*/
+	#logo{ width:25%}
+#logo img{ padding-top:4px}
+	#menu_profile{ width:8%; padding:7px 1%}
+	#icone_header{ width:21%}
+	.messagesLeft{ width:100% !important}
+	.messagesLeft .list_contacts{ width:34% !important}
+	.messagesLeft .messages{ width:65% !important; margin:0 !important}
+	.edit_profil ul input{ width:95%}
+	#iframe_eplugg, div.pp_default .pp_content{height:350px !important; }
+	.item_infinity_serach__{width:220px; float:none; margin:10px; display:inline-block; vertical-align:top;}
+	.inf_search{ text-align:center;}
+	
+}
+
+@media screen and (max-width:768px){
+	.login{ width:100%; clear:both;margin-bottom:5px}
+	.messagesLeft{ width:98% !important; margin-bottom:20px}#footer{ position:inherit !important}
+	.responsivediv{ display:none}
+	
+	.messagesLeft .list_contacts, .messagesLeft .messages{ width:100% !important}
+.messagesLeft form{ margin:30px 10px 0 60px !important}
+		.menu-btn{ display:inline}
+	.center_content{ width:94%}
+	.center_content_inner{ width:94%;}
+	#right_content{ display:none}
+		.pushy{ display:inline-block}
+	#left_content{ display:none}
+	#body_content{ width:95%; float:none; clear:both; margin-bottom:20px}
+	#logo{ width:98%; text-align:center}#logo img{ padding-top:2px}
+	#menu_footer, #copyright{ float:none; text-align:center; width:98%; overflow:auto}#copyright{ clear:both; margin-top:5px;}
+	#search,#icone_header,#menu_profile,#adv_search_conf,#activity_bloc {display:none}
+	.content_date_bloc{ width:100% !important; padding-left:0; margin-top:5px; margin-bottom:7px; clear:both; float:none; border:0}
+	
+	.branche { left: auto;right: 0; top: -17px; background:none; width:34px}
+	.dark-tooltip{ display:none}
+	/*#footer{ width:97%}*/
+	.profil #card_user, .profil #card_company{ height:auto !important; padding:0; width:100%}
+	.profil .descp_card{ width:61%; margin:10px; padding:0;display:block; float:left}.profil .img_profil { display:block; float:left; margin:10px; width:21%}
+	.profil .img_profil img,.profil .yellow img{ width:100%; height:auto}
+	.profil .descp_card strong a{ font-size:17px}
+	.profil #card_user em,.profil .tag{ font-size:13px}.descp_card ul li{ font-size:11px; word-break:keep-all;}
+	.profil .yellow{ width:20%}
+	.profil{ width:97% !important}
+	.profil .img_profil img{ width:100%; height:auto}
+	
+	.titre_plugg a.link_exp,.titre_plugg a.link_cv,.action_cv a.edit_cv, .action_cv a.delete_cv, .titre_plugg a.link_delete_cv{ text-indent:-9999px; display:inline-block; width:25px; padding:3px 2px}
+	.btn_download a{ padding:5px 20px; font-size:12px}
+	.btn_download{ width:182px; margin:0 auto;}
+	.mon_cv .date_mon_cv{ left:-101%; width:100%; font-size:10px;}
+	.mon_cv{ margin-left:49%; padding:11% 0 11% 7%}
+	.filter_date{ margin-bottom:5px}
+	.edit_profil ul input{ width:92%}
+
+	.profil .img_profil img.edit_img{ height:12px; width:12px}
+	.adress_div,.div_city, .country_div{  width:100%}
+	 .div_city input{ width:90% !important}.country_div .custom_country select{width:100% !important}
+	/*.home_full{ left:50%; margin-left:-225px}
+	 .slogan{ margin-right:-50%} */
+	.partage_profil ul li a{ text-indent:-9999px; background-position:13px 10px}
+	#logo img{ padding-top:4px;}.btn_step{ top:183px}.cache{ top:194px; height:194px}.cache2{ top:193px}#etape_page button{ margin-right:18px}
+	.right_search{ float:none; margin-top:10px;}
+	#iframe_eplugg, div.pp_default .pp_content{height:350px !important; }
+	.item_infinity_serach__{width:220px; float:none; margin:10px; display:inline-block; vertical-align:top;}
+	.inf_search{ text-align:center;}
+	
+}
+@media only screen and (max-width: 533px) {
+	.item_infinity_serach__{width:220px; float:none; margin:10px; display:inline-block; vertical-align:top; clear:both;}
+	.inf_search{ text-align:center;}
+	div.pp_pic_holder, div.pp_default .pp_content{ width:100% !important;}
+	div.pp_default .pp_content{ height:100% !important;}
+	div.pp_pic_holder{ left:0 !important;}
+	#iframe_eplugg{ width:100% !important;}
+	#iframe_eplugg, div.pp_default .pp_content{height:350px !important; }
+	}
+@media only screen and (max-width: 479px) {
+	.login{ width:100%; clear:both;margin-bottom:5px}
+	.messagesLeft{ width:98% !important; margin-bottom:20px}#footer{ position:inherit !important}
+	.responsivediv{ display:none}
+	
+	.messagesLeft .list_contacts, .messagesLeft .messages{ width:100% !important}
+.messagesLeft form{ margin:30px 10px 0 60px !important}
+		.menu-btn{ display:inline}
+	.center_content{ width:94%}
+	.center_content_inner{ width:94%;}
+	#right_content{ display:none}
+		.pushy{ display:inline-block}
+	#left_content{ display:none}
+	#body_content{ width:95%; float:none; clear:both; margin-bottom:20px}
+	#logo{ width:98%; text-align:center}#logo img{ padding-top:2px}
+	#menu_footer, #copyright{ float:none; text-align:center; width:98%; overflow:auto}#copyright{ clear:both; margin-top:5px;}
+	#search,#icone_header,#menu_profile,#adv_search_conf,#activity_bloc {display:none}
+	.content_date_bloc{ width:100% !important; padding-left:0; margin-top:5px; margin-bottom:7px; clear:both; float:none; border:0}
+	
+	.branche { left: auto;right: 0; top: -17px; background:none; width:34px}
+	.dark-tooltip{ display:none}
+	/*#footer{ width:97%}*/
+	.profil #card_user, .profil #card_company{ height:auto !important; padding:0; width:100%}
+	.profil .descp_card{ width:61%; margin:10px; padding:0;display:block; float:left}.profil .img_profil { display:block; float:left; margin:10px; width:21%}
+	.profil .img_profil img,.profil .yellow img{ width:100%; height:auto}
+	.profil .descp_card strong a{ font-size:17px}
+	.profil #card_user em,.profil .tag{ font-size:13px}.descp_card ul li{ font-size:11px; word-break:keep-all;}
+	.profil .yellow{ width:20%}
+	.profil{ width:97% !important}
+	.profil .img_profil img{ width:100%; height:auto}
+	
+	.titre_plugg a.link_exp,.titre_plugg a.link_cv,.action_cv a.edit_cv, .action_cv a.delete_cv, .titre_plugg a.link_delete_cv{ text-indent:-9999px; display:inline-block; width:25px; padding:3px 2px}
+	.btn_download a{ padding:5px 20px; font-size:12px}
+	.btn_download{ width:182px; margin:0 auto;}
+	.mon_cv .date_mon_cv{ left:-101%; width:100%; font-size:10px;}
+	.mon_cv{ margin-left:49%; padding:11% 0 11% 7%}
+	.filter_date{ margin-bottom:5px}
+	.edit_profil ul input{ width:92%}
+
+	.profil .img_profil img.edit_img{ height:12px; width:12px}
+	.adress_div,.div_city, .country_div{  width:100%}
+	 .div_city input{ width:90% !important}.country_div .custom_country select{width:100% !important}
+	/*.home_full{ left:50%; margin-left:-225px}
+	 .slogan{ margin-right:-50%} */
+	.partage_profil ul li a{ text-indent:-9999px; background-position:13px 10px}
+	#logo img{ padding-top:4px;}.btn_step{ top:183px}.cache{ top:194px; height:194px}.cache2{ top:193px}#etape_page button{ margin-right:18px}
+	.right_search{ float:none; margin-top:10px;}
+	.item_infinity_serach__{width:220px; float:none; margin:10px; display:inline-block; vertical-align:top;}
+	.inf_search{ text-align:center;}
+	div.pp_pic_holder, div.pp_default .pp_content{ width:100% !important;}
+	div.pp_default .pp_content{ height:100% !important;}
+	div.pp_pic_holder{ left:0 !important;}
+	#iframe_eplugg{ width:100% !important; height:350px !important; }
+	.search_advanced .half_div{ width:46.2%;}.search_advanced .half_div + .search_advanced .half_div{ margin-right:7px;}
+	.search_advanced label.custom_country:after{ left:89%}.search_advanced label.custom_country:before{ left:80%}
+	.search_advanced label.custom_gendre:before{ left:62%}
+	@-moz-document url-prefix()
+{
+   .search_advanced label.custom_country:before
+   { left:84%}
+   
+   .search_advanced label.custom_gendre:before{ left:66%}
+}
+	
+}
+
+
+
+
+
+
+
+
+
+/*@media only screen and  (min-width: 980px) {
+	.pushy{ display:none}
+}
+@media only screen and (min-width: 769px) and (max-width: 980px) {
+	.pushy{ display:none}
+#logo img{ padding-top:2px}.profil .descp_card{  padding-left: 20px;
+    padding-right: 55px;
+    position: relative;
+    vertical-align: top;
+    width: 72%;}
+}
+@media only screen and (max-width: 1024px) {
+	.center_content{ width:98%}
+	.center_content_inner{ width:97%;}
+
+}
+	
+	
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+	
+	#right_content{ display:none}
+	#left_content{ width:28%}
+	#body_content{ width:66%; margin-bottom:20px}#search{ width:38%}
+	.profil{ width:100% !important}
+	.jautocomplete,.ja-actions{ width:100%}
+	#search form{ width:100%}
+	input.ja-tb{ width:82%}
+	#icone_header{ margin:0}
+	.content_date_bloc{ width:78%; padding-left:11.5%}
+	.branche {left: -27%; width: 27%;}
+	.pushy{ display:none}
+	
+	#logo{ width:31%}
+#logo img{ padding-top:4px}
+	#menu_profile{ width:8%; padding:7px 1%}
+	#icone_header{ width:21%}
+	.messagesLeft{ width:100% !important}
+	.messagesLeft .list_contacts{ width:34% !important}
+	.messagesLeft .messages{ width:65% !important; margin:0 !important}
+	.profil .descp_card{  padding-left: 20px;
+    padding-right: 55px;
+    position: relative;
+    vertical-align: top;
+    width: 72%;}
+	
+
+}
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) and (orientation: landscape){
+	label.custom_country:before, label.custom_gendre:before, label.custom-select:before{ left:88%}label.custom_country:after, label.custom_gendre:after, label.custom-select:after{ left:93%}}
+
+@media only screen and (max-width: 479px) {
+	.login-sys{ width:85%;}	
+}
+@media only screen 
+and (min-device-width : 480px) 
+and (max-device-width : 742px) {#footer{ position:inherit !important}#right_content{ display:none}
+	#left_content{ width:28%}
+	#body_content{ width:66%; margin-bottom:20px}#search{ width:38%}
+	.profil{ width:100% !important}
+	.jautocomplete,.ja-actions{ width:100%}
+	#search form{ width:100%}
+	input.ja-tb{ width:82%}
+	#icone_header{ margin:0}
+	.content_date_bloc{ width:78%; padding-left:11.5%}
+	.branche {left: -27%; width: 27%;}
+	.pushy{ display:none}
+	
+	#logo{ width:31%}
+#logo img{ padding-top:4px}
+	#menu_profile{ width:8%; padding:7px 1%}
+	#icone_header{ width:21%}
+	.messagesLeft{ width:100% !important}
+	.messagesLeft .list_contacts{ width:34% !important}
+	.messagesLeft .messages{ width:65% !important; margin:0 !important}
+	.edit_profil ul input{ width:95%}
+	}
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {.login{ width:100%; clear:both;margin-bottom:5px}
+	.messagesLeft{ width:98% !important; margin-bottom:20px}#footer{ position:inherit !important}
+	.responsivediv{ display:none}
+	
+	.messagesLeft .list_contacts, .messagesLeft .messages{ width:100% !important}
+.messagesLeft form{ margin:30px 10px 0 60px !important}
+		.menu-btn{ display:inline}
+	.center_content{ width:94%}
+	.center_content_inner{ width:94%;}
+	#right_content{ display:none}
+		.pushy{ display:inline-block}
+	#left_content{ display:none}
+	#body_content{ width:95%; float:none; clear:both; margin-bottom:20px}
+	#logo{ width:98%; text-align:center}#logo img{ padding-top:2px}
+	#menu_footer, #copyright{ float:none; text-align:center; width:98%; overflow:auto}#copyright{ clear:both; margin-top:5px;}
+	#search,#icone_header,#menu_profile,#adv_search_conf,#activity_bloc {display:none}
+	.content_date_bloc{ width:100% !important; padding-left:0; margin-top:5px; margin-bottom:7px; clear:both; float:none; border:0}
+	
+	.branche { left: auto;right: 0; top: -17px; background:none; width:34px}
+	.dark-tooltip{ display:none}
+	
+	.profil #card_user, .profil #card_company{ height:auto !important; padding:0; width:100%}
+	.profil .descp_card{ width:61%; margin:10px; padding:0;display:block; float:left}.profil .img_profil { display:block; float:left; margin:10px; width:21%}
+	.profil .img_profil img,.profil .yellow img{ width:100%; height:auto}
+	.profil .descp_card strong a{ font-size:17px}
+	.profil #card_user em,.profil .tag{ font-size:13px}.descp_card ul li{ font-size:11px; word-break:keep-all;}
+	.profil .yellow{ width:20%}
+	.profil{ width:97% !important}
+	.profil .img_profil img{ width:100%; height:auto}
+	
+	.titre_plugg a.link_exp,.titre_plugg a.link_cv,.action_cv a.edit_cv, .action_cv a.delete_cv, .titre_plugg a.link_delete_cv{ text-indent:-9999px; display:inline-block; width:25px; padding:3px 2px}
+	.btn_download a{ padding:5px 20px; font-size:12px}
+	.btn_download{ width:182px; margin:0 auto;}
+	.mon_cv .date_mon_cv{ left:-101%; width:100%; font-size:10px;}
+	.mon_cv{ margin-left:49%; padding:11% 0 11% 7%}
+	.filter_date{ margin-bottom:5px}
+	.edit_profil ul input{ width:92%}
+
+	.profil .img_profil img.edit_img{ height:12px; width:12px}
+	.adress_div,.div_city, .country_div{  width:100%}
+	 .div_city input{ width:90% !important}.country_div .custom_country select{width:100% !important}
+	
+	.partage_profil ul li a{ text-indent:-9999px; background-position:13px 10px}
+	#logo img{ padding-top:4px;}.btn_step{ top:183px}.cache{ top:194px; height:194px}.cache2{ top:193px}#etape_page button{ margin-right:18px}
+	.right_search{ float:none; margin-top:10px;}
+	
+	}
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) and (orientation: landscape){
+	#footer{ position:inherit !important}
+	label.custom_country:before, label.custom_gendre:before, label.custom-select:before{ left:88%}label.custom_country:after, label.custom_gendre:after, label.custom-select:after{ left:93%}}
+	@media screen(-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi)and (device-          width: 1440px)and (orientation: portrait){ 
+.messagesLeft{ width:98% !important; margin-bottom:20px}
+#footer{ position:inherit !important}
+	.responsivediv{ display:none}
+	.login{ width:100%; clear:both; margin-bottom:5px}
+	.messagesLeft .list_contacts, .messagesLeft .messages{ width:100% !important}
+.messagesLeft form{ margin:30px 10px 0 60px !important}
+		.menu-btn{ display:inline}
+	.center_content{ width:94%}
+	.center_content_inner{ width:94%;}
+	#right_content{ display:none}
+		.pushy{ display:inline-block}
+	#left_content{ display:none}
+	#body_content{ width:95%; float:none; clear:both; margin-bottom:20px}
+	#logo{ width:98%; text-align:center}#logo img{ padding-top:2px}
+	#menu_footer, #copyright{ float:none; text-align:center; width:98%; overflow:auto}#copyright{ clear:both; margin-top:5px;}
+	#search,#icone_header,#menu_profile,#adv_search_conf,#activity_bloc {display:none}
+	.content_date_bloc{ width:100% !important; padding-left:0; margin-top:5px; margin-bottom:7px; clear:both; float:none; border:0}
+	
+	.branche { left: auto;right: 0; top: -17px; background:none; width:34px}
+	.dark-tooltip{ display:none}
+	
+	.profil #card_user, .profil #card_company{ height:auto !important; padding:0; width:100%}
+		.profil .descp_card{ width:61%; margin:10px; padding:0;display:block; float:left}.profil .img_profil { display:block; float:left; margin:10px; width:21%}
+	.profil .img_profil img,.profil .yellow img{ width:100%; height:auto}
+	.profil .descp_card strong a{ font-size:17px}
+	.profil #card_user em,.profil .tag{ font-size:13px}.descp_card ul li{ font-size:11px; word-break:keep-all;}
+	.profil .yellow{ width:20%}
+	.profil{ width:97% !important}
+	.profil .img_profil img{ width:100%; height:auto}
+	
+	.titre_plugg a.link_exp,.titre_plugg a.link_cv,.action_cv a.edit_cv, .action_cv a.delete_cv{ text-indent:-9999px; display:inline-block; width:25px; padding:3px 2px}
+	.btn_download a{ padding:5px 20px; font-size:12px}
+	.btn_download{ width:182px; margin:0 auto;}
+	.mon_cv .date_mon_cv{ left:-101%; width:100%; font-size:10px;}
+	.mon_cv{ margin-left:49%; padding:11% 0 11% 7%}
+	.filter_date{ margin-bottom:5px}
+	.edit_profil ul input{ width:95%}
+
+	.profil .img_profil img.edit_img{ height:12px; width:12px}
+	.adress_div,.div_city, .country_div{  width:100%}
+	 .div_city input{ width:90% !important}.country_div .custom_country select{width:100% !important}
+	
+	.partage_profil ul li a{ text-indent:-9999px; background-position:13px 10px}
+	#logo img{ padding-top:4px;}.btn_step{ top:183px}.cache{ top:194px; height:194px}.cache2{ top:193px}#etape_page button{ margin-right:18px}
+		.titre_plugg a.link_exp,.titre_plugg a.link_cv,.action_cv a.edit_cv, .action_cv a.delete_cv, .titre_plugg a.link_delete_cv{ text-indent:-9999px; display:inline-block; width:25px; padding:3px 2px}
+
+}
+	/*
+@media only screen  and (orientation: landscape)  and (min-width: 200px) and (max-width: 640px) {	.messagesLeft{ width:98% !important; margin-bottom:20px}
+	.responsivediv{ display:none}
+	
+	.messagesLeft .list_contacts, .messagesLeft .messages{ width:100% !important}
+.messagesLeft form{ margin:30px 10px 0 60px !important}
+		.menu-btn{ display:inline}
+	.center_content{ width:94%}
+	.center_content_inner{ width:94%;}
+	#right_content{ display:none}
+		.pushy{ display:inline-block}
+	#left_content{ display:none}
+	#body_content{ width:97%; float:none; clear:both; margin-bottom:20px}
+	#logo{ width:98%; text-align:center}
+	#menu_footer, #copyright{ float:none; text-align:center; width:98%; overflow:auto}#copyright{ clear:both; margin-top:5px;}
+	#search,#icone_header,#menu_profile,#adv_search_conf,#activity_bloc {display:none}
+	.content_date_bloc{ width:100% !important; padding-left:0; margin-top:5px; margin-bottom:7px; clear:both; float:none; border:0}
+	
+	.branche { left: auto;right: 0; top: -17px; background:none; width:34px}
+	.dark-tooltip{ display:none}
+	.profil #card_user, .profil #card_company{ height:auto !important; width:100%; padding:0}
+	.profil .descp_card{ width:65%; padding:0; margin:10px;display:block; float:right}
+	.profil .img_profil img,.profil .yellow img{ width:100%; height:auto}
+	.profil .descp_card strong a{ font-size:17px}
+	.profil #card_user em,.profil .tag{ font-size:13px}.descp_card ul li{ font-size:11px; word-break:keep-all;}
+	.profil .yellow{ width:20%}
+	.profil{ width:97% !important}
+	.profil .img_profil img{ width:100%; height:auto}
+	.profil .img_profil { display:block; float:left; margin:10px; width:21%}
+	.titre_plugg a.link_exp,.titre_plugg a.link_cv,.action_cv a.edit_cv, .action_cv a.delete_cv{ text-indent:-9999px; display:inline-block}
+	.btn_download a{ padding:5px 20px; font-size:12px}
+	.btn_download{ width:182px; margin:0 auto;}
+	.mon_cv .date_mon_cv{ left:-101%; width:100%; font-size:10px;}
+	.mon_cv{ margin-left:49%; padding:11% 0 11% 7%}
+	.filter_date{ margin-bottom:5px}
+	li .addSep,.edit_profil  li .addSep{ right:7px}
+	.profil .img_profil img.edit_img{ height:12px; width:12px}
+	.adress_div,.div_city, .country_div{  width:100%}
+	 .div_city input{ width:90% !important}.country_div .custom_country select{width:100% !important}
+	 .slogan{ right:inherit} 
+	.partage_profil ul li a{ text-indent:-9999px; background-position:13px 10px}
+	#logo img{ padding-top:4px;}li .addSep,.edit_profil  li .addSep{ right:22px}
+	
+	
+	
+	}
+@media only screen  and (orientation: landscape) and (min-width: 350px)  and (max-width: 481px) {#right_content{ width:30%}
+		.pushy{ display:inline-block}
+	#left_content{ display:none}
+	#body_content, .profil, .messagesLeft{ width:67% !important;margin-bottom:20px}#search{ width:40%}#adv_search_conf{ display:none}
+	}

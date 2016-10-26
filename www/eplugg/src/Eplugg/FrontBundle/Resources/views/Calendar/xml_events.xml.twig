@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<monthly>
+
+    {% for event in events %}
+    <event>
+        <id>{{ event.id }}</id>
+        <name>{{ event.title }}</name>
+        <startdate>{{ event.eventDate|date("Y-m-d") }}</startdate>
+        <enddate></enddate>
+        <starttime></starttime>
+        <endtime></endtime>
+        <color>#ffb128</color>
+        <url></url>
+    </event>
+    {% endfor %}
+
+
+</monthly>

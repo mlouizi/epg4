@@ -1,0 +1,27 @@
+{% extends 'EpluggFrontBundle:popin:base_popin.html.twig' %}
+{% block body %}
+    {% if valid %}
+        <script>
+            parent.document.location.reload();
+        </script>
+    {% endif %}
+    {{ form_start(form, { 'action': path('eplugg_upload_cv'), 'attr': { 'class': 'fos_user_change_password' } }) }}
+
+        <div class="titre_plugg">{{ 'Télécharger votre CV'|trans }}</div>
+        <div class="clear10"></div>
+        <div style="padding:10px">
+            <p>{{ 'Vous pouvez télécharger un fichier au format Word, PDF, JPG ou PNG'|trans }}.</p>
+            <table width="100%">
+                <tbody>
+                <tr>
+                    <td colspan="2">{{ form_widget(form.file, { 'attr': {'id': 'document_cv', 'class': 'custom-file-input'}}) }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    <div class="div_btn">
+        {{ form_widget(form.submit, { 'attr': {'id': 'document_cv', 'class': 'submitSetting btn btn-large btn-inverse'}}) }}
+    </div>
+    {{ form_end(form) }}
+
+{% endblock  %}

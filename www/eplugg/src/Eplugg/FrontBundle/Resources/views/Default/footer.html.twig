@@ -1,0 +1,13 @@
+
+<div id="footer">
+    <div class="center_content">
+        <div id="menu_footer">
+            <ul>
+                {% for link in MenuFooter %}
+                <li><a href="{{ path('eplugg_front_page', {'slug': link.slug }) }}">{% if link.menuTitle is not empty %} {{ link.menuTitle }} {% else %} {{ link.title }} {% endif %}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="copyright"><img alt="{{ 'Corporation'|trans }}" src="{{ asset('images/logo_footer.png') }}"> {{ 'Corporation'|trans }} &copy; 2016</div>
+    </div>
+</div>

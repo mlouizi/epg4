@@ -1,0 +1,43 @@
+<div id="left_content">
+    <div onclick="window.location.href='{{ path('eplugg_profile_page', {'uid': user.id }) }}'" id="card_eplugg">
+        <div class="yellow"><img src="{{ asset('images/arrow-yelow.png') }}"></div>
+        <div id="card_user">
+            <div class="img_profil">
+                <a href="{{ path('eplugg_profile_page', {'uid': user.id }) }}"><img width="48" height="48" alt="" src="{% if user.avatar is not empty %} {{ asset(user.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}"></a>
+            </div>
+            <div class="descp_card">
+                <div class="name_user"><a href="{{ path('eplugg_profile_page', {'uid': user.id }) }}">{{ user.firstName }} {{ user.lastName }}</a></div>
+                <div class="job_user">{{ user.job }}</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div id="card_company">
+            <div class="img_profil">
+                <a href="{{ path('eplugg_profile_page', {'uid': user.id }) }}"><img width="51" height="51" src="{% if user.CompanyAvatar is not empty %} {{ asset(user.CompanyAvatar.croppedWebPath) }} {% else %}{{ asset('images/avatar-company.png') }} {% endif %}"></a>
+            </div>
+            <div class="descp_card">
+                <div class="company_user"><a href="{{ path('eplugg_profile_page', {'uid': user.id }) }}">{{ user.companyName }}</a></div>
+                <div class="tag_company">{{ user.getActivitiesFormatted }}</div>
+                <div class="lieu_company">{{ user.companyAddress }}</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="clear20"></div>
+    <div id="activity_bloc">
+        <div class="titre_plugg">{{ 'Annuaire d’activités'|trans }}</div>
+        <div class="liste_annuaires">
+            <ul>
+
+                {% for activity in activities %}
+
+                    <li>
+                        <a href="{{ path('search_users_by_activity', {'id': activity.activity_id }) }}"
+                           title="1 Contact">{{ activity.name }} <span>{{ activity.nbr_repeat_activity }} </span></a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <a href="{{ path('search_all_users_activities') }}" class="voire_to">{{ 'Afficher tout'|trans }}</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+{% extends 'EpluggFrontBundle::base_logged_in.html.twig' %}
+
+{% block title %}{{ 'Eplugg'|trans }} - {{ 'Profile'|trans }} {{ user.firstName }} {{ user.lastName }}{% endblock %}
+{% block og %}
+    <meta property="og:title" content="{{ 'Carte visite eplugg'|trans }} {{ user.firstName }} {{ user.lastName }}"/>
+    <meta property="og:image" content="{% if user.avatar is not empty %} {{ asset(user.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}"/>
+    <meta property="og:description" content="{% if user.directPhone is not empty %}{{ 'Direct Phone'|trans }}: {{ user.directPhone }}  {% endif %}{% if user.mobile is not empty %}{{ 'Mobile Phone'|trans }}: {{ user.mobile }}  {% endif %}{% if user.moreEmails is not empty %}{{ 'Emails'|trans }}: {{ user.moreEmails }}  {% endif %}"/>
+{% endblock %}
+
+{% block body %}
+
+    <div id="content">
+        <div class="center_content_inner">
+            <div id="body_content" class="profil">
+                <div id="card_eplugg">
+                    <div class="yellow">
+                        {{ render(controller('EpluggFrontBundle:Default:Vip', {'uid': user.Id})) }}
+
+                        <img src="{{ asset('images/arrow-yelow-big.png') }}">
+                    </div>
+                    <div id="card_user" itemscope itemtype="http://schema.org/QAPage">
+                        <div class="img_profil">
+                            <a><img itemprop="image" src="{% if user.avatar is not empty %} {{ asset(user.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}"></a>
+                        </div>
+                        <div class="descp_card">
+                            <strong><a href="#" itemprop="name">{{ user.firstName }} {{ user.lastName }}</a></strong>
+                            <em>search_users</em>
+                            <ul itemprop="description">
+                                {% if isFriend %}
+                                    {% if user.directPhone is not empty %}<li class="tel1">{{ user.directPhone }}</li>{% endif %}
+                                    {% if user.mobile is not empty %}<li class="mobile">{{ user.mobile }}</li>{% endif %}
+                                    {% if user.moreEmails is not empty %}<li class="mail1">{{ user.moreEmails }}</li>{% endif %}
+                                    {% if user.sociaux is not empty %}<li class="sociaux">{{ user.sociaux }}</li>{% endif %}
+                                {% else %}
+                                    <li class="tel1">{{ 'Information privée'|trans }}</li>
+                                    <li class="mobile">{{ 'Information privée'|trans }}</li>
+                                    <li class="mail1">{{ 'Information privée'|trans }}</li>
+                                    <li class="sociaux">{{ 'Information privée'|trans }}</li>
+                                {% endif %}
+                                
+                            </ul>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div id="card_company">
+                        <div class="img_profil"><a><img src="{% if user.CompanyAvatar is not empty %} {{ asset(user.CompanyAvatar.croppedWebPath) }} {% else %}{{ asset('images/avatar-company.png') }} {% endif %}"></a></div>
+                        <div class="descp_card">
+                            <strong><a href="#">{{ user.companyName }}</a></strong>
+                            <div class="tag">{% if user.getActivitiesFormatted is not empty %}{{ user.getActivitiesFormatted }}{% endif %}</div>
+                            <ul>
+                                {% if user.companyTel is not empty %}<li class="tel2">{{ user.companyTel }}</li>{% endif %}
+                                {% if user.companyFax is not empty %}<li class="fax">{{ user.companyFax }}</li>{% endif %}
+                                {% if user.companyWebsite is not empty %}<li class="site">{{ user.companyWebsite }}</li>{% endif %}
+                                {% if user.companyAddress is not empty %}<li class="sociaux">{{ user.companyAddress }}</li>{% endif %}
+                            </ul>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+                <div class="social_bar">
+                    <a onclick="javascript:window.open(this.href, '', 'width=530,height=500,menubar=no,location=no,resizable=true,scrollbars=yes,status=yes');return false;" href="https://www.facebook.com/sharer/sharer.php?u={{ url('eplugg_profile_page', { 'uid': user.id}) }}" class="link_facebook hotspot" onmouseover="tooltip.show('share_on_facebook');" onmouseout="tooltip.hide();" title="facebook"></a>
+
+                    <a onclick="javascript:window.open(this.href, '', 'width=500,height=500,menubar=no,location=no,resizable=true,scrollbars=yes,status=yes');return false;" href="http://twitter.com/share?text=profile%20{{ user.firstName }}%20{{ user.lastName }}&url={{ url('eplugg_profile_page', { 'uid': user.id}) }}" class="link_twitter hotspot" onmouseover="tooltip.show('share_on_twitter');" onmouseout="tooltip.hide();"></a>
+
+                    <a onclick="javascript:window.open(this.href, '', 'width=500,height=500,menubar=no,location=no,resizable=true,scrollbars=yes,status=yes');return false;" href="https://plus.google.com/share?url={{ url('eplugg_profile_page', { 'uid': user.id}) }}" class="link_google hotspot" onmouseover="tooltip.show('share_on_google');" onmouseout="tooltip.hide();"></a>
+
+                    <a onclick="javascript:window.open(this.href, '', 'width=500,height=500,menubar=no,location=no,resizable=true,scrollbars=yes,status=yes');return false;" href="http://www.linkedin.com/shareArticle?mini=true&url={{ url('eplugg_profile_page', { 'uid': user.id}) }}" class="link_linkedin hotspot" onmouseover="tooltip.show('share_on_linkedin');" onmouseout="tooltip.hide();"></a>
+                </div>
+                <div class="partage_profil">
+                    <ul>
+                        {% if isFriend %}
+                            <li id="first"><a class="btn_share" title="Suggérer" rel="suggerer" href="{{ path('eplugg_suggest_user', {'uid': user.id, 'iframe': 'true', 'width': 400} ) }}">{{ 'Suggérer'|trans }}</a></li>
+                        {% elseif invitReceived %}
+                            <li id="first">
+                                <a href="{{ path('eplugg_accpet_invitation', {'uid': user.id, 'token': csrfToken }) }}"  class="Vplugger plugger-link" title="Accepter l'invitation" data-id="8">{{ 'Accepter l’invitation'|trans }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('eplugg_cancel_invitation', {'uid': user.id, 'token': csrfToken }) }}" class="Iplugger plugger-link" title="Cancel">{{ 'Annuler l’invitation'|trans }}</a>
+                            </li>
+                        {% elseif invitSended %}
+                            <li id="first">
+                                <a href="{{ path('eplugg_cancel_invitation', {'uid': user.id, 'token': csrfToken }) }}" class="Iplugger plugger-link" title="Cancel">{{ 'Annuler l’invitation'|trans }}</a>
+                            </li>
+                        {% else %}
+                            <li id="first"><a href="{{ path('eplugg_invite_user', {'uid': user.id, 'token': csrfToken }) }}" class="plugger plugger-link" title="Plugger">{{ 'Plugger'|trans }}</a></li>
+                        {% endif %}
+                        <li><a class="btn_msg" title="Envoyer un message" href="{{ path('eplugg_messages_user', {'uid': user.id } ) }}">{{ 'Envoyer un message'|trans }}</a></li>
+                        {% if isFriend %}
+                            <li>
+                                <a href="{{ path('eplugg_delete_friend', {'uid': user.id, 'token': csrfToken }) }}" class="delete_contact plugger-link" title="Delete">{{ 'Supprimer'|trans }}</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="partage_profil"></div>
+                <div class="clear30"></div>
+                <div class="titre_plugg"> {{ 'Parcours'|trans }} </div>
+                <div class="cv_profil">
+                    {% if isFriend %}
+                        {% if user.Cv is not empty and user.Cv.path is not empty  %}
+                            <div class="btn_download">
+                                <a href="{{ asset('uploads/' ~ user.Cv.path) }}" target="_blank">
+                                    <img src="{{ asset('images/pdf.png') }}" />
+                                </a>
+                            </div>
+                        {% endif %}
+                        {{ render(controller('EpluggFrontBundle:Default:getExperiences', {'ownProfile': false, 'uid': user.Id})) }}
+
+                    {% else %}
+                    {{ 'Information privée'|trans }}
+                    {% endif %}
+                </div>
+                <div class="clear20"></div>
+                <div class="titre_plugg">{{ 'Actualités'|trans }}</div>
+                <div id="content_infinity" class="content_center__">
+                    {% if isFriend %}
+                        {{ render(controller('EpluggFrontBundle:Default:News', {'uid': user.Id})) }}
+                    {% else %}
+                        {{ 'Information privée'|trans }}
+
+                    {% endif %}
+                </div>
+                <div class="clear20"></div>
+            </div>
+        </div>
+        <div class="clear25"></div>
+    </div>
+
+{% endblock %}

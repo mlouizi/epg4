@@ -1,0 +1,52 @@
+<div id="block-suggest-{{ user[0].id }}" class="bloc_suggestion">
+    <a href="{{ path('eplugg_profile_page', {'uid': user[0].id }) }}" data-tooltip="#html-content{{ user[0].id }}" class="infobull_div tooltip"></a>
+    <div class="im_connais">
+        <a href="{{ path('eplugg_profile_page', {'uid': user[0].id }) }}" data-tooltip="#html-content{{ user[0].id }}" class="tooltip">
+            <img width="37" height="37" alt="" src="{% if user[0].avatar is not empty %} {{ asset(user[0].avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}">
+        </a>
+    </div>
+    <div class="des_connais">
+        <strong> <a href="{{ path('eplugg_profile_page', {'uid': user[0].id }) }}" data-tooltip="#html-content{{ user[0].id }}" class="tooltip">{{ user[0].firstName }} {{ user[0].lastName }}</a></strong>
+        {{ user[0].job }}
+    </div>
+    <div class="ferme_connais">
+        <div class="fermer_connais"><a href="{{ path('eplugg_ignore_user', {'uid': user[0].id }) }}" class="ignore-user show-next" data-id="#block-suggest-{{ user[0].id }}">X</a></div>
+        <a rel="mutual_friend" href="{{ path('eplugg_common_firends', {'uid': user[0].id, 'iframe': 'true', 'width': '400'}) }}" class="nb_vue_" title="{{ user[1] }} {{ 'Contacts en commun'|trans }}"><span>{{ user[1] }}</span></a>
+    </div>
+    <div class="clear5"></div>
+    <div id="html-content{{ user[0].id }}" style="display:none;">
+        <div onclick="window.location.href='{{ path('eplugg_profile_page', {'uid': user[0].id }) }}'" id="card_eplugg">
+            <div class="yellow"><img src="{{ asset('images/arrow-yelow.png') }}"></div>
+            <div id="card_user">
+                <div class="img_profil"><a href="{{ path('eplugg_profile_page', {'uid': user[0].id }) }}"><img width="48" height="48" alt="" src="{% if user[0].avatar is not empty %} {{ asset(user[0].avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}"></a></div>
+                <div class="descp_card">
+                    <div class="name_user"> <a href="{{ path('eplugg_profile_page', {'uid': user[0].id }) }}">{{ user[0].firstName }} {{ user[0].lastName }}</a> </div>
+                    <div class="job_user">{{ user[0].job }}</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div id="card_company">
+                <div class="img_profil">
+                    <a href="{{ path('eplugg_profile_page', {'uid': user[0].id }) }}">
+                        <img width="51" height="51" src="{% if  user[0].CompanyAvatar is not empty %} {{ asset( user[0].CompanyAvatar.croppedWebPath) }} {% else %}{{ asset('images/avatar-company.png') }} {% endif %}">
+                    </a>
+                </div>
+                <div class="descp_card">
+                    <div class="company_user"><a href="{{ path('eplugg_profile_page', {'uid': user[0].id }) }}">{{ user[0].companyName }}</a></div>
+                    <div class="tag_company">
+                        {{ user[0].getActivitiesFormatted }}
+                    </div>
+                    <div class="lieu_company">{{ user[0].companyAddress }}</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="plugg_link info_card">
+            <a onclick="Plugger(this, 0)" data-id="{{ path('eplugg_profile_page', {'uid': user[0].id }) }}">{{ 'Plugger'|trans }}</a>
+
+            <a href="{{ path('eplugg_messages_user', {'uid': user[0].id } ) }}">{{ 'Message'|trans }}</a>
+        </div>
+    </div>
+
+
+</div>

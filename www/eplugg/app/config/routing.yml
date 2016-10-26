@@ -1,0 +1,22 @@
+eplugg_back:
+    resource: "@EpluggBackBundle/Resources/config/routing.yml"
+    prefix:   /
+
+eplugg_front:
+    resource: "@EpluggFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+    requirements:
+        _locale: fr|en
+
+eplugg_user:
+    resource: "@EpluggUserBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}
+    defaults: { _locale: fr }
+    requirements:
+        _locale: fr|en
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+

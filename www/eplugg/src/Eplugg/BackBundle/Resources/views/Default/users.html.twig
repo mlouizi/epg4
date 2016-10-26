@@ -1,0 +1,113 @@
+{% extends 'EpluggBackBundle::base.html.twig' %}
+
+{% block content %}
+    <section class="content-header">
+        <h1>Users</h1>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div id="users" class="dataTables_wrapper form-inline dt-bootstrap">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a class="btn btn-success" href="{{ path('eplugg_add_user') }}">Add new user</a>
+
+                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid"
+                                           aria-describedby="example2_info">
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="" aria-sort="ascending">First Name
+                                            </th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="" aria-sort="ascending">Last Name
+                                            </th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="" aria-sort="ascending">Email
+                                            </th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="" aria-sort="ascending">Last Login
+                                            </th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="" aria-sort="ascending">Status
+                                            </th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="" aria-sort="ascending">Action
+                                            </th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for user in users %}
+
+                                            <tr class="{{ cycle(['odd', 'even'], loop.index) }}" role="row">
+                                                <td>
+                                                    {% if user.firstname is not empty %}
+                                                        {{ user.firstname }}
+                                                    {% else %}
+                                                        -
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if user.lastname is not empty %}
+                                                        {{ user.lastname }}
+                                                    {% else %}
+                                                        -
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if user.email is not empty %}
+                                                        {{ user.email }}
+                                                    {% else %}
+                                                        -
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if user.lastLogin and user.lastLogin.date is not empty %}
+                                                        {{ user.lastLogin.date }}
+                                                    {% else %}
+                                                        -
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if user.enabled == true %}
+                                                        Active
+                                                    {% else %}
+                                                        Blocked
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-success" type="button">Action</button>
+                                                        <button data-toggle="dropdown"
+                                                                class="btn btn-success dropdown-toggle" type="button">
+                                                            <span class="caret"></span>
+                                                            <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                        <ul role="menu" class="dropdown-menu">
+                                                            <li><a href="{{ path('eplugg_edit_user', {'uid': user.id }) }}">Edit User</a></li>
+                                                            <li>{% if user.enabled == true %}<a href="{{ path('eplugg_block_user', {'uid': user.id }) }}">Block User</a>{% else %}<a href="{{ path('eplugg_activate_user', {'uid': user.id }) }}">Enable User</a>{% endif %}</li>
+                                                            <li><a href="{{ path('eplugg_delete_user', {'uid': user.id }) }}">Delete User</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

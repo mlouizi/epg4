@@ -1,0 +1,89 @@
+@charset "utf-8";
+/* CSS Document */
+		body{ background:url(/images/photo.jpg) left top no-repeat !important;}
+@media screen and (max-width:992px) {
+	.pushy{ display:none}
+	.center_content{ width:98%}
+	.center_content_inner{ width:97%;}
+	#right_content{ display:none}
+	#left_content{ width:28%}
+	#body_content{ width:66%; margin-bottom:20px}
+#footer{ position:inherit !important}
+	.map-container{ display:none}
+	#footer{ position:inherit !important}
+	#header{position:inherit !important;}
+	.ombre{ display:none}
+	
+	#menu_footer, #copyright{ float:none; text-align:center; width:98%; overflow:auto}#copyright{ clear:both; margin-top:5px;}
+	#search,#icone_header,#menu_profile,#adv_search_conf,#activity_bloc {display:none}
+	.content_date_bloc{ width:100% !important; padding-left:0; margin-top:5px; margin-bottom:7px; clear:both; float:none; border:0}
+	.slogan{ display:none} #menu_footer ul li{ float:none; display:inline-block}
+
+	/*#footer{ width:97%}*/
+.home_full{position:inherit !important; height:100%; margin-bottom:20px; top:20px}
+	.mapplic-pin{ display:none} 	label.custom_country:before, label.custom_gendre:before, label.custom-select:before {
+    left: auto;
+}
+label.custom_country:after, label.custom_gendre:after, label.custom-select:after {
+    left: 75%;
+}
+}
+
+@media screen and (max-width:768px){
+	.center_content{ width:98%}
+	.center_content_inner{ width:97%;}
+	#right_content{ display:none}
+	#left_content{ width:28%}
+	#body_content{ width:66%; margin-bottom:20px}
+	#search,.jautocomplete,.ja-actions{ width:297px}
+	#search form{ width:100%}
+	input.ja-tb{ width:260px}
+	#icone_header{ margin:6px 8px 0}
+	.content_date_bloc{ width:78%; padding-left:11.5%}
+	.branche {left: -27%; width: 27%;}
+	.pushy{ display:none}.mapplic-pin{ display:none}
+}
+
+@media only screen and (max-width: 479px) {
+	.menu-btn{ display:inline}#logo img{ padding-top:4px;}
+	.center_content{ width:94%}
+	.center_content_inner{ width:94%;}
+	#right_content{ display:none}
+	#left_content{ display:none}
+	#body_content{ width:95%; float:none; clear:both; margin-bottom:20px}
+	#logo{ width:98%; text-align:center}#logo a{ display:block}
+	#menu_footer, #copyright{ float:none; text-align:center; width:98%; overflow:auto}#copyright{ clear:both; margin-top:5px;}
+	#search,#icone_header,#menu_profile,#adv_search_conf,#activity_bloc {display:none}
+	.content_date_bloc{ width:100% !important; padding-left:0; margin-top:5px; margin-bottom:7px; clear:both; float:none; border:0}
+	
+	/*#footer{ width:97%}*/
+
+	.filter_date{ margin-bottom:5px}
+	li .addSep{ right:7px}
+	.profil .img_profil img.edit_img{ height:12px; width:12px}
+	.adress_div,.div_city, .country_div{  width:100%}
+	.country_div .custom_country select, .div_city input{ width:100% !important}
+	.home_full{ left:0; margin-left:0; width:100%; top:10px}
+	 .slogan{ display:none} 
+	.login{ width:100%}
+	.signup,.homeSearch{ width:100%; margin:0; margin-top:10px}.form_home,#msform fieldset{ width:100%}#msform{ width:90%}.form_home{ background-position:80% 0; padding:0}
+	.select_div{ width:20%;float:none; clear:both; margin:0}
+	label.custom_gendre select{ width:100%}
+	.custom_country select{ width:100% !important}.bloc_btn_home{ padding:0}
+	#footer{ position:inherit !important}
+		body{ background:url(/images/photo.jpg) left top no-repeat !important;}
+	.map-container{ display:none}
+	#footer{ position:inherit !important}
+	#header{position:inherit !important; }
+	.home_full{position:inherit !important}	
+	.ombre{ display:none}.card_user-search{ height:85px}
+	#registration input{ width:94%}
+	.pp_inline .form_home{ width:99% !important}
+	.pp_content{ width:97% !important}.pp_content_container{ width:100%}div.ppt,.pp_details, .pp_pic_holder{ width:306px !important}
+	#progressbar{ display:block}
+	#msform fieldset{ width:100%; margin-left:0}
+	.btn_step{ top:183px}.cache{ top:194px; height:194px}.cache2{ top:193px}#etape_page button{ margin-right:18px}
+	.card_user-search .half_div{ margin-left:7px;width:47%;}.card_user-search .half_div + .card_user-search .half_div{ margin-left:0px}
+	
+	.mapplic-pin{ display:none}#menu_footer ul li{ float:none; display:inline-block}
+}

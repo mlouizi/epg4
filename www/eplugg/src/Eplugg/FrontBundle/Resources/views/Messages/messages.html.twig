@@ -1,0 +1,114 @@
+{% extends 'EpluggFrontBundle::base_logged_in.html.twig' %}
+{% block more_stylesheets %}
+    <link media="all" type="text/css" href="{{ asset('css/default.min.css') }}" rel="stylesheet">
+
+{% endblock %}
+{% block title %}{{ 'Eplugg'|trans }} - {{ 'Messages'|trans }}{% endblock %}
+
+{% block body %}
+    <div id="content" style="min-height: 834px;">
+        <div class="center_content_inner" style="min-height: 829px;">
+            <div class="messagesLeft">
+                <div class="titre_plugg search">Messages</div>
+                <div class="list_contacts responsivediv">
+                        <div class="search"><input type="text" id="msg_ct_serach" placeholder="Rechercher" data-url="{{  path('eplugg_messages_user_search') }}"></div>
+                        <div class="clear20"></div>
+                        <div id="msg_ct_list">
+                        {% if messagesContacts is  not empty %}
+
+                        {% for contact in messagesContacts  %}
+                                <div class="bloc_suggestion {% if currentUid == contact.destination.id and contact.status == false %}actif{% endif %}">
+                                    {% if currentUid == contact.source.id %}
+                                        <div class="im_connais">
+                                            <a href="{{ path('eplugg_messages_user', {'uid': contact.destination.id }) }}"><img src="{% if contact.destination.avatar is not empty %} {{ asset(contact.destination.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}" width="37" height="37"></a>
+                                        </div>
+                                        <div class="des_connais">
+                                            <strong>
+                                                <a href="{{ path('eplugg_messages_user', {'uid': contact.destination.id }) }}">{{ contact.destination.firstName }} {{ contact.destination.lastName }}</a>
+                                            </strong>
+                                            {% if "now"|date('Y-m-d') == contact.timeSended|date('Y-m-d') %}
+                                                aujourd'hui à {{ contact.timeSended|date('H:i') }}
+                                            {% else %}
+                                                {{ contact.timeSended|date('d-m-Y H:i') }}
+                                            {% endif %}
+                                        </div>
+                                    {% else %}
+                                        <div class="im_connais">
+                                            <a href="{{ path('eplugg_messages_user', {'uid': contact.source.id }) }}"><img src="{% if contact.source.avatar is not empty %} {{ asset(contact.source.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}" width="37" height="37"></a>
+                                        </div>
+                                        <div class="des_connais">
+                                            <strong>
+                                                <a href="{{ path('eplugg_messages_user', {'uid': contact.source.id }) }}">{{ contact.source.firstName }} {{ contact.source.lastName }}</a>
+                                            </strong>
+                                            {% if "now"|date('Y-m-d') == contact.timeSended|date('Y-m-d') %}
+                                                aujourd'hui à {{ contact.timeSended|date('H:i') }}
+                                            {% else %}
+                                                {{ contact.timeSended|date('d-m-Y H:i') }}
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                    <div class="clear5"></div>
+                                </div>
+                        {% endfor %}
+                    {% endif %}
+                    </div>
+
+                </div>
+
+                <div class="messages">
+                    {% if uid is not empty %}
+                        {% for message in messagesList %}
+                            <div class="{% if uid == message.source.id  %}msg_block-left{% else %}msg_block-right{% endif %}">
+                                <div class="im_connais">
+                                    <a href="{{ path('eplugg_profile_page', {'uid': message.source.id }) }}"><img src="{% if message.source.Avatar is not empty %} {{ asset(message.source.Avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}" width="37" height="37"></a>
+                                </div>
+                                <div class="msg_left">
+                                    <div class="conten_msg">{{ message.body }}</div>
+                                    <div class="top_msg">
+                                        <div class="time">
+                                            {% if "now"|date('Y-m-d') == message.timeSended|date('Y-m-d') %}
+                                                aujourd'hui à {{ message.timeSended|date('H:i') }}
+                                            {% else %}
+                                                {{ message.timeSended|date('d-m-Y H:i') }}
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+                                    <div class="arrow_left"></div>
+                                </div>
+                                <div class="clear5"></div>
+                            </div>
+                        {% endfor %}
+                        {% if form is not empty %}
+                            {{ form_start(form, {'method': 'post', 'files': true, 'action': path('eplugg_messages_user', {'uid': uid }), 'attr': {'id': 'sendMsgForm'} }) }}
+                                {{ form_widget(form.body, { 'id': "messageText", 'attr': {'style': 'font-family: Arial, Helvetica, sans-serif; color: #5e5e5e', 'cols': 59, 'rows': 5, 'autocomplete': 'off'} } ) }}
+                                <div class="clear10"></div>
+                                <div align="right"><button type="submit" name="send_message" value="1" id="submitMessage">Envoyer</button></div>
+                            {{ form_end(form) }}
+                        {% endif %}
+
+                    {% endif %}
+                </div>
+            </div>
+            {% include "EpluggFrontBundle:logged_in:right_sidebar.html.twig" %}
+            <div class="clear"></div>
+        </div>
+        <div class="clear25"></div>
+    </div>
+{% endblock %}
+{% block more_javascripts %}
+    <script src="{{ asset('js/menuphone/pushy.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.souscat a').click(function(){
+                _this = $(this) ;
+                $('#userLang').val(_this.data('lang')) ;
+                $('#lang_link').html(_this.html()) ;
+                $('.souscat').animate({height: ['hide', 'swing'],opacity: 'hide'}, 500, 'linear');
+            }) ;
+            $('#btn_cat, #lang_link').click(function(){
+                $('.souscat').animate({height: ['toggle', 'swing'],opacity: 'toggle'}, 500, 'linear');
+            }) ;
+        }) ;
+    </script>
+{% endblock %}

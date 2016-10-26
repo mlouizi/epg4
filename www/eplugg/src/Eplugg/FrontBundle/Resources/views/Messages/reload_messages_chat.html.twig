@@ -1,0 +1,27 @@
+{% if messages is not empty %}
+	
+	<div class="{% if messages[0].source == app.user %}msg_text_2{% else %}msg_text_1{% endif %}">
+		<a class="tooltip tooltip-right-message" data-tooltip="{% if messages[0].source == app.user %}{{ app.user.firstName }} {{ app.user.lastName }}{% else %}{{ destination.firstName }} {{ destination.lastName }}{% endif %}">
+			<img class="profil_photo" width="36" height="34" src="{{ asset('uploads/pictures/') }}{% if messages[0].source == app.user %}{% if app.user.avatar is not null %}{{ app.user.avatar.path }}{% else %}none.png{% endif %}{% else %}{% if destination.avatar is not null %}{{ destination.avatar.path }}{% else %}none.png{% endif %}{% endif %}"/>
+		</a>
+		<div class="content_msg"><div class="first_msg">{{ messages[0].body }}</div></div>
+	</div>
+	{% for i in 1..messages|length-1 %}
+		{% if messages[i].source == messages[i-1].source %}
+			<div class="another_msg {% if messages[i].source == app.user %}to_another{% else %}from_another{% endif %}">{{ messages[i].body }}</div>
+		{% else %}
+			<div class="{% if messages[i].source == app.user %}msg_text_2{% else %}msg_text_1{% endif %}">
+			  <a class="tooltip tooltip-right-message" data-tooltip="{% if messages[i].source == app.user %}{{ app.user.firstName }} {{ app.user.lastName }}{% else %}{{ destination.firstName }} {{ destination.lastName }}{% endif %}">
+				<img class="profil_photo" width="36" height="34" src="{{ asset('uploads/pictures/') }}{% if messages[i].source == app.user %}{% if app.user.avatar is not null %}{{ app.user.avatar.path }}{% else %}none.png{% endif %}{% else %}{% if destination.avatar is not null %}{{ destination.avatar.path }}{% else %}none.png{% endif %}{% endif %}"/>
+			  </a>
+			 <div class="content_msg"><div class="first_msg">{{ messages[i].body }}</div></div>
+			</div>
+		{% endif %}
+		{% if i == messages|length-1 %}<font class="last_msgbox">{{ 'Dernier message'|trans }} {{ messages[i].timeSended | date("Y-m-d H:i:s") }}</font>{% endif %}
+	{% endfor %}
+	
+{% else %}
+	
+	<br/><center><font class="noNewMessages">{{ 'Pas de nouveaux messages'|trans }}</font></center>
+	
+{% endif %}

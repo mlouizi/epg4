@@ -1,0 +1,36 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    constant_manager:
+        class: Eplugg\UserBundle\ConstantsManager\ConstantsManager
+    fbn_user.formsuccess_listener:
+        class: Eplugg\UserBundle\EventListener\FormSuccessListener
+        arguments: [@router]
+        tags:
+            - { name: kernel.event_subscriber }
+    app.twig_extension:
+        class: Eplugg\FrontBundle\Twig\AppExtension
+        public: false
+        arguments: [@doctrine.orm.entity_manager, @service_container]
+        tags:
+            - { name: twig.extension }
+
+    FrontBundle.twig.count_extension:
+        class: Eplugg\FrontBundle\Twig\CountExtension
+        tags:
+            - { name: twig.extension }
+        arguments:
+            em: "@doctrine.orm.entity_manager"
+    user.listener:
+        class: Eplugg\FrontBundle\EventListener\UserListener
+        calls:
+          - [setContainer,  ["@service_container"]]
+        tags:
+            -  {name: doctrine.event_listener, event: postFlush}
+            -  {name: doctrine.event_listener, event: onFlush}

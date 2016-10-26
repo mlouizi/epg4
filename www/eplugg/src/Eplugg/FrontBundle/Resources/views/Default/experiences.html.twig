@@ -1,0 +1,26 @@
+{% for experience in experiences %}
+<div class="mon_cv" style="position:relative" id="config_cv{{ experience.id }}">
+    <div class="date_mon_cv">
+        {{ experience.startDate|date("M Y") }} - {{ experience.endDate|date("M Y") }}
+    </div>
+    <h3>{{ experience.etablissement }}</h3>
+    <div class="lieu_mon_cv"> {{ experience.address }}</div>
+    <div class="poste_mon_cv"> {{ experience.title }} </div>
+    {% if ownProfile %}
+    <div class="action_cv">
+        <a title="{{ 'Supprimer'|trans }}" class="delete_cv" rel="delete_cv" href="#delete_cv{{ experience.id }} "> {{ 'Supprimer'|trans }}</a>
+        <div style="display:none;" id="delete_cv{{ experience.id }}">
+            <div class="titre_plugg"> Confirmation </div>
+            <div class="top_form"> <div> {{ 'Voulez vous vraiment supprimer ce contenu'|trans }} ? </div> </div>
+            <div class="clear10"></div>
+            <div align="center" class="plugg_link">
+                <a onclick="$.prettyPhoto.close();"> {{ 'Annuler'|trans }} </a>
+                <a href="{{ path('eplugg_delete_experience', {'eid': experience.id }) }}"> {{ 'Confirmer'|trans }} </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <a title="{{ 'Modifier'|trans }}" class="edit_cv" rel="edit_cv" href="{{ path('eplugg_edit_experience', {'eid': experience.id,'iframe': 'true', 'width': '500', 'height': '350' }) }}"> {{ 'Modifier'|trans }} </a>
+    </div>
+    {% endif %}
+</div>
+{% endfor %}

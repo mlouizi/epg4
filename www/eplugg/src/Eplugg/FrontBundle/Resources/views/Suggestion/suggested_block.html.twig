@@ -1,0 +1,30 @@
+<script type="text/javascript" language="javascript">
+    function getSuggestion(_this) {
+        $('#suggestion' + $(_this).attr('data-id')).hide('slow', function(){ $(this.remove())}) ;
+        $('#list_suggestions').append($('#others_suggestions li:first').html()) ;
+        $('#others_suggestions li:first').remove() ;
+    }
+</script>
+{% if users is not empty %}
+<div class="list_suggestions">
+    <div class="titre_plugg">{{ 'Vous intéressent-ils'|trans }} ?</div>
+{% for user in users %}
+    {% include "EpluggFrontBundle:Suggestion:suggested_user.html.twig" with {"user": user} only %}
+
+{% endfor %}
+</div>
+{% if moreUsers is not empty %}
+<ul style="display:none" id="others_suggestions">
+{% for user in moreUsers %}
+    <li>
+        {% include "EpluggFrontBundle:Suggestion:suggested_user.html.twig" with {"user": user} only %}
+    </li>
+{% endfor %}
+</ul>
+
+{% endif %}
+<div style="  margin-top: 20px; margin-left: 45px; float: left;" class="right_search">
+    <a class="selected" href="{{ path('eplugg_suggest_page_auto') }}">{{ 'Toutes les suggestions'|trans }} </a>
+</div>
+{% endif %}
+

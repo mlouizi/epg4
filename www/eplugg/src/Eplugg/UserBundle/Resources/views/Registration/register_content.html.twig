@@ -1,0 +1,28 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'id': 'registration', 'class': 'fos_user_registration_register'}}) }}
+    <div class="form_home div_email" style="width:79%">
+        <div class="div_message error" id="registerMsg" style="display:none" ></div>
+        <div class="clear10"></div>
+        <div class="signstep">
+            <div>{{ form_widget(form.email, { 'id': "email", 'attr': {'placeholder': "Email address"|trans} } ) }}</div>
+            <div>{{ form_widget(form.plainPassword.first, { 'id': "password", 'attr': {'placeholder': "Mot de passe"|trans} } ) }}</div>
+            <div>{{ form_widget(form.plainPassword.second, { 'id': "password_again", 'attr': {'placeholder': "Confirmation mot de passe"|trans} } ) }}</div>
+        </div>
+        <div class="clear10"></div>
+        <div align="right" >
+            <button class="submitSignup" onclick="if(!ValidateForm()) return false;" name="submit" type="submit">{{ 'Enregistrer'|trans }}</button>
+        </div>
+    </div>
+    {{ form_widget(form.gender, { 'id': "gender1" } ) }}
+    {{ form_widget(form.firstname, { 'id': "firstname1" } ) }}
+    {{ form_widget(form.lastname, { 'id': "lastname1" } ) }}
+    {{ form_widget(form.job, { 'id': "job1" } ) }}
+    {{ form_widget(form.company_name, { 'id': "company_name1" } ) }}
+    {{ form_widget(form.activities, { 'id': "company_activity1" } ) }}
+    {{ form_widget(form.company_city, { 'id': "company_city1" } ) }}
+    {{ form_widget(form.company_country, { 'id': "company_country1" } ) }}
+    {{ form_widget(form.birthday, { 'id': "birthday1" } ) }}
+    {{ form_widget(form.birthmonth, { 'id': "birthmonth1" } ) }}
+    {{ form_widget(form.birthyear, { 'id': "birthyear1" } ) }}
+
+{{ form_end(form) }}

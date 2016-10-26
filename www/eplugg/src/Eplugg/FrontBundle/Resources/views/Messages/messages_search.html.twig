@@ -1,0 +1,39 @@
+{% if messagesContacts is empty %}
+    <div class="message">{{ 'Aucun contact trouvé'|trans }}.</div>
+{% else %}
+
+    {% for contact in messagesContacts  %}
+        <div class="bloc_suggestion {% if currentUid == contact.destination.id and contact.status == false %}actif{% endif %}">
+            {% if currentUid == contact.source.id %}
+                <div class="im_connais">
+                    <a href="{{ path('eplugg_messages_user', {'uid': contact.destination.id }) }}"><img src="{% if contact.destination.avatar is not empty %} {{ asset(contact.destination.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}" width="37" height="37"></a>
+                </div>
+                <div class="des_connais">
+                    <strong>
+                        <a href="{{ path('eplugg_messages_user', {'uid': contact.destination.id }) }}">{{ contact.destination.firstName }} {{ contact.destination.lastName }}</a>
+                    </strong>
+                    {% if "now"|date('Y-m-d') == contact.timeSended|date('Y-m-d') %}
+                        aujourd'hui à {{ contact.timeSended|date('H:i') }}
+                    {% else %}
+                        {{ contact.timeSended|date('d-m-Y H:i') }}
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="im_connais">
+                    <a href="{{ path('eplugg_messages_user', {'uid': contact.source.id }) }}"><img src="{% if contact.source.avatar is not empty %} {{ asset(contact.source.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}" width="37" height="37"></a>
+                </div>
+                <div class="des_connais">
+                    <strong>
+                        <a href="{{ path('eplugg_messages_user', {'uid': contact.source.id }) }}">{{ contact.source.firstName }} {{ contact.source.lastName }}</a>
+                    </strong>
+                    {% if "now"|date('Y-m-d') == contact.timeSended|date('Y-m-d') %}
+                        aujourd'hui à {{ contact.timeSended|date('H:i') }}
+                    {% else %}
+                        {{ contact.timeSended|date('d-m-Y H:i') }}
+                    {% endif %}
+                </div>
+            {% endif %}
+            <div class="clear5"></div>
+        </div>
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,161 @@
+{% extends 'EpluggFrontBundle::base_logged_in.html.twig' %}
+{% block title %}{{ 'Eplugg'|trans }} - {{ 'Inscription'|trans }}{% endblock %}
+{% block body %}
+    <div id="content" style="min-height: 832px;">
+        <div class="center_content_inner" style="min-height: 827px;">
+            <div id="etape_page">
+                {{ form_start(form, {'method': 'post', 'files': true, 'action': path('eplug_signup_step2'), 'attr': {'id': 'msform', 'class': 'msform' } }) }}
+
+                <ul id="progressbar">
+                    <li id="step1" class="active">Step 1<span>{{ 'Pluggeur info'|trans }}</span></li>
+                    <li id="step2">Step 2<span>{{ 'Establishment info'|trans }}</span></li>
+                </ul>
+                <fieldset id="fieldsetStep1">
+                    <div class="profil">
+                        <div id="card_eplugg">
+                            <div class="btn_step">
+                                <button id="previousStep" disabled="disabled" type="button"><img
+                                            src="{{ asset('images/prev.png') }}">{{'Retour'|trans}}
+                                </button>
+                                <button id="nextStep" type="button" onclick="getCompany()"> {{ 'Suivant'|trans }} <img
+                                            src="{{ asset('images/continue.png') }}"></button>
+                            </div>
+                            <div class="cache"></div>
+                            <div class="cache2"></div>
+                            <div class="yellow">
+                                <img src="{{ asset('images/arrow-yelow-big.png') }}">
+                            </div>
+                            <div id="card_user">
+                                 <div class="img_profil user_avatar">
+                                    <a rel="edit_image" href="{{ path('eplugg_upload_avatar', {'iframe': 'true', 'width': '800', 'height': '560','avatarType': 'user_avatar'}) }}">
+                                        <img class="edit_img" src="{{ asset('images/png_edit.png') }}">
+                                        <img id="profile_image" class="avatar_img" src="{% if user.avatar is not empty %} {{ asset(user.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}">
+                                    </a>
+                                    {{ form_widget(form.avatar_user_id, { 'attr': { 'class': 'avatar_id'} } ) }}
+
+                                </div>
+                                <div class="descp_card">
+                                    <strong>
+                                        <a></a>
+                                    </strong>
+                                    <em></em>
+                                    <ul>
+                                        <li class="tel1" style="position:relative">
+                                            {{ form_widget(form.direct_phone, { 'id': "perPhone", 'attr': {'placeholder': 'Numéro téléphone fixe'| trans } } ) }}
+                                            <a id="pAddSep" class="addSep hotspot" onmouseout="tooltip.hide()"
+                                               onmouseover="tooltip.show('{{ "Ajouter un numéro de téléphone"|trans }}');"></a>
+                                        </li>
+                                        <li class="mobile" style="position:relative">
+                                            {{ form_widget(form.mobile, { 'id': "perMobile", 'attr': {'placeholder': 'Numéro téléphone mobile'| trans } } ) }}
+                                            <a id="pAddMobile" class="addSep hotspot" onmouseout="tooltip.hide();"
+                                               onmouseover="tooltip.show('{{ "Ajouter un numéro de téléphone"|trans }}');"></a>
+                                        </li>
+                                        <li class="mail1" style="position:relative">
+                                            {{ form_widget(form.more_emails, { 'id': "perEmail", 'attr': {'placeholder': 'Emails'| trans } } ) }}
+                                            <a id="pAddEmail" class="addSep hotspot" onmouseout="tooltip.hide();"
+                                               onmouseover="tooltip.show('{{ "Ajouter une adresse e-mail"|trans }}');"></a>
+                                        </li>
+                                        <li class="sociaux" style="position:relative">
+                                            {{ form_widget(form.sociaux, { 'id': "perSociaux", 'attr': {'placeholder': 'Liens Réseaux sociaux (Facebook, Twitter, G+, Linkedin, ...)'| trans } } ) }}
+                                            <a id="pAddSociaux" class="addSep hotspot" onmouseout="tooltip.hide();"
+                                               onmouseover="tooltip.show('{{ "Ajouter des liens vers des réseaux sociaux (facebook, google+,twitter...)"|trans }}');"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="card_company">
+                                <div class="img_profil company_avatar">
+                                    <a rel="edit_logo" href="{{ path('eplugg_upload_avatar', {'iframe': 'true', 'width': '800', 'height': '560','avatarType': 'company_avatar'}) }}">
+                                        <img class="edit_img" src="{{ asset('images/png_edit.png') }}">
+                                        <img id="profile_logo" class="avatar_img" src="{% if user.CompanyAvatar is not empty %} {{ asset(user.CompanyAvatar.croppedWebPath) }} {% else %}{{ asset('images/avatar-company.png') }} {% endif %}">
+                                        {{ form_widget(form.avatar_company_id, { 'attr': { 'class': 'avatar_id'} } ) }}
+
+                                    </a>
+                                </div>
+                                <div class="descp_card">
+                                    <strong><a></a></strong>
+
+                                    <div class="tag"></div>
+                                    <ul>
+                                        <li style="position:relative" class="tel2">
+                                            {{ form_widget(form.company_tel, { 'id': "cmpnPhone", 'attr': {'placeholder': 'Téléphones'| trans } } ) }}
+                                            <a onmouseout="tooltip.hide();"
+                                               onmouseover="tooltip.show('{{ "Ajouter un numéro de téléphone"|trans }}');"
+                                               class="addSep hotspot" id="cAddPhone"></a>
+                                        </li>
+                                        <li style="position:relative" class="fax">
+                                            {{ form_widget(form.company_fax, { 'id': "cmpnFax", 'attr': {'placeholder': 'Fax'| trans } } ) }}
+                                            <a onmouseout="tooltip.hide();"
+                                               onmouseover="tooltip.show('{{ "Ajouter le numéro de fax"|trans }}');"
+                                               class="addSep hotspot" id="cAddFax"></a>
+                                        </li>
+                                        <li style="position:relative" class="site">
+                                            {{ form_widget(form.company_website, { 'id': "cmpnSite", 'attr': {'placeholder': 'Sitesweb'| trans } } ) }}
+                                            <a onmouseout="tooltip.hide();" onmouseover="tooltip.show('{{ "Ajouter un site"|trans }}');"
+                                               class="addSep hotspot" id="cAddSite"></a>
+                                        </li>
+                                        <li class="lieu">
+                                            <table width="100%">
+                                                <tbody>
+                                                <tr>
+                                                    <td width="60%">
+                                                        {{ form_widget(form.company_address, { 'id': "cmpnAddress", 'attr': {'placeholder': 'Adresse'|trans } } ) }}
+                                                    </td>
+                                                    <td>,</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </li>
+                                        <li>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear25"></div>
+                </fieldset>
+                <fieldset id="fieldsetStep2">
+                    <div class="profil">
+                        <div id="card_eplugg">
+                            <div class="yellow "><img src="{{ asset('images/arrow-yelow-big.png') }}"></div>
+                            <div id="card_user">
+                                <div class="img_profil user_avatar"><a><img class="avatar_img" src="{{ asset('images/avatar.png') }}"></a></div>
+                                <div class="descp_card">
+                                    <strong><a> </a></strong>
+                                    <em></em>
+                                    <ul>
+                                        <li id="cfmPerPhone" class="tel1"></li>
+                                        <li id="cfmPerMobile" class="mobile"></li>
+                                        <li id="cfmPerEmail" class="mail1"></li>
+                                        <li id="cfmPerSociaux" class="sociaux"></li>
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div id="card_company">
+                                <div class="img_profil company_avatar"><a><img class="avatar_img" src="{{ asset('images/avatar-company.png') }}"></a></div>
+                                <div class="descp_card">
+                                    <strong><a></a></strong>
+                                    <ul>
+                                        <li id="cfmCmpnPhone" class="tel2"></li>
+                                        <li id="cfmCmpnFax" class="fax"></li>
+                                        <li id="cfmCmpnSite" class="site"></li>
+                                        <li class="lieu"><span id="cfmCmpnAddress"></span> ,</li>
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear25"></div>
+                    <button name="submit" type="submit"><img src="{{ asset('images/valide_.png') }}"> {{ 'Enregistrer'|trans }}</button>
+                    <button onclick="getPrevious2()" type="button"><img src="{{ asset('images/arrow_btn.png') }}"> {{ 'Retour'|trans }}
+                    </button>
+                </fieldset>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'EpluggFrontBundle::base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+{% block stylesheets %}
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    {% block fos_user_content %}
+        <div class="login-sys">
+            <p>
+                {{ 'resetting.check_email'|trans({'%email%': email}) }}
+            </p>
+        </div>
+    {% endblock %}
+{% endblock %}
+
+

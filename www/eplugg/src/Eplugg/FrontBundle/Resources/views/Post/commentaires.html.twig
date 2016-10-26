@@ -1,0 +1,31 @@
+{% for comment in comments %}
+
+<div class="comments">
+
+
+<div class="comment_avatar_user">
+   <a> <img width="35" height="35"
+         src="{% if comment.user.avatar is not empty %} {{ asset(comment.user.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}">
+    </a>
+</div>
+
+    <div class="comment_name_user">
+        <a href="{{ path('eplugg_profile_page', {'uid': comment.user.id }) }}">{{ comment.user.firstName }} {{ comment.user.lastName }}</a>
+    </div>
+
+
+    <div class="comment_message">
+        {{ comment.message }}
+    </div>
+
+    <div class="comment_time">
+        {{ comment.dateAjout|date('m-d-Y h:i')  }}
+    </div>
+{% if comment.user.id == app.user.id %}
+    <a class="delete_comment" id="delete_comment_{{ comment.id }}" href="javascript:void(0);"  onclick="return confirm('delete comment ?')" data-postid="{{ post.id }}"   data-commentid="{{ comment.id }}"  data-url="{{ path('comment_delete') }}">{{ 'Supprimer'|trans }}</a>
+{% endif %}
+
+
+</div>
+{% endfor %}
+<input class="comment_form" id="comment_form_{{ post.id }}" type="text" name="content" data-postid="{{ post.id }}" data-url=" {{ path('comment_add_ajax') }}" placeholder="{{ 'Commenter'|trans }}">

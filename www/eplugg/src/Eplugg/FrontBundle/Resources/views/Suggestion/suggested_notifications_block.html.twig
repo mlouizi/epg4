@@ -1,0 +1,12 @@
+{% if suggestions is not empty %}
+<div class="block-suggests">
+    <div class="suggests-title">{{ 'Connaissez-vous'|trans }}?</div>
+    {% for suggestion in suggestions %}
+        <div class="bloc_user"> <a style="cursor: pointer;" class="infobull_div" data-tooltip="#html-content5" href="{{ path('eplugg_profile_page', {'uid': suggestion.suggested.id }) }}"></a>
+            <div class="im_connais"><img width="37" height="37" src="{% if suggestion.suggested.avatar is not empty %} {{ asset(suggestion.suggested.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}" alt=""></div>
+            <div class="des_connais"><strong><a>{{ suggestion.suggested.firstName }} {{ suggestion.suggested.lastName }}</a></strong> {{ suggestion.suggested.job }}</div>
+            <div class="clear5"></div>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}

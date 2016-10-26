@@ -1,0 +1,56 @@
+eplugg_back_homepage:
+    path:     /{_locale}/admin{trailingSlash}
+    defaults: { _controller: EpluggBackBundle:Default:admin, trailingSlash : "/"  }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_back_users:
+    path:     /{_locale}/admin/users{trailingSlash}
+    defaults: { _controller: EpluggBackBundle:Default:users, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_delete_user:
+    path:     /admin/user/delete/{uid}
+    defaults: { _controller: EpluggBackBundle:Default:userDelete, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_block_user:
+    path:     /admin/user/block/{uid}
+    defaults: { _controller: EpluggBackBundle:Default:userBlock, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_activate_user:
+    path:     /admin/user/activate/{uid}
+    defaults: { _controller: EpluggBackBundle:Default:userActivate, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_edit_user:
+    path:     /admin/user/edit/{uid}
+    defaults: { _controller: EpluggBackBundle:Default:userEdit, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_add_user:
+    path:     /admin/user/add
+    defaults: { _controller: EpluggBackBundle:Default:userAdd, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_edit_page:
+    path:     /admin/page/{pid}/edit
+    defaults: { _controller: EpluggBackBundle:Default:pageEdit, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_add_page:
+    path:     /admin/page/add
+    defaults: { _controller: EpluggBackBundle:Default:pageAdd, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_delete_page:
+    path:     /admin/page/{pid}/delete
+    defaults: { _controller: EpluggBackBundle:Default:pageDelete, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_unpublish_page:
+    path:     /admin/page/{pid}/unpublish
+    defaults: { _controller: EpluggBackBundle:Default:pageUnpublish, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_publish_page:
+    path:     /admin/page/{pid}/publish
+    defaults: { _controller: EpluggBackBundle:Default:pagepublish, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+eplugg_back_pages:
+    path:     /admin/pages{trailingSlash}
+    defaults: { _controller: EpluggBackBundle:Default:pages, trailingSlash : "/"   }
+    requirements: { trailingSlash : "[/]{0,1}" }
+
+
+
+

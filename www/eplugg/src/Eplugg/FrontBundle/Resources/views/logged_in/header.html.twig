@@ -1,0 +1,120 @@
+<div id="header">
+    <div class="center_content">
+        <div id="logo"><a href="{{ path('eplugg_front_homepage') }}"><img alt="" src="{{ asset('images/logo.png') }}"></a></div>
+        <div style="width: 400px;" id="search">
+            <div class="jautocomplete layout-3" data-url="{{ path('search_users') }}" style="width: 450px;" id="jautocomplete">
+                <div data-type="actions" class="box ja-actions">
+                    <form action="{{ path('search_users_page') }}" id="topSearchFORM" method="GET">
+                        <input type="text" autocomplete="off" id="topSearchInput" data-type="tb" name="topSearchInput" class="ja-tb" placeholder="{{ 'Name, City, Activity, Locations, Trades'|trans }} ...">
+                        <input type="hidden" name="topSearch" value="1">
+                        <button class="btn_searchTop"></button>
+                    </form>
+                </div>
+                {% raw %}
+                    <script id="jautocompleteTemplate" type="text/x-jsrender">
+                        <div class="jautocomplete-box">
+                            <div classs="box">
+                                {{for data}}
+                                <a href="{{>profile_url}}" title="" data-type="item">
+                                    <div class="item">
+                                        <div class="box">
+                                            <div class="img"><p><img src="{{>user_picture}}" alt="" title="" /></p></div>
+                                            <div class="data">
+                                                <div class="box">
+                                                    <p class="title">{{>firstname}} {{>lastname}}</p>
+                                                    <p class="desc">{{>job}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                {{/for}}
+                            </div>
+                            <div class="box"><p class="footer"><a onclick="$('#topSearchFORM').submit();">{{ 'Voir plus de résultats'|trans }} &raquo;</a></p></div>
+                        </div>
+                    </script>
+                {% endraw %}
+            </div>
+        </div>
+
+        <div style="margin: 17px 0 0 10px; float: right;" class="cat_search">
+            <a style="color: #ffffff;" id="lang_link" data-url=""><span id="cat_label">{{ originalRequest.locale }} </span></a>
+            <a style="  display: inline-block;width: 20px;cursor: pointer;text-align: right" id="btn_cat"><img alt="" src="{{ asset('images/arrow.png') }}"></a>
+            <div class="souscat">
+                {% block lang %}
+                <ul>
+                    <li><a data-lang="en" href="{{ path(originalRequest.get('_route'), originalRequest.get('_route_params')|merge({'_locale': 'en'})) }}">{{ 'en'|trans }}</a></li>
+                    <li><a data-lang="fr" href="{{ path(originalRequest.get('_route'), originalRequest.get('_route_params')|merge({'_locale': 'fr'})) }}">{{ 'fr'|trans }}</a></li>
+                </ul>
+                {% endblock %}
+            </div>
+        </div>
+        <div id="menu_profile">
+            <a href="{{ path('fos_user_profile_show') }}">
+                <img width="35" height="33" alt="" src="{% if user.avatar is not empty %} {{ asset(user.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}">
+                <span><img alt="" src="{{ asset('images/puce_profile.png') }}"></span>
+            </a>
+            <div class="submenu">
+                <ul>
+                    <li><a rel="setting" href="{{ path('fos_user_change_password', {'iframe': 'true', 'width': '500', 'height': '280' }) }}"><img src="{{ asset('images/tools.png') }}"> {{ 'Paramètres du compte'|trans }}</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}"><img src="{{ asset('images/logout.png') }}"> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="icone_header">
+            <ul>
+                <li><a title="Répertoire" id="localization" href="{{ path('eplugg_localize') }}"><span></span></a></li>
+                <li>
+                    <a href="{{ path('eplugg_calendar') }}" title="Calendar" id="cal"><span>{{ events|length }}</span></a>
+                </li>
+                <li>
+                    <a title="Message" id="mssg"><span>{{ messages|length }}</span></a>
+                    <div style="display:none">
+                        <div id="contentMessage">
+                            <div style="overflow-y:auto; max-height:400px;">
+                            <div style="overflow-y:auto; max-height:400px;">
+                                {% if messagesSummary is not empty %}
+                                    <div class="bloc_user">
+                                        <a style="cursor: pointer;" class="infobull_div" data-tooltip="#html-content5" href="{{ path('eplugg_messages_user', {'uid': messagesSummary.source.id }) }}"></a>
+                                        <div class="im_connais"><img width="37" height="37" src="{% if messagesSummary.source.avatar is not empty %} {{ asset(messagesSummary.source.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}" alt=""></div>
+                                        <div class="des_connais">
+                                            <strong><a>{{ messagesSummary.source.firstName }} {{ messagesSummary.source.lastName }}</a></strong>
+                                            {{ messagesSummary.body }}
+                                        </div>
+                                        <div class="clear5"></div>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                            <div class="popModal_footer"><a href="{{ path('eplugg_messages') }}">{{ 'Afficher tout'|trans }}</a></div>
+                        </div>
+                    </div>
+                </li>
+                <li><a title="Répertoire" id="rep" href="{{ path('directory') }}"><span></span></a></li>
+                <li>
+                    <a title="Invitations" id="invite"><span>{{ invitations|length }}</span></a>
+                    <div style="display:none;">
+                        <div style="width:298px;" id="contentInvitations">
+                            <div style="overflow-y:auto; max-height:400px;">
+                                {% for invitation in invitationsSummary %}
+                                    <div class="bloc_user"> <a style="cursor: pointer;" class="infobull_div" data-tooltip="#html-content5" href="{{ path('eplugg_profile_page', {'uid': invitation.userOne.id }) }}"></a>
+                                        <div class="im_connais"><img width="37" height="37" src="{% if invitation.userOne.avatar is not empty %} {{ asset(invitation.userOne.avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}" alt=""></div>
+                                        <div class="des_connais"><strong><a>{{ invitation.userOne.firstName }} {{ invitation.userOne.lastName }}</a></strong> {{ invitation.userOne.job }}</div>
+                                        <div class="clear5"></div>
+                                    </div>
+                                {% endfor %}
+                                {{ render(controller('EpluggFrontBundle:Suggestion:suggestedNotificationBlock')) }}
+
+                            </div>
+                            <div class="popModal_footer"><a href="{{ path('eplugg_invitations') }}">{{ 'Afficher tout'|trans }}</a></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+</div>

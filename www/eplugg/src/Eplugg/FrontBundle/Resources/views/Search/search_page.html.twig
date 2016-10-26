@@ -1,0 +1,111 @@
+{% extends 'EpluggFrontBundle::base_logged_in.html.twig' %}
+{% block title %}{{ 'Eplugg'|trans }} - {{ 'Recherche'|trans }}{% endblock %}
+
+{% block body %}
+    <div id="content">
+        <div class="center_content_inner">
+
+            {{ render(controller('EpluggFrontBundle:Default:leftSidebarConnected')) }}
+
+            <div id="body_content">
+                {% if users is not empty %}
+                    <div class="titre_plugg search">{{ 'Résultats de la recherche'|trans }}</div>
+                    <div class="result_search">
+                        {{ total }} {{ 'Résultats'|trans }}
+                        <div class="right_search">
+                            <a {% if not directory %}class="selected"{% endif %} href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'directory': '0'})) }}">All community </a>
+                            <a {% if directory %}class="selected"{% endif %} href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'directory': '1'})) }}">My contacts </a>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div id="content_infinity">
+                        {% for user in users %}
+                            <div class="item_infinity">
+                                <div class="bloc_user">
+
+                                    <a href="{{ path('eplugg_profile_page', {'uid': user['user'].id }) }}" data-tooltip="#html-content{{ user['user'].id }}" class="infobull_div tooltip"></a>
+                                    <div class="im_connais">
+                                        <a href="{{ path('eplugg_profile_page', {'uid': user['user'].id }) }}" data-tooltip="#html-content{{ user['user'].id }}" class="tooltip">
+                                            <img width="37" height="37" alt="" src="{% if user['user'].avatar is not empty %} {{ asset(user['user'].avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}">
+                                        </a>
+                                    </div>
+                                    <div class="des_connais">
+                                        <strong> <a href="{{ path('eplugg_profile_page', {'uid': user['user'].id }) }}" data-tooltip="#html-content{{ user['user'].id }}" class="tooltip">{{ user['user'].firstName }} {{ user['user'].lastName }}</a></strong>
+                                        {{ user['user'].job }}
+                                    </div>
+                                    <div class="ferme_connais">
+                                        <a rel="mutual_friend" href="{{ path('eplugg_common_firends', {'uid': user['user'].id, 'iframe': 'true', 'width': '400'}) }}" class="nb_vue_" title="{{ user['common_friends'] }} Contacts en commun"><span>{{ user['common_friends'] }}</span></a>
+                                    </div>
+                                    <div class="clear5"></div>
+                                </div>
+                                <div id="html-content{{ user['user'].id }}" style="display:none;">
+                                    <div onclick="window.location.href='{{ path('eplugg_profile_page', {'uid': user['user'].id }) }}'" id="card_eplugg">
+                                        <div class="yellow"><img src="{{ asset('images/arrow-yelow.png') }}"></div>
+                                        <div id="card_user">
+                                            <div class="img_profil"><a href="{{ path('eplugg_profile_page', {'uid': user['user'].id }) }}"><img width="48" height="48" alt="" src="{% if user['user'].avatar is not empty %} {{ asset(user['user'].avatar.croppedWebPath) }} {% else %}{{ asset('images/avatar.png') }} {% endif %}"></a></div>
+                                            <div class="descp_card">
+                                                <div class="name_user"> <a href="{{ path('eplugg_profile_page', {'uid': user['user'].id }) }}">{{ user['user'].firstName }} {{ user['user'].lastName }}</a> </div>
+                                                <div class="job_user">{{ user['user'].job }}</div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div id="card_company">
+                                            <div class="img_profil">
+                                                <a href="/{{ path('eplugg_profile_page', {'uid': user['user'].id }) }}">
+                                                    <img width="51" height="51" src="{% if  user['user'].CompanyAvatar is not empty %} {{ asset( user['user'].CompanyAvatar.croppedWebPath) }} {% else %}{{ asset('images/avatar-company.png') }} {% endif %}">
+                                                </a>
+                                            </div>
+                                            <div class="descp_card">
+                                                <div class="company_user"><a href="{{ path('eplugg_profile_page', {'uid': user['user'].id }) }}">{{ user['user'].companyName }}</a></div>
+                                                <div class="tag_company">
+                                                    {{ user['user'].companyActivity }}
+                                                </div>
+                                                <div class="lieu_company">{{ user['user'].companyAddress }}</div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                    <div class="plugg_link info_card">
+                                        <a onclick="Plugger(this, 0)" data-id="{{ path('eplugg_profile_page', {'uid': user['user'].id }) }}">Plugger</a>
+
+                                        <a href="{{ path('eplugg_messages_user', {'uid': user['user'].id } ) }}">Message</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
+                        <a href="{{ path('eplugg_suggest_page_auto', {'page': next } ) }}" id="next" data-search="{{ search }}"></a>
+                    </div>
+                {% endif %}
+            </div>
+            {% include "EpluggFrontBundle:logged_in:right_sidebar.html.twig" %}
+            <div class="clear"></div>
+
+        </div>
+        <div class="clear25"></div>
+    </div>
+{% endblock %}
+{% block more_javascripts %}
+    <script src="{{ asset('js/jquery.infinitescroll.js') }}"></script>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function() {
+            $('#content_infinity').infinitescroll(
+                    {
+                        navSelector: "#next:last",
+                        nextSelector: "a#next:last",
+                        itemSelector: "#content_infinity div.item_infinity",
+                        dataType: 'html',
+                        maxPage: 3,
+                        path: function (index) {
+                            return "?page=" + index + "&topSearchInput={{ search }}&directory={{ directory }}";
+                        }
+                    },
+                    function (newElements, data, url) {
+                        $('.tooltip').darkTooltip({animation: 'flipIn', gravity: 'east', theme: 'light'});
+                        intPretty();
+                    }
+            );
+        });
+    </script>
+{% endblock %}
